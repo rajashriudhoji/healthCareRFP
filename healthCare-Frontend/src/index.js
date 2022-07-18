@@ -9,6 +9,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import StepOne from "./components/assessment-form/step-one/StepOne";
+import StepThree from "./components/assessment-form/step-three/StepThree";
 import Home from "./components/home/Home";
 import DataContext from "./context/DataContext";
 import "./index.css";
@@ -34,6 +35,26 @@ const AppRoutes = () => {
       email: "",
       phone: "",
       babyGender: "",
+    },
+    p_breastFeeding: {
+      patientId: "",
+      isBreastfeeding: true,
+      feedLength: 15,
+      feedFrequency: 5,
+      supplimentFormula: true,
+      feedingComfort: true,
+      isNippleCracked: true,
+    },
+    p_safeSpacing: {
+      patientId: "",
+      birthControl: {
+        isUsed: true,
+        details: "",
+      },
+      birthControlAssess: {
+        isAssessDone: true,
+        details: "",
+      },
     },
   });
 
@@ -75,11 +96,13 @@ const AppRoutes = () => {
         handlePreviousClick,
         handleFinish,
         step,
+        setStep,
       }}
     >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/step-one" element={<StepOne />} />
+        <Route path="/step-three" element={<StepThree />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </DataContext.Provider>
