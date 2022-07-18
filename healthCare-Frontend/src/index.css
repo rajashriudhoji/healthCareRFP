@@ -6,12 +6,14 @@
 
 :root {
   --text-color: #636366;
+  --white-color: #fff;
+  --black-background: #20232a;
   --form-text-color: #02425b;
   --small-font-weight: 300;
   --medium-font-weight: 600;
   --large-font-weight: 900;
   --max-screen-width: 1200px;
-  --error-color:#da6a6a;
+  --error-color: #da6a6a;
   --default-margin: 3rem;
 }
 
@@ -34,4 +36,9 @@ body {
 
 .step-form .btn {
   margin-bottom: var(--default-margin);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
 }

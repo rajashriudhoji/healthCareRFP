@@ -1,14 +1,22 @@
 import { useContext } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
 import Stepper from "../../stepper/Stepper";
-import { ATLEAST_ONE_SELECT, REQUIRED_ERROR_MSG } from "../../utils/constants";
+import {
+  ATLEAST_ONE_SELECT,
+  NEXT_BUTTON_TEXT,
+  PREVIOUS_BUTTON_TEXT,
+  REQUIRED_ERROR_MSG,
+} from "../../utils/constants";
 import Header from "../form-header/Header";
 import "../step-one/stepone.css";
 
 const StepThree = () => {
-  const { setData, handleNextClick, step } = useContext(DataContext);
+  const navigate = useNavigate();
+  const { setData, incrementStep, decrementStep, step } =
+    useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -17,28 +25,44 @@ const StepThree = () => {
 
   const handleFormSubmit = (values) => {
     console.log(values);
-    handleNextClick();
+    const {
+      isBreastfeeding,
+      feedLength,
+      feedFrequency,
+      supplimentFormula,
+      feedingComfort,
+      isNippleCracked,
+      birthControl,
+      birthControlAssess,
+    } = values;
     setData((prev) => ({
       ...prev,
       p_breastFeeding: {
-        isBreastfeeding: values.isBreastfeeding,
-        feedLength: values.feedLength,
-        feedFrequency: values.feedFrequency,
-        supplimentFormula: values.supplimentFormula,
-        feedingComfort: values.feedingComfort,
-        isNippleCracked: values.isNippleCracked,
+        isBreastfeeding,
+        feedLength,
+        feedFrequency,
+        supplimentFormula,
+        feedingComfort,
+        isNippleCracked,
       },
       p_safeSpacing: {
         birthControl: {
-          isUsed: values.birthControl.isUsed,
-          details: values.birthControl.details,
+          isUsed: birthControl?.isUsed,
+          details: birthControl?.details,
         },
         birthControlAssess: {
-          isAssessDone: values.birthControlAssess.isAssessDone,
-          details: values.birthControlAssess.details,
+          isAssessDone: birthControlAssess?.isAssessDone,
+          details: birthControlAssess?.details,
         },
       },
     }));
+    incrementStep();
+    navigate("/step-end");
+  };
+
+  const handlePreviousClick = () => {
+    decrementStep();
+    navigate("/step-two");
   };
 
   return (
@@ -310,10 +334,18 @@ const StepThree = () => {
               </Form.Group>
             </Col>
           </Row>
-
-          <Button variant="secondary" type="submit">
-            Next
-          </Button>
+          <Form.Group className="mb-3 buttons">
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={handlePreviousClick}
+            >
+              {PREVIOUS_BUTTON_TEXT}
+            </Button>
+            <Button variant="secondary" type="submit">
+              {NEXT_BUTTON_TEXT}
+            </Button>
+          </Form.Group>
         </Form>
       </div>
     </div>

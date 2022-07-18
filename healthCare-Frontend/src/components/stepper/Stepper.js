@@ -10,13 +10,13 @@ function Stepper(props) {
             <form id="msform">
               <ul id="progressbar">
                 <li className={step === 1 ? "active" : ""} id="account">
-                  <strong>STEP 1</strong>
+                  <strong>Basic Info</strong>
                 </li>
                 <li className={step === 2 ? "active" : ""} id="personal">
-                  <strong>STEP 2</strong>
+                  <strong>Visit Check</strong>
                 </li>
                 <li className={step === 3 ? "active" : ""} id="payment">
-                  <strong>STEP 3</strong>
+                  <strong>Breastfeeding</strong>
                 </li>
                 <li className={step === 4 ? "active" : ""} id="confirm">
                   <strong>STEP 4</strong>

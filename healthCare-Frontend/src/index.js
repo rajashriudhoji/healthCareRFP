@@ -1,15 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import StepEnd from "./components/assessment-form/step-end/StepEnd";
 import StepOne from "./components/assessment-form/step-one/StepOne";
 import StepThree from "./components/assessment-form/step-three/StepThree";
+import StepTwo from "./components/assessment-form/step-two/StepTwo";
 import Home from "./components/home/Home";
 import DataContext from "./context/DataContext";
 import "./index.css";
@@ -23,11 +19,8 @@ const AppWrapper = () => {
 };
 
 const AppRoutes = () => {
-  const navigate = useNavigate();
-
   const [data, setData] = useState({
     patient: {
-      patientId: "",
       motherName: "",
       babyName: "",
       babyDOB: "",
@@ -35,6 +28,20 @@ const AppRoutes = () => {
       email: "",
       phone: "",
       babyGender: "",
+    },
+    p_visit: {
+      dateOfService: "",
+      vitalSigns: {
+        temperature: {
+          pulseRate: "",
+          respirationRate: "",
+          bloodPressure: "",
+          weight: "",
+        },
+      },
+    },
+    p_clinical_Assess: {
+      smokeStatus: false,
     },
     p_breastFeeding: {
       patientId: "",
@@ -60,40 +67,27 @@ const AppRoutes = () => {
 
   const [step, setStep] = useState(1);
 
-  const getURL = (step) => {
-    switch (step) {
-      case 1:
-        navigate("/step-one");
-        break;
-
-      default:
-        setStep(1);
-        navigate("/step-one");
-        break;
-    }
+  const incrementStep = () => {
+    setStep((step) => step + 1);
   };
 
-  const handleNextClick = () => {
-    setStep(step + 1);
-    getURL(step + 1);
-  };
-
-  const handlePreviousClick = () => {
-    setStep(step - 1);
-    getURL(step - 1);
+  const decrementStep = () => {
+    setStep((step) => step - 1);
   };
 
   const handleFinish = () => {
     console.log("Step", step);
   };
 
+  console.log({ data });
+
   return (
     <DataContext.Provider
       value={{
         data,
         setData,
-        handleNextClick,
-        handlePreviousClick,
+        incrementStep,
+        decrementStep,
         handleFinish,
         step,
         setStep,
@@ -102,7 +96,9 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/step-one" element={<StepOne />} />
+        <Route path="/step-two" element={<StepTwo />} />
         <Route path="/step-three" element={<StepThree />} />
+        <Route path="/step-end" element={<StepEnd />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </DataContext.Provider>

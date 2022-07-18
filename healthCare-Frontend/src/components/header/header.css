@@ -1,5 +1,5 @@
 .header {
-    background: #20232a;
+    background: var(--black-background);
     text-align: center;
     padding: 1rem;
     letter-spacing: 1px;

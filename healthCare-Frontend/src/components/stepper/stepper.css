@@ -178,5 +178,5 @@ p {
 
 #progressbar li.active:before,
 #progressbar li.active:after {
-    background: #673AB7
+    background: #673AB7;
 }

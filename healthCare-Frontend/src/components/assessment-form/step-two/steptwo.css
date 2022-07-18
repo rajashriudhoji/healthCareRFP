@@ -1,0 +1,18 @@
+.step-two .form-heading {
+    background-color: var(--text-color);
+    color: var(--white-color);
+    padding: 5px;
+    margin-bottom: 1rem;
+}
+
+.step-two .smoke-status .form-check {
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.step-two .vital-signs {
+    text-align: center;
+    font-weight: var(--medium-font-weight);
+    text-decoration: underline;
+    margin: 1rem;
+}

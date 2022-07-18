@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
 import Stepper from "../../stepper/Stepper";
 import {
   ATLEAST_ONE_SELECT,
+  NEXT_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
   VALID_PHONE_NUMBER,
 } from "../../utils/constants";
@@ -12,22 +14,35 @@ import Header from "../form-header/Header";
 import "./stepone.css";
 
 const StepOne = () => {
-  const { setData, handleNextClick, step } = useContext(DataContext);
+  const navigate = useNavigate();
+  const { data, setData, incrementStep, step } = useContext(DataContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      motherName: data?.patient?.motherName,
+      babyName: data?.patient?.babyName,
+      babyDOB: data?.patient?.babyDOB,
+      address: data?.patient?.address,
+      email: data?.patient?.email,
+      phone: data?.patient?.phone,
+      babyGender: data?.patient?.babyGender,
+    },
+  });
 
   const handleFormSubmit = (values) => {
     console.log(values);
-    handleNextClick();
     setData((prev) => ({
       ...prev,
       patient: {
         ...values,
+        phone: +values.phone,
       },
     }));
+    incrementStep();
+    navigate("/step-two");
   };
 
   return (
@@ -150,7 +165,7 @@ const StepOne = () => {
             )}
           </Form.Group>
           <Button variant="secondary" type="submit">
-            Next
+            {NEXT_BUTTON_TEXT}
           </Button>
         </Form>
       </div>
