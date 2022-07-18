@@ -57,7 +57,7 @@ const StepThree = () => {
       },
     }));
     incrementStep();
-    navigate("/step-end");
+    navigate("/step-four");
   };
 
   const handlePreviousClick = () => {
@@ -69,9 +69,9 @@ const StepThree = () => {
     <div>
       <Header />
       <Stepper step={step} />
-      <div className="step-form container step-one">
+      <div className="step-form container step-three">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
-          <h3>Breastfeeding</h3>
+          <h4 className="form-heading">Breastfeeding</h4>
           <Row>
             <Col>
               <Form.Label>Are you currently breastfeeding?</Form.Label>
@@ -226,8 +226,7 @@ const StepThree = () => {
               </Form.Group>
             </Col>
           </Row>
-
-          <h3>Safe Spacing Plan</h3>
+          <h4 className="form-heading">Safe Spacing Plan</h4>
           <Row>
             <Col>
               <Row>
@@ -264,7 +263,6 @@ const StepThree = () => {
               </Row>
             </Col>
             <Col>
-              {" "}
               <Form.Group className="mb-3" controlId="birthControl">
                 <Form.Label>Comment :</Form.Label>
                 <Form.Control

@@ -13,13 +13,13 @@ function Stepper(props) {
                   <strong>Basic Info</strong>
                 </li>
                 <li className={step === 2 ? "active" : ""} id="personal">
-                  <strong>Visit Check</strong>
+                  <strong>Postpartum Visit Check</strong>
                 </li>
                 <li className={step === 3 ? "active" : ""} id="payment">
                   <strong>Breastfeeding</strong>
                 </li>
                 <li className={step === 4 ? "active" : ""} id="confirm">
-                  <strong>STEP 4</strong>
+                  <strong>Psycho-Social Assessment</strong>
                 </li>
               </ul>
             </form>

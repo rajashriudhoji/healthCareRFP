@@ -42,3 +42,15 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
+.form-heading {
+  background-color: var(--text-color);
+  color: var(--white-color);
+  padding: 5px;
+  margin-bottom: 1rem;
+}
+
+.form-check {
+  display: inline-block;
+  margin-left: 1rem;
+}

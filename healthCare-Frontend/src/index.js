@@ -3,6 +3,7 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import StepEnd from "./components/assessment-form/step-end/StepEnd";
+import StepFour from "./components/assessment-form/step-four/StepFour";
 import StepOne from "./components/assessment-form/step-one/StepOne";
 import StepThree from "./components/assessment-form/step-three/StepThree";
 import StepTwo from "./components/assessment-form/step-two/StepTwo";
@@ -98,6 +99,7 @@ const AppRoutes = () => {
         <Route path="/step-one" element={<StepOne />} />
         <Route path="/step-two" element={<StepTwo />} />
         <Route path="/step-three" element={<StepThree />} />
+        <Route path="/step-four" element={<StepFour />} />
         <Route path="/step-end" element={<StepEnd />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
