@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import DataContext from "../../../context/DataContext";
+import Stepper from "../../stepper/Stepper";
 import {
   ATLEAST_ONE_SELECT,
   REQUIRED_ERROR_MSG,
@@ -10,7 +11,8 @@ import {
 import Header from "../form-header/Header";
 import "./stepone.css";
 
-const StepOne = () => {
+const StepOne = (props) => {
+  const { step, handleNextClick } = props;
   const { setData } = useContext(DataContext);
   const {
     register,
@@ -31,6 +33,7 @@ const StepOne = () => {
   return (
     <div>
       <Header />
+      <Stepper step={step} />
       <div className="step-form container step-one">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
           <Form.Group className="mb-3" controlId="motherName">
@@ -132,7 +135,7 @@ const StepOne = () => {
               <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
             )}
           </Form.Group>
-          <Button variant="secondary" type="submit">
+          <Button variant="secondary" type="submit" onClick={handleNextClick}>
             Next
           </Button>
         </Form>

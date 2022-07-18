@@ -1,13 +1,29 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import StepOne from "./components/assessment-form/step-one/StepOne";
 import Home from "./components/home/Home";
 import DataContext from "./context/DataContext";
 import "./index.css";
 
+const AppWrapper = () => {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
+};
+
 const AppRoutes = () => {
+  let history = useNavigate();
+
   const [data, setData] = useState({
     patient: {
       patientId: "",
@@ -21,17 +37,47 @@ const AppRoutes = () => {
     },
   });
 
+  const [step, setStep] = useState(1);
+  
+  const getURL = (step) => {
+    switch (step) {
+      case 1:
+        history("/step-one");
+        break;
+      // case 2:
+      //   history("/step-two");
+      //   break;
+
+      default:
+        setStep(1);
+        history("/step-one");
+        break;
+    }
+  };
+  const handleNextClick = () => {
+    setStep(step + 1);
+    getURL(step + 1);
+  };
+  const handlePreviousClick = () => {
+    setStep(step - 1);
+    getURL(step - 1);
+  };
+  const handleFinish = () => {
+    console.log("Step", step);
+  };
+
   return (
-    <BrowserRouter>
       <DataContext.Provider value={{ data, setData }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/step-one" element={<StepOne />} />
+          <Route
+            path="/step-one"
+            element={<StepOne handleNextClick={handleNextClick} step={step} />}
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </DataContext.Provider>
-    </BrowserRouter>
   );
 };
 
-ReactDOM.render(<AppRoutes />, document.getElementById("root"));
+ReactDOM.render(<AppWrapper />, document.getElementById("root"));
