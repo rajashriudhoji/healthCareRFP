@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --text-color: #636366;
+  --form-text-color: #02425b;
+  --small-font-weight: 300;
+  --medium-font-weight: 600;
+  --large-font-weight: 900;
+  --max-screen-width: 1200px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+}
+
+.step-form {
+  max-width: var(--max-screen-width);
+}
