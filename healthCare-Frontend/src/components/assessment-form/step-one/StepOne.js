@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import DataContext from "../../../context/DataContext";
 import Stepper from "../../stepper/Stepper";
@@ -48,32 +48,38 @@ const StepOne = () => {
               <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
             )}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="babyName">
-            <Form.Label>Baby's Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your baby's name"
-              {...register("babyName", {
-                required: true,
-              })}
-            />
-            {errors.babyName && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="babyDOB">
-            <Form.Label>Baby's DOB</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="Enter your baby's Date of birth"
-              {...register("babyDOB", {
-                required: true,
-              })}
-            />
-            {errors.babyName && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
-          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="babyName">
+                <Form.Label>Baby's Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your baby's name"
+                  {...register("babyName", {
+                    required: true,
+                  })}
+                />
+                {errors.babyName && (
+                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
+                )}
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="babyDOB">
+                <Form.Label>Baby's DOB</Form.Label>
+                <Form.Control
+                  type="date"
+                  placeholder="Enter your baby's Date of birth"
+                  {...register("babyDOB", {
+                    required: true,
+                  })}
+                />
+                {errors.babyDOB && (
+                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
           <Form.Group className="mb-3" controlId="address">
             <Form.Label>Address</Form.Label>
             <Form.Control
@@ -86,34 +92,42 @@ const StepOne = () => {
             />
             {errors.address && <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter your email"
-              {...register("email", {
-                required: true,
-              })}
-            />
-            {errors.email && <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="phone">
-            <Form.Label>Phone</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your phone"
-              {...register("phone", {
-                required: true,
-                pattern: /^\d{10}$/,
-              })}
-            />
-            {errors.phone && errors.phone.type === "required" && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
-            {errors.phone && errors.phone.type === "pattern" && (
-              <p className="errorMsg">{VALID_PHONE_NUMBER}</p>
-            )}
-          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter your email"
+                  {...register("email", {
+                    required: true,
+                  })}
+                />
+                {errors.email && (
+                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
+                )}
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="phone">
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your phone"
+                  {...register("phone", {
+                    required: true,
+                    pattern: /^\d{10}$/,
+                  })}
+                />
+                {errors.phone && errors.phone.type === "required" && (
+                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
+                )}
+                {errors.phone && errors.phone.type === "pattern" && (
+                  <p className="errorMsg">{VALID_PHONE_NUMBER}</p>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
           <Form.Group className="mb-3 baby-gender" controlId="babyGender">
             <Form.Label>Baby's Gender</Form.Label>
             <Form.Check
