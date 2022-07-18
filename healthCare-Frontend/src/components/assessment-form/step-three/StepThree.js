@@ -3,10 +3,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import DataContext from "../../../context/DataContext";
 import Stepper from "../../stepper/Stepper";
-import {
-  ATLEAST_ONE_SELECT,
-  REQUIRED_ERROR_MSG,
-} from "../../utils/constants";
+import { ATLEAST_ONE_SELECT, REQUIRED_ERROR_MSG } from "../../utils/constants";
 import Header from "../form-header/Header";
 import "../step-one/stepone.css";
 
@@ -23,8 +20,23 @@ const StepThree = () => {
     handleNextClick();
     setData((prev) => ({
       ...prev,
-      patient: {
-        ...values,
+      p_breastFeeding: {
+        isBreastfeeding: values.isBreastfeeding,
+        feedLength: values.feedLength,
+        feedFrequency: values.feedFrequency,
+        supplimentFormula: values.supplimentFormula,
+        feedingComfort: values.feedingComfort,
+        isNippleCracked: values.isNippleCracked,
+      },
+      p_safeSpacing: {
+        birthControl: {
+          isUsed: values.birthControl.isUsed,
+          details: values.birthControl.details,
+        },
+        birthControlAssess: {
+          isAssessDone: values.birthControlAssess.isAssessDone,
+          details: values.birthControlAssess.details,
+        },
       },
     }));
   };
@@ -38,7 +50,7 @@ const StepThree = () => {
           <h3>Breastfeeding</h3>
           <Row>
             <Col>
-              <Form.Label>Are you currently Breastfeeding?</Form.Label>
+              <Form.Label>Are you currently breastfeeding?</Form.Label>
             </Col>
             <Col>
               <Form.Group
@@ -69,10 +81,10 @@ const StepThree = () => {
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="feedLength">
-                <Form.Label>Length Of Feedings</Form.Label>
+                <Form.Label>Length of feedings</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter Length Of Feedings"
+                  placeholder="Enter length of feedings"
                   {...register("feedLength", {
                     required: true,
                   })}
@@ -84,10 +96,10 @@ const StepThree = () => {
             </Col>
             <Col>
               <Form.Group className="mb-3" controlId="feedFrequency">
-                <Form.Label>Frequency Of Feedings</Form.Label>
+                <Form.Label>Frequency of feedings</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter Frequency Of Feedings"
+                  placeholder="Enter frequency of feedings"
                   {...register("feedFrequency", {
                     required: true,
                   })}
@@ -102,7 +114,7 @@ const StepThree = () => {
           <Row>
             <Col>
               <Form.Label>
-                Do you suplement with (sometimes use) formula?
+                Do you supplement with (sometimes use) formula?
               </Form.Label>
             </Col>
             <Col>
@@ -194,90 +206,110 @@ const StepThree = () => {
           <h3>Safe Spacing Plan</h3>
           <Row>
             <Col>
-              <Form.Label>
-                Are you using, or planning to use, birth control?If so, what
-                type?
-              </Form.Label>
+              <Row>
+                <Col>
+                  <Form.Label>
+                    Are you using, or planning to use, birth control? If so,
+                    what type?
+                  </Form.Label>
+                </Col>
+                <Col>
+                  <Form.Group
+                    className="mb-3 baby-gender"
+                    controlId="birthControl"
+                  >
+                    <Form.Check
+                      type="radio"
+                      label="Yes"
+                      value="Yes"
+                      {...register("birthControl_isUsed", {
+                        required: true,
+                      })}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="No"
+                      value="No"
+                      {...register("birthControl_isUsed", { required: true })}
+                    />
+                    {errors.birthControl_isUsed && (
+                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                    )}
+                  </Form.Group>
+                </Col>
+              </Row>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="birthControl">
-                <Form.Check
-                  type="radio"
-                  label="Yes"
-                  value="Yes"
-                  {...register("birthControl.isUsed", {
+              {" "}
+              <Form.Group className="mb-3" controlId="birthControl">
+                <Form.Label>Comment :</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter details"
+                  {...register("birthControl_details", {
                     required: true,
                   })}
                 />
-                <Form.Check
-                  type="radio"
-                  label="No"
-                  value="No"
-                  {...register("birthControl.isUsed", { required: true })}
-                />
-                {errors.birthControl && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                {errors.birthControl_details && (
+                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
                 )}
               </Form.Group>
             </Col>
           </Row>
-
-          <Form.Group className="mb-3" controlId="birthControl">
-            <Form.Label>Comments :</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter details"
-              {...register("birthControl.details", {
-                required: true,
-              })}
-            />
-            {errors.birthControl && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
-          </Form.Group>
 
           <Row>
             <Col>
-              <Form.Label>
-                Was birth control administered(given) in today's visit?
-              </Form.Label>
+              <Row>
+                <Col>
+                  <Form.Label>
+                    Was birth control administered(given) in today's visit?
+                  </Form.Label>
+                </Col>
+                <Col>
+                  <Form.Group
+                    className="mb-3 baby-gender"
+                    controlId="birthControl"
+                  >
+                    <Form.Check
+                      type="radio"
+                      label="Yes"
+                      value="Yes"
+                      {...register("birthControlAssess_isAssessDone", {
+                        required: true,
+                      })}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="No"
+                      value="No"
+                      {...register("birthControlAssess_isAssessDone", {
+                        required: true,
+                      })}
+                    />
+                    {errors.birthControlAssess_isAssessDone && (
+                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                    )}
+                  </Form.Group>
+                </Col>
+              </Row>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="birthControl">
-                <Form.Check
-                  type="radio"
-                  label="Yes"
-                  value="Yes"
-                  {...register("birthControlAssess.isAssessDone", {
+              {" "}
+              <Form.Group className="mb-3" controlId="birthControl">
+                <Form.Label>If so, what type?</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter details"
+                  {...register("birthControlAssess_details", {
                     required: true,
                   })}
                 />
-                <Form.Check
-                  type="radio"
-                  label="No"
-                  value="No"
-                  {...register("birthControlAssess.isAssessDone", { required: true })}
-                />
-                {errors.birthControl && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                {errors.birthControlAssess_details && (
+                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
                 )}
               </Form.Group>
             </Col>
           </Row>
-
-          <Form.Group className="mb-3" controlId="birthControl">
-            <Form.Label>Comments :</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter details"
-              {...register("birthControlAssess.details", {
-                required: true,
-              })}
-            />
-            {errors.birthControl && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
-          </Form.Group>
 
           <Button variant="secondary" type="submit">
             Next
