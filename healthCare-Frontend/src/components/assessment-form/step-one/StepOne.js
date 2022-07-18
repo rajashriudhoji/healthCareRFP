@@ -11,9 +11,8 @@ import {
 import Header from "../form-header/Header";
 import "./stepone.css";
 
-const StepOne = (props) => {
-  const { step, handleNextClick } = props;
-  const { setData } = useContext(DataContext);
+const StepOne = () => {
+  const { setData, handleNextClick, step } = useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -90,7 +89,7 @@ const StepOne = (props) => {
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
-              type="text"
+              type="email"
               placeholder="Enter your email"
               {...register("email", {
                 required: true,

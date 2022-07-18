@@ -22,7 +22,7 @@ const AppWrapper = () => {
 };
 
 const AppRoutes = () => {
-  let history = useNavigate();
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     patient: {
@@ -38,45 +38,51 @@ const AppRoutes = () => {
   });
 
   const [step, setStep] = useState(1);
-  
+
   const getURL = (step) => {
     switch (step) {
       case 1:
-        history("/step-one");
+        navigate("/step-one");
         break;
-      // case 2:
-      //   history("/step-two");
-      //   break;
 
       default:
         setStep(1);
-        history("/step-one");
+        navigate("/step-one");
         break;
     }
   };
+
   const handleNextClick = () => {
     setStep(step + 1);
     getURL(step + 1);
   };
+
   const handlePreviousClick = () => {
     setStep(step - 1);
     getURL(step - 1);
   };
+
   const handleFinish = () => {
     console.log("Step", step);
   };
 
   return (
-      <DataContext.Provider value={{ data, setData }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/step-one"
-            element={<StepOne handleNextClick={handleNextClick} step={step} />}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </DataContext.Provider>
+    <DataContext.Provider
+      value={{
+        data,
+        setData,
+        handleNextClick,
+        handlePreviousClick,
+        handleFinish,
+        step,
+      }}
+    >
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/step-one" element={<StepOne />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </DataContext.Provider>
   );
 };
 

@@ -12,6 +12,7 @@
   --large-font-weight: 900;
   --max-screen-width: 1200px;
   --error-color:  #ff0000;
+  --default-margin: 3rem;
 }
 
 body {
@@ -23,10 +24,14 @@ body {
 
 .step-form {
   max-width: var(--max-screen-width);
-  margin-bottom: 3rem;
+  margin-bottom: var(--default-margin);
 }
 
 .step-form .errorMsg {
   color: var(--error-color);
   margin: 5px 0;
+}
+
+.step-form .btn {
+  margin-bottom: var(--default-margin);
 }
