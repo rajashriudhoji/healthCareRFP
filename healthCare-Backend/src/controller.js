@@ -9,14 +9,14 @@ const getPatient = (req, res) => {
 };
 
 const addPatient = (req, res) => {
-  // const { motherName, babyName, babyDOB, address, email, phone, babyGender } = req.body;
-  const { name } = req.body;
+  const {motherName, babyName, babyDOB, address, email, phone, babyGender} = req.body;
 
   //TODO: write middleware to validate input.
 
-  pool.query(queries.addPatient, [name], (err, result) => {
-    res.json(newPatient.rows[0]);
-  })
+  pool.query(queries.addPatient, [motherName, babyName, babyDOB, address, email, phone, babyGender], (error, result) => {
+    if (error) throw error;
+    res.status(201). send('Patient added with id'+ result.rows[0].patient_id);
+  });
 };
 
 module.exports = {
