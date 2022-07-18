@@ -8,15 +8,34 @@ const getPatient = (req, res) => {
   })
 };
 
-const addPatient = (req, res) => {
-  const {motherName, babyName, babyDOB, address, email, phone, babyGender} = req.body;
+const addPatientFollowUpAppointments = (patient_id, folowUpAppointments) => {
+  const {pFollowupAppointment, childFollowupAppointment} = folowUpAppointments;
 
-  //TODO: write middleware to validate input.
-
-  pool.query(queries.addPatient, [motherName, babyName, babyDOB, address, email, phone, babyGender], (error, result) => {
+  pool.query(queries.addPatientFollowUpAppointments, [patient_id, pFollowupAppointment, childFollowupAppointment], (error, result) => {
     if (error) throw error;
-    res.status(201). send('Patient added with id'+ result.rows[0].patient_id);
+    return result;
   });
+
+};
+
+const addPatient = async(req, res) => {
+  try{
+    const {motherName, babyName, babyDOB, address, email, phone, babyGender, folowUpAppointments} = req.body;
+
+    //TODO: write middleware to validate input.
+    const patient = await pool.query(queries.addPatient, [motherName, babyName, babyDOB, address, email, phone, babyGender]);
+    const patient_id = patient.rows.length ? patient.rows[0].patient_id : 0;
+    if(patient_id){
+      addPatientFollowUpAppointments(patient_id, folowUpAppointments);
+    }
+
+    res.json({
+      patient: patient.rows[0],
+    });
+  } catch(err){
+    console.log('error',err);
+    res.status(500);
+  }
 };
 
 module.exports = {
