@@ -1,6 +1,5 @@
 const pool = require('../db');
 const queries = require('./queries');
-const utils = require('./utils');
 
 const getPatient = (req, res) => {
   pool.query(queries.getPatient, (error, result) => {
@@ -9,15 +8,25 @@ const getPatient = (req, res) => {
   })
 };
 
+const addPatientFollowUpAppointments = (patient_id, folowUpAppointments) => {
+  const {pFollowupAppointment, childFollowupAppointment} = folowUpAppointments;
+
+  pool.query(queries.addPatientFollowUpAppointments, [patient_id, pFollowupAppointment, childFollowupAppointment], (error, result) => {
+    if (error) throw error;
+    return result;
+  });
+
+};
+
 const addPatient = async(req, res) => {
   try{
     const {motherName, babyName, babyDOB, address, email, phone, babyGender, folowUpAppointments} = req.body;
 
     //TODO: write middleware to validate input.
     const patient = await pool.query(queries.addPatient, [motherName, babyName, babyDOB, address, email, phone, babyGender]);
-    if(patient.rows.length){
-      const patient_id = patient.rows[0].patient_id;
-      await utils.addPatientFollowUpAppointments(patient_id, folowUpAppointments);
+    const patient_id = patient.rows.length ? patient.rows[0].patient_id : 0;
+    if(patient_id){
+      addPatientFollowUpAppointments(patient_id, folowUpAppointments);
     }
 
     res.json({
