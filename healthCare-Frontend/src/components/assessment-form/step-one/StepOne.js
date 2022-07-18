@@ -21,6 +21,7 @@ const StepOne = () => {
 
   const handleFormSubmit = (values) => {
     console.log(values);
+    handleNextClick();
     setData((prev) => ({
       ...prev,
       patient: {
@@ -142,13 +143,13 @@ const StepOne = () => {
               type="radio"
               label="F"
               value="F"
-              {...register("babyGender", {})}
+              {...register("babyGender", { required: true })}
             />
             {errors.babyGender && (
               <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
             )}
           </Form.Group>
-          <Button variant="secondary" type="submit" onClick={handleNextClick}>
+          <Button variant="secondary" type="submit">
             Next
           </Button>
         </Form>
