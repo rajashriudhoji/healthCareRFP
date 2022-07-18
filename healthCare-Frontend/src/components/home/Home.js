@@ -1,8 +1,7 @@
 import { Button } from "react-bootstrap";
-import React from "react";
-import "./home.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../header/Header";
+import "./home.css";
 
 const Home = () => {
   const navigate = useNavigate();
