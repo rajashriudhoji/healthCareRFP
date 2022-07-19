@@ -15,7 +15,7 @@ import "../step-one/stepone.css";
 
 const StepThree = () => {
   const navigate = useNavigate();
-  const { setData, incrementStep, decrementStep, step, data } =
+  const { setData, incrementStep, decrementStep, step, data, isReadOnly } =
     useContext(DataContext);
   const {
     register,
@@ -106,28 +106,30 @@ const StepThree = () => {
               <Form.Label>Are you currently breastfeeding?</Form.Label>
             </Col>
             <Col>
-              <Form.Group
-                className="mb-3 baby-gender"
-                controlId="breastfeeding"
-              >
-                <Form.Check
-                  type="radio"
-                  label="Yes"
-                  value="true"
-                  {...register("isBreastfeeding", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="radio"
-                  label="No"
-                  value="false"
-                  {...register("isBreastfeeding", { required: true })}
-                />
-                {errors.isBreastfeeding && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group
+                  className="mb-3 baby-gender"
+                  controlId="breastfeeding"
+                >
+                  <Form.Check
+                    type="radio"
+                    label="Yes"
+                    value="true"
+                    {...register("isBreastfeeding", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="No"
+                    value="false"
+                    {...register("isBreastfeeding", { required: true })}
+                  />
+                  {errors.isBreastfeeding && (
+                    <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
 
@@ -141,6 +143,7 @@ const StepThree = () => {
                   {...register("feedLength", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.feedLength && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -156,6 +159,7 @@ const StepThree = () => {
                   {...register("feedFrequency", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.feedFrequency && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -171,28 +175,30 @@ const StepThree = () => {
               </Form.Label>
             </Col>
             <Col>
-              <Form.Group
-                className="mb-3 baby-gender"
-                controlId="supplimentFormula"
-              >
-                <Form.Check
-                  type="radio"
-                  label="Yes"
-                  value="true"
-                  {...register("supplimentFormula", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="radio"
-                  label="No"
-                  value="false"
-                  {...register("supplimentFormula", { required: true })}
-                />
-                {errors.supplimentFormula && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group
+                  className="mb-3 baby-gender"
+                  controlId="supplimentFormula"
+                >
+                  <Form.Check
+                    type="radio"
+                    label="Yes"
+                    value="true"
+                    {...register("supplimentFormula", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="No"
+                    value="false"
+                    {...register("supplimentFormula", { required: true })}
+                  />
+                  {errors.supplimentFormula && (
+                    <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
 
@@ -201,28 +207,30 @@ const StepThree = () => {
               <Form.Label>Does your baby takes your breast easily?</Form.Label>
             </Col>
             <Col>
-              <Form.Group
-                className="mb-3 baby-gender"
-                controlId="feedingComfort"
-              >
-                <Form.Check
-                  type="radio"
-                  label="Yes"
-                  value="true"
-                  {...register("feedingComfort", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="radio"
-                  label="No"
-                  value="false"
-                  {...register("feedingComfort", { required: true })}
-                />
-                {errors.feedingComfort && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group
+                  className="mb-3 baby-gender"
+                  controlId="feedingComfort"
+                >
+                  <Form.Check
+                    type="radio"
+                    label="Yes"
+                    value="true"
+                    {...register("feedingComfort", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="No"
+                    value="false"
+                    {...register("feedingComfort", { required: true })}
+                  />
+                  {errors.feedingComfort && (
+                    <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
 
@@ -231,28 +239,30 @@ const StepThree = () => {
               <Form.Label>Are your nipples cracked and/or sore?</Form.Label>
             </Col>
             <Col>
-              <Form.Group
-                className="mb-3 baby-gender"
-                controlId="isNippleCracked"
-              >
-                <Form.Check
-                  type="radio"
-                  label="Yes"
-                  value="true"
-                  {...register("isNippleCracked", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="radio"
-                  label="No"
-                  value="false"
-                  {...register("isNippleCracked", { required: true })}
-                />
-                {errors.isNippleCracked && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group
+                  className="mb-3 baby-gender"
+                  controlId="isNippleCracked"
+                >
+                  <Form.Check
+                    type="radio"
+                    label="Yes"
+                    value="true"
+                    {...register("isNippleCracked", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="No"
+                    value="false"
+                    {...register("isNippleCracked", { required: true })}
+                  />
+                  {errors.isNippleCracked && (
+                    <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
           <h4 className="form-heading">Safe Spacing Plan</h4>
@@ -266,28 +276,30 @@ const StepThree = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3 baby-gender"
-                    controlId="birthControl"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("birthControl_isUsed", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("birthControl_isUsed", { required: true })}
-                    />
-                    {errors.birthControl_isUsed && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3 baby-gender"
+                      controlId="birthControl"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("birthControl_isUsed", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("birthControl_isUsed", { required: true })}
+                      />
+                      {errors.birthControl_isUsed && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -297,9 +309,8 @@ const StepThree = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("birthControl_details", {
-                    required: true,
-                  })}
+                  {...register("birthControl_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.birthControl_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -317,30 +328,32 @@ const StepThree = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3 baby-gender"
-                    controlId="birthControl"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("birthControlAssess_isAssessDone", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("birthControlAssess_isAssessDone", {
-                        required: true,
-                      })}
-                    />
-                    {errors.birthControlAssess_isAssessDone && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3 baby-gender"
+                      controlId="birthControl"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("birthControlAssess_isAssessDone", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("birthControlAssess_isAssessDone", {
+                          required: true,
+                        })}
+                      />
+                      {errors.birthControlAssess_isAssessDone && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -351,9 +364,8 @@ const StepThree = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("birthControlAssess_details", {
-                    required: true,
-                  })}
+                  {...register("birthControlAssess_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.birthControlAssess_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>

@@ -15,7 +15,7 @@ import "./steptwo.css";
 
 const StepTwo = () => {
   const navigate = useNavigate();
-  const { data, setData, incrementStep, decrementStep, step } =
+  const { data, setData, incrementStep, decrementStep, step, isReadOnly } =
     useContext(DataContext);
   const {
     register,
@@ -72,6 +72,7 @@ const StepTwo = () => {
               {...register("dateOfService", {
                 required: true,
               })}
+              disabled={isReadOnly}
             />
             {errors.dateOfService && (
               <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -93,6 +94,7 @@ const StepTwo = () => {
                   {...register("pulseRate", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.pulseRate && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -108,6 +110,7 @@ const StepTwo = () => {
                   {...register("respirationRate", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.respirationRate && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -123,6 +126,7 @@ const StepTwo = () => {
                   {...register("bloodPressure", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.bloodPressure && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -138,6 +142,7 @@ const StepTwo = () => {
                   {...register("weight", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.weight && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -154,25 +159,30 @@ const StepTwo = () => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group className="mb-3 smoke-status" controlId="smokeStatus">
-                <Form.Check
-                  type="radio"
-                  label="Yes"
-                  value="true"
-                  {...register("smokeStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="radio"
-                  label="No"
-                  value="false"
-                  {...register("smokeStatus", { required: true })}
-                />
-                {errors.smokeStatus && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group
+                  className="mb-3 smoke-status"
+                  controlId="smokeStatus"
+                >
+                  <Form.Check
+                    type="radio"
+                    label="Yes"
+                    value="true"
+                    {...register("smokeStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="No"
+                    value="false"
+                    {...register("smokeStatus", { required: true })}
+                  />
+                  {errors.smokeStatus && (
+                    <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
           <Form.Group className="mb-3 buttons">

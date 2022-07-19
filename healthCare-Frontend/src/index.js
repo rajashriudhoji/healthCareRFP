@@ -11,7 +11,7 @@ import StepFive from "./components/assessment-form/stepFive/StepFive";
 import Home from "./components/home/Home";
 import DataContext from "./context/DataContext";
 import "./index.css";
-import { initialState } from "./utils/data";
+import { initialState } from "./utils/initialstate";
 
 const AppWrapper = () => {
   return (
@@ -24,6 +24,7 @@ const AppWrapper = () => {
 const AppRoutes = () => {
   const [data, setData] = useState(initialState);
   const [step, setStep] = useState(1);
+  const [isReadOnly, setIsReadOnly] = useState(false);
 
   const incrementStep = () => {
     setStep((step) => step + 1);
@@ -49,6 +50,8 @@ const AppRoutes = () => {
         handleFinish,
         step,
         setStep,
+        isReadOnly,
+        setIsReadOnly,
       }}
     >
       <Routes>

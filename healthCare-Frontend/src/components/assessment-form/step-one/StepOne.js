@@ -15,7 +15,9 @@ import "./stepone.css";
 
 const StepOne = () => {
   const navigate = useNavigate();
-  const { data, setData, incrementStep, step } = useContext(DataContext);
+  const { data, setData, incrementStep, step, isReadOnly } =
+    useContext(DataContext);
+  console.log({ gender: data?.patientBasicInfo?.babyGender });
   const {
     register,
     handleSubmit,
@@ -45,6 +47,8 @@ const StepOne = () => {
     navigate("/step-two");
   };
 
+  console.log({ data });
+
   return (
     <div>
       <Header />
@@ -59,6 +63,7 @@ const StepOne = () => {
               {...register("motherName", {
                 required: true,
               })}
+              disabled={isReadOnly}
             />
             {errors.motherName && (
               <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -74,6 +79,7 @@ const StepOne = () => {
                   {...register("babyName", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.babyName && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -89,6 +95,7 @@ const StepOne = () => {
                   {...register("babyDOB", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.babyDOB && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -105,65 +112,72 @@ const StepOne = () => {
               {...register("address", {
                 required: true,
               })}
+              disabled={isReadOnly}
             />
             {errors.address && <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>}
           </Form.Group>
           <Row>
             <Col>
-              <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter your email"
-                  {...register("email", {
-                    required: true,
-                  })}
-                />
-                {errors.email && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group className="mb-3" controlId="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter your email"
+                    {...register("email", {
+                      required: true,
+                    })}
+                  />
+                  {errors.email && (
+                    <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
             <Col>
-              <Form.Group className="mb-3" controlId="phone">
-                <Form.Label>Phone</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter your phone"
-                  {...register("phone", {
-                    required: true,
-                    pattern: /^\d{10}$/,
-                  })}
-                />
-                {errors.phone && errors.phone.type === "required" && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
-                {errors.phone && errors.phone.type === "pattern" && (
-                  <p className="errorMsg">{VALID_PHONE_NUMBER}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group className="mb-3" controlId="phone">
+                  <Form.Label>Phone</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your phone"
+                    {...register("phone", {
+                      required: true,
+                      pattern: /^\d{10}$/,
+                    })}
+                  />
+                  {errors.phone && errors.phone.type === "required" && (
+                    <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
+                  )}
+                  {errors.phone && errors.phone.type === "pattern" && (
+                    <p className="errorMsg">{VALID_PHONE_NUMBER}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
-          <Form.Group className="mb-3 baby-gender" controlId="babyGender">
-            <Form.Label>Baby's Gender</Form.Label>
-            <Form.Check
-              type="radio"
-              label="M"
-              value="M"
-              {...register("babyGender", {
-                required: true,
-              })}
-            />
-            <Form.Check
-              type="radio"
-              label="F"
-              value="F"
-              {...register("babyGender", { required: true })}
-            />
-            {errors.babyGender && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Form.Group>
+          <fieldset disabled={isReadOnly}>
+            <Form.Group className="mb-3 baby-gender" controlId="babyGender">
+              <Form.Label>Baby's Gender</Form.Label>
+              <Form.Check
+                type="radio"
+                label="M"
+                value="M"
+                {...register("babyGender", {
+                  required: true,
+                })}
+              />
+              <Form.Check
+                type="radio"
+                label="F"
+                value="F"
+                {...register("babyGender", { required: true })}
+              />
+              {errors.babyGender && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Form.Group>
+          </fieldset>
           <Button variant="secondary" type="submit">
             {NEXT_BUTTON_TEXT}
           </Button>

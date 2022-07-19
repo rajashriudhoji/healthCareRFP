@@ -15,7 +15,7 @@ import "../step-one/stepone.css";
 
 const StepFour = () => {
   const navigate = useNavigate();
-  const { data, setData, incrementStep, decrementStep, step } =
+  const { data, setData, incrementStep, decrementStep, step, isReadOnly } =
     useContext(DataContext);
   const {
     register,
@@ -150,30 +150,32 @@ const StepFour = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="relationWithBaby_isComfortable"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("relationWithBaby_isComfortable", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("relationWithBaby_isComfortable", {
-                        required: true,
-                      })}
-                    />
-                    {errors.relationWithBaby_isComfortable && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="relationWithBaby_isComfortable"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("relationWithBaby_isComfortable", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("relationWithBaby_isComfortable", {
+                          required: true,
+                        })}
+                      />
+                      {errors.relationWithBaby_isComfortable && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -183,9 +185,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("relationWithBaby_details", {
-                    required: true,
-                  })}
+                  {...register("relationWithBaby_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.relationWithBaby_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -202,30 +203,32 @@ const StepFour = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="houseMemberStatus_isAdjusted"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("houseMemberStatus_isAdjusted", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("houseMemberStatus_isAdjusted", {
-                        required: true,
-                      })}
-                    />
-                    {errors.houseMemberStatus_isAdjusted && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="houseMemberStatus_isAdjusted"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("houseMemberStatus_isAdjusted", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("houseMemberStatus_isAdjusted", {
+                          required: true,
+                        })}
+                      />
+                      {errors.houseMemberStatus_isAdjusted && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -238,9 +241,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("houseMemberStatus_details", {
-                    required: true,
-                  })}
+                  {...register("houseMemberStatus_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.houseMemberStatus_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -258,30 +260,32 @@ const StepFour = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="fatherStatus_isSupportive"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("fatherStatus_isSupportive", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("fatherStatus_isSupportive", {
-                        required: true,
-                      })}
-                    />
-                    {errors.fatherStatus_isSupportive && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="fatherStatus_isSupportive"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("fatherStatus_isSupportive", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("fatherStatus_isSupportive", {
+                          required: true,
+                        })}
+                      />
+                      {errors.fatherStatus_isSupportive && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -291,9 +295,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("fatherStatus_details", {
-                    required: true,
-                  })}
+                  {...register("fatherStatus_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.fatherStatus_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -304,48 +307,49 @@ const StepFour = () => {
           <Row>
             <Col>
               <Form.Label>
-                How does your partner feel about the baby? (Check all that
-                apply)
+                How does your partner feel about the baby?
               </Form.Label>
             </Col>
             <Col>
-              <Form.Group className="mb-3" controlId="fatherStatus">
-                <Form.Check
-                  type="checkbox"
-                  label="Happy"
-                  value="happy"
-                  {...register("fatherStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Angry"
-                  value="angry"
-                  {...register("fatherStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Refused to be involved"
-                  value="isInvolved"
-                  {...register("fatherStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Not sure"
-                  value="isSure"
-                  {...register("fatherStatus", {
-                    required: true,
-                  })}
-                />
-                {errors.fatherStatus && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group className="mb-3" controlId="fatherStatus">
+                  <Form.Check
+                    type="radio"
+                    label="Happy"
+                    value="happy"
+                    {...register("fatherStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="Angry"
+                    value="angry"
+                    {...register("fatherStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="Refused to be involved"
+                    value="isInvolved"
+                    {...register("fatherStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="Not sure"
+                    value="isSure"
+                    {...register("fatherStatus", {
+                      required: true,
+                    })}
+                  />
+                  {errors.fatherStatus && (
+                    <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
           <Row>
@@ -357,27 +361,29 @@ const StepFour = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group className="mb-3" controlId="safety_isSafe">
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("safety_isSafe", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("safety_isSafe", {
-                        required: true,
-                      })}
-                    />
-                    {errors.safety_isSafe && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group className="mb-3" controlId="safety_isSafe">
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("safety_isSafe", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("safety_isSafe", {
+                          required: true,
+                        })}
+                      />
+                      {errors.safety_isSafe && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -387,9 +393,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("safety_details", {
-                    required: true,
-                  })}
+                  {...register("safety_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.safety_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -407,30 +412,32 @@ const StepFour = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="unsafeRelationStatus_isRelationThreat"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("unsafeRelationStatus_isRelationThreat", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("unsafeRelationStatus_isRelationThreat", {
-                        required: true,
-                      })}
-                    />
-                    {errors.unsafeRelationStatus_isRelationThreat && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="unsafeRelationStatus_isRelationThreat"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("unsafeRelationStatus_isRelationThreat", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("unsafeRelationStatus_isRelationThreat", {
+                          required: true,
+                        })}
+                      />
+                      {errors.unsafeRelationStatus_isRelationThreat && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -443,9 +450,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("unsafeRelationStatus_details", {
-                    required: true,
-                  })}
+                  {...register("unsafeRelationStatus_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.unsafeRelationStatus_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -463,30 +469,32 @@ const StepFour = () => {
                   </Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="resourceStatus_isEnoughResources"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="true"
-                      {...register("resourceStatus_isEnoughResources", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="false"
-                      {...register("resourceStatus_isEnoughResources", {
-                        required: true,
-                      })}
-                    />
-                    {errors.resourceStatus_isEnoughResources && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="resourceStatus_isEnoughResources"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="true"
+                        {...register("resourceStatus_isEnoughResources", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="false"
+                        {...register("resourceStatus_isEnoughResources", {
+                          required: true,
+                        })}
+                      />
+                      {errors.resourceStatus_isEnoughResources && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -496,9 +504,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("resourceStatus_details", {
-                    required: true,
-                  })}
+                  {...register("resourceStatus_details", {})}
+                  disabled={isReadOnly}
                 />
                 {errors.resourceStatus_details && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -511,51 +518,53 @@ const StepFour = () => {
               <Form.Label>If no, what needs exist?</Form.Label>
             </Col>
             <Col>
-              <Form.Group className="mb-3" controlId="resourceStatus">
-                <Form.Check
-                  type="checkbox"
-                  label="Housing"
-                  value="housing"
-                  {...register("resourceStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Financial"
-                  value="financial"
-                  {...register("resourceStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Food"
-                  value="food"
-                  {...register("resourceStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Family"
-                  value="family"
-                  {...register("resourceStatus", {
-                    required: true,
-                  })}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label="Other"
-                  value="other"
-                  {...register("resourceStatus", {
-                    required: true,
-                  })}
-                />
-                {errors.resourceStatus && (
-                  <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                )}
-              </Form.Group>
+              <fieldset disabled={isReadOnly}>
+                <Form.Group className="mb-3" controlId="resourceStatus">
+                  <Form.Check
+                    type="checkbox"
+                    label="Housing"
+                    value="housing"
+                    {...register("resourceStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    label="Financial"
+                    value="financial"
+                    {...register("resourceStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    label="Food"
+                    value="food"
+                    {...register("resourceStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    label="Family"
+                    value="family"
+                    {...register("resourceStatus", {
+                      required: true,
+                    })}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    label="Other"
+                    value="other"
+                    {...register("resourceStatus", {
+                      required: true,
+                    })}
+                  />
+                  {errors.resourceStatus && (
+                    <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                  )}
+                </Form.Group>
+              </fieldset>
             </Col>
           </Row>
           <Form.Group className="mb-3 buttons">
