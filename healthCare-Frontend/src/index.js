@@ -7,6 +7,7 @@ import StepFour from "./components/assessment-form/step-four/StepFour";
 import StepOne from "./components/assessment-form/step-one/StepOne";
 import StepThree from "./components/assessment-form/step-three/StepThree";
 import StepTwo from "./components/assessment-form/step-two/StepTwo";
+import StepFive from "./components/assessment-form/stepFive/StepFive";
 import Home from "./components/home/Home";
 import DataContext from "./context/DataContext";
 import "./index.css";
@@ -64,6 +65,59 @@ const AppRoutes = () => {
         details: "",
       },
     },
+    patientEducationalMaterial: {
+      depressionScreening: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      contraceptionMethod: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      peripheralBloodGlucose: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      doctorAppointment: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      carSeatSafety: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      immunizationSchedule: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      breastFeeding: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      infantSafety: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      familyPlanning: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      checkups: {
+        educationProvided: true,
+        referred: true,
+        declined: true,
+      },
+      details: "",
+    },
   });
 
   const [step, setStep] = useState(1);
@@ -101,6 +155,7 @@ const AppRoutes = () => {
         <Route path="/step-three" element={<StepThree />} />
         <Route path="/step-four" element={<StepFour />} />
         <Route path="/step-end" element={<StepEnd />} />
+        <Route path="/step-five" element={<StepFive />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </DataContext.Provider>

@@ -15,13 +15,35 @@ import "../step-one/stepone.css";
 
 const StepThree = () => {
   const navigate = useNavigate();
-  const { setData, incrementStep, decrementStep, step } =
+  const { setData, incrementStep, decrementStep, step, data } =
     useContext(DataContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      isBreastfeeding:
+        data?.p_breastFeeding?.isBreastfeeding === true ,
+      feedLength: data?.p_breastFeeding?.feedLength,
+      feedFrequency: data?.p_breastFeeding?.feedFrequency,
+      supplimentFormula:
+        data?.p_breastFeeding?.supplimentFormula === true ? "true" : "false",
+      feedingComfort:
+        data?.p_breastFeeding?.feedingComfort === true ? "true" : "false",
+      isNippleCracked:
+        data?.p_breastFeeding?.isNippleCracked === true ? "true" : "false",
+      birthControl_isUsed:
+        data?.p_safeSpacing?.birthControl?.isUsed === true ? "true" : "false",
+      birthControl_details: data?.p_safeSpacing?.birthControl?.details,
+      birthControlAssess_isAssessDone:
+        data?.p_safeSpacing?.birthControlAssess?.isAssessDone === true
+          ? "true"
+          : "false",
+      birthControlAssess_details:
+        data?.p_safeSpacing?.birthControlAssess?.details,
+    },
+  });
 
   const handleFormSubmit = (values) => {
     console.log(values);
@@ -32,27 +54,30 @@ const StepThree = () => {
       supplimentFormula,
       feedingComfort,
       isNippleCracked,
-      birthControl,
-      birthControlAssess,
+      birthControl_isUsed,
+      birthControl_details,
+      birthControlAssess_isAssessDone,
+      birthControlAssess_details,
     } = values;
     setData((prev) => ({
       ...prev,
       p_breastFeeding: {
-        isBreastfeeding,
+        isBreastfeeding: isBreastfeeding === "true" ? true : false,
         feedLength,
         feedFrequency,
-        supplimentFormula,
-        feedingComfort,
-        isNippleCracked,
+        supplimentFormula: supplimentFormula === "true" ? true : false,
+        feedingComfort: feedingComfort === "true" ? true : false,
+        isNippleCracked: isNippleCracked === "true" ? true : false,
       },
       p_safeSpacing: {
         birthControl: {
-          isUsed: birthControl?.isUsed,
-          details: birthControl?.details,
+          isUsed: birthControl_isUsed === "true" ? true : false,
+          details: birthControl_details,
         },
         birthControlAssess: {
-          isAssessDone: birthControlAssess?.isAssessDone,
-          details: birthControlAssess?.details,
+          isAssessDone:
+            birthControlAssess_isAssessDone === "true" ? true : false,
+          details: birthControlAssess_details,
         },
       },
     }));
