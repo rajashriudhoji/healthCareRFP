@@ -297,13 +297,8 @@ const StepThree = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("birthControl_details", {
-                    required: true,
-                  })}
+                  {...register("birthControl_details", {})}
                 />
-                {errors.birthControl_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -351,13 +346,8 @@ const StepThree = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("birthControlAssess_details", {
-                    required: true,
-                  })}
+                  {...register("birthControlAssess_details", {})}
                 />
-                {errors.birthControlAssess_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>

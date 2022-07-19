@@ -36,12 +36,16 @@ const StepSix = () => {
         data?.patientFollowUpAppointments?.childFollowupAppointment?.healthCare,
       childFollowupAppointment_isAppointmentTaken:
         data?.patientFollowUpAppointments?.childFollowupAppointment
-          ?.isAppointmentTaken,
+          ?.isAppointmentTaken === true
+          ? "Yes"
+          : "No",
       healthCare:
         data?.patientFollowUpAppointments?.pFollowupAppointment?.healthCare,
       isAppointmentTaken:
         data?.patientFollowUpAppointments?.pFollowupAppointment
-          ?.isAppointmentTaken,
+          ?.isAppointmentTaken === true
+          ? "Yes"
+          : "No",
     },
   });
 
@@ -117,7 +121,7 @@ const StepSix = () => {
                     <Form.Check
                       type="radio"
                       label="Yes"
-                      value="true"
+                      value="Yes"
                       {...register("isAppointmentTaken", {
                         required: true,
                       })}
@@ -125,7 +129,7 @@ const StepSix = () => {
                     <Form.Check
                       type="radio"
                       label="No"
-                      value="false"
+                      value="No"
                       {...register("isAppointmentTaken", {
                         required: true,
                       })}
@@ -159,13 +163,8 @@ const StepSix = () => {
               as="textarea"
               rows={1}
               className="address"
-              {...register("healthCare", {
-                required: true,
-              })}
+              {...register("healthCare", {})}
             />
-            {errors.healthCare && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
           </Form.Group>
           <Row>
             <Col>
@@ -235,13 +234,8 @@ const StepSix = () => {
               as="textarea"
               rows={1}
               className="address"
-              {...register("childFollowupAppointment_healthCare", {
-                required: true,
-              })}
+              {...register("childFollowupAppointment_healthCare", {})}
             />
-            {errors.childFollowupAppointment_healthCare && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
           </Form.Group>
 
           <Form.Group className="mb-3 buttons">

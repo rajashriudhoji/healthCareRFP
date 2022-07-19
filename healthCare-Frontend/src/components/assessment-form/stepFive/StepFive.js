@@ -523,11 +523,8 @@ const StepFive = () => {
               as="textarea"
               rows={2}
               className="address"
-              {...register("details", {
-                required: true,
-              })}
+              {...register("details", {})}
             />
-            {errors.details && <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>}
           </Form.Group>
 
           <Form.Group className="mb-3 buttons">

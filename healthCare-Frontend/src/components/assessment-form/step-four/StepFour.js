@@ -183,13 +183,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("relationWithBaby_details", {
-                    required: true,
-                  })}
+                  {...register("relationWithBaby_details", {})}
                 />
-                {errors.relationWithBaby_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -238,13 +233,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("houseMemberStatus_details", {
-                    required: true,
-                  })}
+                  {...register("houseMemberStatus_details", {})}
                 />
-                {errors.houseMemberStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -291,13 +281,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("fatherStatus_details", {
-                    required: true,
-                  })}
+                  {...register("fatherStatus_details", {})}
                 />
-                {errors.fatherStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -387,13 +372,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("safety_details", {
-                    required: true,
-                  })}
+                  {...register("safety_details", {})}
                 />
-                {errors.safety_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -443,13 +423,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("unsafeRelationStatus_details", {
-                    required: true,
-                  })}
+                  {...register("unsafeRelationStatus_details", {})}
                 />
-                {errors.unsafeRelationStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -496,13 +471,8 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("resourceStatus_details", {
-                    required: true,
-                  })}
+                  {...register("resourceStatus_details", {})}
                 />
-                {errors.resourceStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
