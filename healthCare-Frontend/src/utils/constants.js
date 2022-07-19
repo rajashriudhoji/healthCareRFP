@@ -3,3 +3,4 @@ export const ATLEAST_ONE_SELECT = "Please select one of the option.";
 export const VALID_PHONE_NUMBER = "Please enter a 10 digit phone number.";
 export const PREVIOUS_BUTTON_TEXT = "Previous Page";
 export const NEXT_BUTTON_TEXT = "Next Page";
+export const SUBMIT = "Submit";

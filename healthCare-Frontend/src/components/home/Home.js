@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../context/DataContext";
+import { initialState } from "../../utils/data";
 import Header from "../header/Header";
 import "./home.css";
 
 const Home = () => {
-  const { setStep } = useContext(DataContext);
+  const { setStep, setData } = useContext(DataContext);
   const navigate = useNavigate();
   return (
     <>
@@ -17,6 +18,7 @@ const Home = () => {
           className="btn"
           onClick={() => {
             setStep(1);
+            setData(initialState);
             navigate("/step-one");
           }}
         >

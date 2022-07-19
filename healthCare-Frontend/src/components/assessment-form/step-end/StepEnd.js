@@ -3,8 +3,11 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
+import {
+  NEXT_BUTTON_TEXT,
+  PREVIOUS_BUTTON_TEXT,
+} from "../../../utils/constants";
 import Stepper from "../../stepper/Stepper";
-import { NEXT_BUTTON_TEXT, PREVIOUS_BUTTON_TEXT } from "../../utils/constants";
 import Header from "../form-header/Header";
 import "./stepend.css";
 

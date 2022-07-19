@@ -24,9 +24,6 @@ function Stepper(props) {
           <li className={step >= 6 ? "active " : ""} id="confirm">
             <strong>Follow-Up Appointments</strong>
           </li>
-          <li className={step >= 7 ? "active " : ""} id="confirm">
-            <strong>Step End</strong>
-          </li>
         </ul>
       </form>
     </div>

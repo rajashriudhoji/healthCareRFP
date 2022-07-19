@@ -3,13 +3,13 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
-import Stepper from "../../stepper/Stepper";
 import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
-} from "../../utils/constants";
+} from "../../../utils/constants";
+import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "./steptwo.css";
 

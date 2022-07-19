@@ -3,13 +3,13 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
-import Stepper from "../../stepper/Stepper";
 import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
   VALID_PHONE_NUMBER,
-} from "../../utils/constants";
+} from "../../../utils/constants";
+import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "./stepone.css";
 
@@ -22,13 +22,13 @@ const StepOne = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      motherName: data?.basicPatientInfo?.motherName,
-      babyName: data?.basicPatientInfo?.babyName,
-      babyDOB: data?.basicPatientInfo?.babyDOB,
-      address: data?.basicPatientInfo?.address,
-      email: data?.basicPatientInfo?.email,
-      phone: data?.basicPatientInfo?.phone,
-      babyGender: data?.basicPatientInfo?.babyGender,
+      motherName: data?.patientBasicInfo?.motherName,
+      babyName: data?.patientBasicInfo?.babyName,
+      babyDOB: data?.patientBasicInfo?.babyDOB,
+      address: data?.patientBasicInfo?.address,
+      email: data?.patientBasicInfo?.email,
+      phone: data?.patientBasicInfo?.phone,
+      babyGender: data?.patientBasicInfo?.babyGender,
     },
   });
 
@@ -36,7 +36,7 @@ const StepOne = () => {
     console.log(values);
     setData((prev) => ({
       ...prev,
-      basicPatientInfo: {
+      patientBasicInfo: {
         ...values,
         phone: +values.phone,
       },

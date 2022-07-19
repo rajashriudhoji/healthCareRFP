@@ -13,6 +13,7 @@
   --medium-font-weight: 600;
   --large-font-weight: 900;
   --max-screen-width: 1200px;
+  --success-color: #329232;
   --error-color: #da6a6a;
   --default-margin: 3rem;
 }
@@ -29,7 +30,7 @@ body {
   margin-bottom: var(--default-margin);
 }
 
-.step-form .errorMsg {
+.errorMsg {
   color: var(--error-color);
   margin: 5px 0;
 }
@@ -53,4 +54,9 @@ body {
 .form-check {
   display: inline-block;
   margin-left: 1rem;
+}
+
+.successMsg {
+  color: var(--success-color);
+  margin: 5px 0;
 }

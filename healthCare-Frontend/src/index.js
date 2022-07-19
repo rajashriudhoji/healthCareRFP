@@ -12,6 +12,7 @@ import StepFive from "./components/assessment-form/stepFive/StepFive";
 import Home from "./components/home/Home";
 import DataContext from "./context/DataContext";
 import "./index.css";
+import { initialState } from "./utils/data";
 
 const AppWrapper = () => {
   return (
@@ -22,148 +23,7 @@ const AppWrapper = () => {
 };
 
 const AppRoutes = () => {
-  const [data, setData] = useState({
-    basicPatientInfo: {
-      motherName: "",
-      babyName: "",
-      babyDOB: "",
-      address: "",
-      email: "",
-      phone: "",
-      babyGender: "",
-    },
-    patientVisit: {
-      dateOfService: "",
-      smokeStatus: false,
-      vitalSigns: {
-        temperature: {
-          pulseRate: "",
-          respirationRate: "",
-          bloodPressure: "",
-          weight: "",
-        },
-      },
-    },
-    patientBreastFeeding: {
-      isBreastfeeding: true,
-      feedLength: 15,
-      feedFrequency: 5,
-      supplimentFormula: true,
-      feedingComfort: true,
-      isNippleCracked: true,
-    },
-    patientSafeSpacing: {
-      birthControl: {
-        isUsed: true,
-        details: "",
-      },
-      birthControlAssess: {
-        isAssessDone: true,
-        details: "",
-      },
-    },
-    patientEducationalMaterial: {
-      depressionScreening: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      contraceptionMethod: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      peripheralBloodGlucose: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      doctorAppointment: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      carSeatSafety: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      immunizationSchedule: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      breastFeeding: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      infantSafety: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      familyPlanning: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      checkups: {
-        educationProvided: true,
-        referred: true,
-        declined: true,
-      },
-      details: "",
-    },
-    patientPsychoSocialAssess: {
-      relationWithBaby: {
-        isComfortable: true,
-        details: "",
-      },
-      houseMemberStatus: {
-        isAdjusted: true,
-        details: "",
-      },
-      fatherStatus: {
-        isSupportive: false,
-        detail: "",
-        isHappy: false,
-        isAngry: false,
-        isInvolved: false,
-        isSure: false,
-      },
-      safety: {
-        isSafe: true,
-        details: "",
-      },
-      unsafeRelationStatus: {
-        isRelationThreat: false,
-        details: "",
-      },
-      resourceStatus: {
-        isEnoughResources: false,
-        details: "",
-        isHousingAvailable: false,
-        isFinanceAvailable: false,
-        isFoodAvailable: false,
-        isFamilyAvailable: false,
-        isAny: false,
-      },
-    },
-    patientFollowUpAppointments: {
-      pFollowupAppointment: {
-        isAppointmentTaken: true,
-        appointmentDate: "",
-        healthCare: "",
-      },
-      childFollowupAppointment: {
-        isAppointmentTaken: true,
-        appointmentDate: "",
-        healthCare: "",
-      },
-    },
-  });
-
+  const [data, setData] = useState(initialState);
   const [step, setStep] = useState(1);
 
   const incrementStep = () => {

@@ -1,20 +1,23 @@
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
-import Stepper from "../../stepper/Stepper";
 import {
   ATLEAST_ONE_SELECT,
-  NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
-} from "../../utils/constants";
+  SUBMIT,
+} from "../../../utils/constants";
+import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "../step-one/stepone.css";
 
 const StepSix = () => {
   const navigate = useNavigate();
+  const [successMsg, setSuccessMsg] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
   const { setData, incrementStep, decrementStep, step, data } =
     useContext(DataContext);
   const {
@@ -42,7 +45,7 @@ const StepSix = () => {
     },
   });
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = async (values) => {
     console.log(values);
     const {
       appointmentDate,
@@ -70,8 +73,24 @@ const StepSix = () => {
         },
       },
     }));
-    incrementStep();
-    navigate("/step-end");
+    //incrementStep();
+    // API call
+    //  navigate("/step-end");
+    try {
+      debugger;
+      const { data: responseData } = await axios.post(
+        "http://4597-2401-4900-362b-7c62-980b-a0a8-fc0d-3f0f.ngrok.io/api/v1/patient",
+        { ...data }
+      );
+      setSuccessMsg("Data is successfully saved.");
+      setErrorMsg("");
+      setTimeout(() => {
+        navigate("/");
+      }, 5000);
+    } catch (error) {
+      setSuccessMsg("");
+      setErrorMsg("Error while saving data. Please try again.");
+    }
   };
 
   const handlePreviousClick = () => {
@@ -85,6 +104,8 @@ const StepSix = () => {
       <Stepper step={step} />
       <div className="step-form container step-three">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
+          {successMsg && <p className="successMsg">{successMsg}</p>}
+          {errorMsg && <p className="errorMsg">{errorMsg}</p>}
           <h4 className="form-heading">Follow-Up Appointments</h4>
           <Row>
             <Col>
@@ -236,7 +257,7 @@ const StepSix = () => {
               {PREVIOUS_BUTTON_TEXT}
             </Button>
             <Button variant="secondary" type="submit">
-              {NEXT_BUTTON_TEXT}
+              {SUBMIT}
             </Button>
           </Form.Group>
         </Form>
