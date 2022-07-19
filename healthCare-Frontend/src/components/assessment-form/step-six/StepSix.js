@@ -73,12 +73,8 @@ const StepSix = () => {
         },
       },
     }));
-    //incrementStep();
-    // API call
-    //  navigate("/step-end");
     try {
-      debugger;
-      const { data: responseData } = await axios.post(
+      await axios.post(
         "http://4597-2401-4900-362b-7c62-980b-a0a8-fc0d-3f0f.ngrok.io/api/v1/patient",
         { ...data }
       );

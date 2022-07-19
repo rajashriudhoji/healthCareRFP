@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import StepEnd from "./components/assessment-form/step-end/StepEnd";
 import StepFour from "./components/assessment-form/step-four/StepFour";
 import StepOne from "./components/assessment-form/step-one/StepOne";
 import StepSix from "./components/assessment-form/step-six/StepSix";
@@ -58,7 +57,6 @@ const AppRoutes = () => {
         <Route path="/step-two" element={<StepTwo />} />
         <Route path="/step-three" element={<StepThree />} />
         <Route path="/step-four" element={<StepFour />} />
-        <Route path="/step-end" element={<StepEnd />} />
         <Route path="/step-five" element={<StepFive />} />
         <Route path="/step-six" element={<StepSix />} />
         <Route path="*" element={<Navigate to="/" />} />
