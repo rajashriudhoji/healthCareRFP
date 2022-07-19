@@ -119,7 +119,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="depressionScreening"
               >
                 <Form.Check
                   type="checkbox"
@@ -132,7 +131,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="depressionScreening"
               >
                 <Form.Check
                   type="checkbox"
@@ -145,7 +143,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="depressionScreening"
               >
                 <Form.Check
                   type="checkbox"
@@ -167,7 +164,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="contraceptionMethod"
               >
                 <Form.Check
                   type="checkbox"
@@ -180,7 +176,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="contraceptionMethod"
               >
                 <Form.Check
                   type="checkbox"
@@ -193,7 +188,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="contraceptionMethod"
               >
                 <Form.Check
                   type="checkbox"
@@ -216,7 +210,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="peripheralBloodGlucose"
               >
                 <Form.Check
                   type="checkbox"
@@ -231,7 +224,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="peripheralBloodGlucose"
               >
                 <Form.Check
                   type="checkbox"
@@ -246,7 +238,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="peripheralBloodGlucose"
               >
                 <Form.Check
                   type="checkbox"
@@ -271,7 +262,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="doctorAppointment"
               >
                 <Form.Check
                   type="checkbox"
@@ -284,7 +274,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="doctorAppointment"
               >
                 <Form.Check
                   type="checkbox"
@@ -297,7 +286,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="doctorAppointment"
               >
                 <Form.Check
                   type="checkbox"
@@ -320,7 +308,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="carSeatSafety"
               >
                 <Form.Check
                   type="checkbox"
@@ -333,7 +320,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="carSeatSafety"
               >
                 <Form.Check
                   type="checkbox"
@@ -346,7 +332,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="carSeatSafety"
               >
                 <Form.Check
                   type="checkbox"
@@ -369,7 +354,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="immunizationSchedule"
               >
                 <Form.Check
                   type="checkbox"
@@ -382,7 +366,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="immunizationSchedule"
               >
                 <Form.Check
                   type="checkbox"
@@ -395,7 +378,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="immunizationSchedule"
               >
                 <Form.Check
                   type="checkbox"
@@ -418,7 +400,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="breastFeeding"
               >
                 <Form.Check
                   type="checkbox"
@@ -431,7 +412,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="breastFeeding"
               >
                 <Form.Check
                   type="checkbox"
@@ -444,7 +424,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="breastFeeding"
               >
                 <Form.Check
                   type="checkbox"
@@ -465,7 +444,7 @@ const StepFive = () => {
               <Form.Label>Infant Safety</Form.Label>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="infantSafety">
+              <Form.Group className="mb-3 baby-gender">
                 <Form.Check
                   type="checkbox"
                   label="Education Provided"
@@ -475,7 +454,7 @@ const StepFive = () => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="infantSafety">
+              <Form.Group className="mb-3 baby-gender">
                 <Form.Check
                   type="checkbox"
                   label="Referred"
@@ -485,7 +464,7 @@ const StepFive = () => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="infantSafety">
+              <Form.Group className="mb-3 baby-gender">
                 <Form.Check
                   type="checkbox"
                   label="Declined"
@@ -507,7 +486,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="familyPlanning"
               >
                 <Form.Check
                   type="checkbox"
@@ -520,7 +498,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="familyPlanning"
               >
                 <Form.Check
                   type="checkbox"
@@ -533,7 +510,6 @@ const StepFive = () => {
             <Col>
               <Form.Group
                 className="mb-3 baby-gender"
-                controlId="familyPlanning"
               >
                 <Form.Check
                   type="checkbox"
@@ -554,7 +530,7 @@ const StepFive = () => {
               <Form.Label>Checkups</Form.Label>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="checkups">
+              <Form.Group className="mb-3 baby-gender">
                 <Form.Check
                   type="checkbox"
                   label="Education Provided"
@@ -564,7 +540,7 @@ const StepFive = () => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="checkups">
+              <Form.Group className="mb-3 baby-gender">
                 <Form.Check
                   type="checkbox"
                   label="Referred"
@@ -574,7 +550,7 @@ const StepFive = () => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group className="mb-3 baby-gender" controlId="checkups">
+              <Form.Group className="mb-3 baby-gender">
                 <Form.Check
                   type="checkbox"
                   label="Declined"
@@ -589,7 +565,7 @@ const StepFive = () => {
             )}
           </Row>
 
-          <Form.Group className="mb-3" controlId="details">
+          <Form.Group className="mb-3">
             <Form.Label>Comments:</Form.Label>
             <Form.Control
               as="textarea"
