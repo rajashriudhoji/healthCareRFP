@@ -13,8 +13,8 @@ CREATE TABLE patientBasicInfo (
 
 CREATE TABLE patientFollowUpAppointments (
 	patient_id NUMERIC(5) NOT NULL,
-	pFollowupAppointment json NOT NULL,
-	childFollowupAppointment json NOT NULL
+	pFollowupAppointment json,
+	childFollowupAppointment json
 );
 
 CREATE TABLE patientVisit (

@@ -8,8 +8,8 @@ const getPatient = (req, res) => {
   })
 };
 
-const addPatientFollowUpAppointments = (patient_id, folowUpAppointments) => {
-  const {pFollowupAppointment, childFollowupAppointment} = folowUpAppointments;
+const addPatientFollowUpAppointments = (patient_id, patientFollowUpAppointments) => {
+  const {pFollowupAppointment, childFollowupAppointment} = patientFollowUpAppointments;
 
   pool.query(queries.addPatientFollowUpAppointments, [patient_id, pFollowupAppointment, childFollowupAppointment], (error, result) => {
     if (error) throw error;
@@ -74,14 +74,14 @@ const addPatientEducationalMaterial = (patient_id, patientEducationalMaterial) =
 const addPatient = async(req, res) => {
   try{
     const {patientBasicInfo:{motherName, babyName, babyDOB, address, email, phone, babyGender},
-      folowUpAppointments, patientVisit, patientBreastFeeding, patientSafeSpacing,
+      patientFollowUpAppointments, patientVisit, patientBreastFeeding, patientSafeSpacing,
       patientPsychoSocialAssess, patientEducationalMaterial} = req.body;
 
     //TODO: write middleware to validate input.
     const patient = await pool.query(queries.addPatient, [motherName, babyName, babyDOB, address, email, phone, babyGender]);
     const patient_id = patient.rows.length ? patient.rows[0].patient_id : 0;
     if(patient_id){
-      addPatientFollowUpAppointments(patient_id, folowUpAppointments);
+      addPatientFollowUpAppointments(patient_id, patientFollowUpAppointments);
       addPatientVisit(patient_id, patientVisit);
       addPatientBreastFeeding(patient_id, patientBreastFeeding);
       addPatientSafeSpacing(patient_id, patientSafeSpacing);
