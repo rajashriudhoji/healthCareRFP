@@ -24,9 +24,9 @@ const StepThree = () => {
   } = useForm({
     defaultValues: {
       isBreastfeeding:
-        data?.p_breastFeeding?.isBreastfeeding === true ? "true" : "false",
-      feedLength: data?.p_breastFeeding?.feedLength,
-      feedFrequency: data?.p_breastFeeding?.feedFrequency,
+        data?.patientBreastFeeding?.isBreastfeeding === true ? "true" : "false",
+      feedLength: data?.patientBreastFeeding?.feedLength,
+      feedFrequency: data?.patientBreastFeeding?.feedFrequency,
       supplimentFormula:
         data?.patientBreastFeeding?.supplimentFormula === true
           ? "true"
@@ -65,22 +65,22 @@ const StepThree = () => {
     } = values;
     setData((prev) => ({
       ...prev,
-      p_breastFeeding: {
-        isBreastfeeding: isBreastfeeding === "Yes" ? true : false,
+      patientBreastFeeding: {
+        isBreastfeeding: isBreastfeeding === "true" ? true : false,
         feedLength,
         feedFrequency,
-        supplimentFormula: supplimentFormula === "Yes" ? true : false,
-        feedingComfort: feedingComfort === "Yes" ? true : false,
-        isNippleCracked: isNippleCracked === "Yes" ? true : false,
+        supplimentFormula: supplimentFormula === "true" ? true : false,
+        feedingComfort: feedingComfort === "true" ? true : false,
+        isNippleCracked: isNippleCracked === "true" ? true : false,
       },
       patientSafeSpacing: {
         birthControl: {
-          isUsed: birthControl_isUsed === "Yes" ? true : false,
+          isUsed: birthControl_isUsed === "true" ? true : false,
           details: birthControl_details,
         },
         birthControlAssess: {
           isAssessDone:
-            birthControlAssess_isAssessDone === "Yes" ? true : false,
+            birthControlAssess_isAssessDone === "true" ? true : false,
           details: birthControlAssess_details,
         },
       },
