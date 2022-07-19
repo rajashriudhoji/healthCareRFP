@@ -24,24 +24,28 @@ const StepThree = () => {
   } = useForm({
     defaultValues: {
       isBreastfeeding:
-        data?.p_breastFeeding?.isBreastfeeding === true ,
-      feedLength: data?.p_breastFeeding?.feedLength,
-      feedFrequency: data?.p_breastFeeding?.feedFrequency,
+        data?.patientBreastFeeding?.isBreastfeeding === true ? "true" : "false",
+      feedLength: data?.patientBreastFeeding?.feedLength,
+      feedFrequency: data?.patientBreastFeeding?.feedFrequency,
       supplimentFormula:
-        data?.p_breastFeeding?.supplimentFormula === true ? "true" : "false",
+        data?.patientBreastFeeding?.supplimentFormula === true
+          ? "true"
+          : "false",
       feedingComfort:
-        data?.p_breastFeeding?.feedingComfort === true ? "true" : "false",
+        data?.patientBreastFeeding?.feedingComfort === true ? "true" : "false",
       isNippleCracked:
-        data?.p_breastFeeding?.isNippleCracked === true ? "true" : "false",
+        data?.patientBreastFeeding?.isNippleCracked === true ? "true" : "false",
       birthControl_isUsed:
-        data?.p_safeSpacing?.birthControl?.isUsed === true ? "true" : "false",
-      birthControl_details: data?.p_safeSpacing?.birthControl?.details,
+        data?.patientSafeSpacing?.birthControl?.isUsed === true
+          ? "true"
+          : "false",
+      birthControl_details: data?.patientSafeSpacing?.birthControl?.details,
       birthControlAssess_isAssessDone:
-        data?.p_safeSpacing?.birthControlAssess?.isAssessDone === true
+        data?.patientSafeSpacing?.birthControlAssess?.isAssessDone === true
           ? "true"
           : "false",
       birthControlAssess_details:
-        data?.p_safeSpacing?.birthControlAssess?.details,
+        data?.patientSafeSpacing?.birthControlAssess?.details,
     },
   });
 
@@ -61,7 +65,7 @@ const StepThree = () => {
     } = values;
     setData((prev) => ({
       ...prev,
-      p_breastFeeding: {
+      patientBreastFeeding: {
         isBreastfeeding: isBreastfeeding === "true" ? true : false,
         feedLength,
         feedFrequency,
@@ -69,7 +73,7 @@ const StepThree = () => {
         feedingComfort: feedingComfort === "true" ? true : false,
         isNippleCracked: isNippleCracked === "true" ? true : false,
       },
-      p_safeSpacing: {
+      patientSafeSpacing: {
         birthControl: {
           isUsed: birthControl_isUsed === "true" ? true : false,
           details: birthControl_details,
@@ -109,7 +113,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="Yes"
-                  value="Yes"
+                  value="true"
                   {...register("isBreastfeeding", {
                     required: true,
                   })}
@@ -117,7 +121,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="No"
-                  value="No"
+                  value="false"
                   {...register("isBreastfeeding", { required: true })}
                 />
                 {errors.isBreastfeeding && (
@@ -174,7 +178,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="Yes"
-                  value="Yes"
+                  value="true"
                   {...register("supplimentFormula", {
                     required: true,
                   })}
@@ -182,7 +186,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="No"
-                  value="No"
+                  value="false"
                   {...register("supplimentFormula", { required: true })}
                 />
                 {errors.supplimentFormula && (
@@ -204,7 +208,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="Yes"
-                  value="Yes"
+                  value="true"
                   {...register("feedingComfort", {
                     required: true,
                   })}
@@ -212,7 +216,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="No"
-                  value="No"
+                  value="false"
                   {...register("feedingComfort", { required: true })}
                 />
                 {errors.feedingComfort && (
@@ -234,7 +238,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="Yes"
-                  value="Yes"
+                  value="true"
                   {...register("isNippleCracked", {
                     required: true,
                   })}
@@ -242,7 +246,7 @@ const StepThree = () => {
                 <Form.Check
                   type="radio"
                   label="No"
-                  value="No"
+                  value="false"
                   {...register("isNippleCracked", { required: true })}
                 />
                 {errors.isNippleCracked && (
@@ -269,7 +273,7 @@ const StepThree = () => {
                     <Form.Check
                       type="radio"
                       label="Yes"
-                      value="Yes"
+                      value="true"
                       {...register("birthControl_isUsed", {
                         required: true,
                       })}
@@ -277,7 +281,7 @@ const StepThree = () => {
                     <Form.Check
                       type="radio"
                       label="No"
-                      value="No"
+                      value="false"
                       {...register("birthControl_isUsed", { required: true })}
                     />
                     {errors.birthControl_isUsed && (
@@ -289,7 +293,7 @@ const StepThree = () => {
             </Col>
             <Col>
               <Form.Group className="mb-3" controlId="birthControl">
-                <Form.Label>Comment :</Form.Label>
+                <Form.Label>Comment</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
@@ -320,7 +324,7 @@ const StepThree = () => {
                     <Form.Check
                       type="radio"
                       label="Yes"
-                      value="Yes"
+                      value="true"
                       {...register("birthControlAssess_isAssessDone", {
                         required: true,
                       })}
@@ -328,7 +332,7 @@ const StepThree = () => {
                     <Form.Check
                       type="radio"
                       label="No"
-                      value="No"
+                      value="false"
                       {...register("birthControlAssess_isAssessDone", {
                         required: true,
                       })}

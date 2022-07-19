@@ -22,7 +22,7 @@ const AppWrapper = () => {
 
 const AppRoutes = () => {
   const [data, setData] = useState({
-    patient: {
+    basicPatientInfo: {
       motherName: "",
       babyName: "",
       babyDOB: "",
@@ -31,8 +31,9 @@ const AppRoutes = () => {
       phone: "",
       babyGender: "",
     },
-    p_visit: {
+    patientVisit: {
       dateOfService: "",
+      smokeStatus: false,
       vitalSigns: {
         temperature: {
           pulseRate: "",
@@ -42,11 +43,7 @@ const AppRoutes = () => {
         },
       },
     },
-    p_clinical_Assess: {
-      smokeStatus: false,
-    },
-    p_breastFeeding: {
-      patientId: "",
+    patientBreastFeeding: {
       isBreastfeeding: true,
       feedLength: 15,
       feedFrequency: 5,
@@ -54,8 +51,7 @@ const AppRoutes = () => {
       feedingComfort: true,
       isNippleCracked: true,
     },
-    p_safeSpacing: {
-      patientId: "",
+    patientSafeSpacing: {
       birthControl: {
         isUsed: true,
         details: "",
@@ -117,6 +113,41 @@ const AppRoutes = () => {
         declined: true,
       },
       details: "",
+    },
+    patientPsychoSocialAssess: {
+      relationWithBaby: {
+        isComfortable: true,
+        details: "",
+      },
+      houseMemberStatus: {
+        isAdjusted: true,
+        details: "",
+      },
+      fatherStatus: {
+        isSupportive: false,
+        detail: "",
+        isHappy: false,
+        isAngry: false,
+        isInvolved: false,
+        isSure: false,
+      },
+      safety: {
+        isSafe: true,
+        details: "",
+      },
+      unsafeRelationStatus: {
+        isRelationThreat: false,
+        details: "",
+      },
+      resourceStatus: {
+        isEnoughResources: false,
+        details: "",
+        isHousingAvailable: false,
+        isFinanceAvailable: false,
+        isFoodAvailable: false,
+        isFamilyAvailable: false,
+        isAny: false,
+      },
     },
   });
 

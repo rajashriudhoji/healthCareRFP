@@ -96,13 +96,13 @@ const StepFive = () => {
         details: details,
       },
     }));
-    incrementStep();
-    navigate("/step-end");
+    //incrementStep();
+    //navigate("/step-six");
   };
 
   const handlePreviousClick = () => {
     decrementStep();
-    navigate("/step-one");
+    navigate("/step-four");
   };
 
   return (

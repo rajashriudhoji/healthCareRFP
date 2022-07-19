@@ -22,13 +22,13 @@ const StepOne = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      motherName: data?.patient?.motherName,
-      babyName: data?.patient?.babyName,
-      babyDOB: data?.patient?.babyDOB,
-      address: data?.patient?.address,
-      email: data?.patient?.email,
-      phone: data?.patient?.phone,
-      babyGender: data?.patient?.babyGender,
+      motherName: data?.basicPatientInfo?.motherName,
+      babyName: data?.basicPatientInfo?.babyName,
+      babyDOB: data?.basicPatientInfo?.babyDOB,
+      address: data?.basicPatientInfo?.address,
+      email: data?.basicPatientInfo?.email,
+      phone: data?.basicPatientInfo?.phone,
+      babyGender: data?.basicPatientInfo?.babyGender,
     },
   });
 
@@ -36,7 +36,7 @@ const StepOne = () => {
     console.log(values);
     setData((prev) => ({
       ...prev,
-      patient: {
+      basicPatientInfo: {
         ...values,
         phone: +values.phone,
       },

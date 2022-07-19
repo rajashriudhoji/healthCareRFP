@@ -23,13 +23,13 @@ const StepTwo = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      dateOfService: data?.p_visit?.dateOfService,
-      pulseRate: data?.p_visit?.vitalSigns?.temperature?.pulseRate,
-      respirationRate: data?.p_visit?.vitalSigns?.temperature?.respirationRate,
-      bloodPressure: data?.p_visit?.vitalSigns?.temperature?.bloodPressure,
-      weight: data?.p_visit?.vitalSigns?.temperature?.weight,
-      smokeStatus:
-        data?.p_clinical_Assess?.smokeStatus === true ? "true" : "false",
+      dateOfService: data?.patientVisit?.dateOfService,
+      pulseRate: data?.patientVisit?.vitalSigns?.temperature?.pulseRate,
+      respirationRate:
+        data?.patientVisit?.vitalSigns?.temperature?.respirationRate,
+      bloodPressure: data?.patientVisit?.vitalSigns?.temperature?.bloodPressure,
+      weight: data?.patientVisit?.vitalSigns?.temperature?.weight,
+      smokeStatus: data?.patientVisit?.smokeStatus === true ? "true" : "false",
     },
   });
 
@@ -38,16 +38,14 @@ const StepTwo = () => {
     const { dateOfService, smokeStatus, ...rest } = values;
     setData((prev) => ({
       ...prev,
-      p_visit: {
+      patientVisit: {
         dateOfService,
+        smokeStatus: smokeStatus === "true" ? true : false,
         vitalSigns: {
           temperature: {
             ...rest,
           },
         },
-      },
-      p_clinical_Assess: {
-        smokeStatus: smokeStatus === "true" ? true : false,
       },
     }));
     incrementStep();
