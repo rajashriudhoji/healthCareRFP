@@ -32,7 +32,7 @@ const StepEnd = () => {
 
   const handlePreviousClick = () => {
     decrementStep();
-    navigate("/step-three");
+    navigate("/step-six");
   };
 
   return (

@@ -96,8 +96,8 @@ const StepFive = () => {
         details: details,
       },
     }));
-    //incrementStep();
-    //navigate("/step-six");
+    incrementStep();
+    navigate("/step-six");
   };
 
   const handlePreviousClick = () => {
