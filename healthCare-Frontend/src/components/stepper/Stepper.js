@@ -22,7 +22,7 @@ function Stepper(props) {
             <strong>Educational Discussions</strong>
           </li>
           <li className={step >= 6 ? "active " : ""} id="confirm">
-            <strong>Step 6</strong>
+            <strong>Follow-Up Appointments</strong>
           </li>
           <li className={step >= 7 ? "active " : ""} id="confirm">
             <strong>Step End</strong>
