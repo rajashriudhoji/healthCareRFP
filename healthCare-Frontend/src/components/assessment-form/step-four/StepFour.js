@@ -27,7 +27,7 @@ const StepFour = () => {
     console.log(values);
 
     incrementStep();
-    navigate("/step-end");
+    navigate("/step-five");
   };
 
   const handlePreviousClick = () => {
