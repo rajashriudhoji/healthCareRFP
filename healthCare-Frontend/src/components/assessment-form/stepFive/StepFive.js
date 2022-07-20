@@ -7,7 +7,6 @@ import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
-  REQUIRED_ERROR_MSG,
 } from "../../../utils/constants";
 import { getSelectedValue } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
