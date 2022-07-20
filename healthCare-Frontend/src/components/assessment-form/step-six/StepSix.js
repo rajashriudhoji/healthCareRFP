@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
 import {
   ATLEAST_ONE_SELECT,
+  BASE_API_URL,
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
   SUBMIT,
@@ -19,6 +20,7 @@ const StepSix = () => {
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const { setData, step, data, isReadOnly } = useContext(DataContext);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -83,10 +85,8 @@ const StepSix = () => {
     }));
     if (!isReadOnly) {
       try {
-        await axios.post(
-          "http://4597-2401-4900-362b-7c62-980b-a0a8-fc0d-3f0f.ngrok.io/api/v1/patient",
-          { ...data }
-        );
+        setLoading(true);
+        await axios.post(`${BASE_API_URL}/v1/patient`, { ...data });
         setSuccessMsg("Data is successfully saved.");
         setErrorMsg("");
         setTimeout(() => {
@@ -95,6 +95,8 @@ const StepSix = () => {
       } catch (error) {
         setSuccessMsg("");
         setErrorMsg("Error while saving data. Please try again.");
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -110,7 +112,7 @@ const StepSix = () => {
       <div className="step-form container step-three">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
           {successMsg && <Alert variant="success">{successMsg}</Alert>}
-          {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+          {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
           <h4 className="form-heading">Follow-Up Appointments</h4>
           <Row>
             <Col>
@@ -254,7 +256,7 @@ const StepSix = () => {
               {PREVIOUS_BUTTON_TEXT}
             </Button>
             {!isReadOnly && (
-              <Button variant="secondary" type="submit">
+              <Button variant="secondary" type="submit" disabled={loading}>
                 {SUBMIT}
               </Button>
             )}
