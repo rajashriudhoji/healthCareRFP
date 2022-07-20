@@ -1,10 +1,10 @@
+import axios from "axios";
 import { useContext, useState } from "react";
 import { Alert, Table } from "react-bootstrap";
-import { AiOutlineEye, AiOutlineDelete } from "react-icons/ai";
-import axios from "axios";
+import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../context/DataContext";
-import { BASE_API_URL } from "../../utils/constants";
+import { BASE_API_URL, ICONS_COLOR } from "../../utils/constants";
 import "./patientslist.css";
 
 const PatientsList = ({ filteredData }) => {
@@ -46,7 +46,7 @@ const PatientsList = ({ filteredData }) => {
     <div className="patients-list">
       {successMsg && <Alert variant="success">{successMsg}</Alert>}
       {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>#</th>
@@ -70,19 +70,19 @@ const PatientsList = ({ filteredData }) => {
                 <td>{babyName}</td>
                 <td>{email}</td>
                 <td>{phone}</td>
-                <td>
+                <td className="icon">
                   <AiOutlineEye
-                    color="#0d6efd"
+                    color={ICONS_COLOR}
                     size={30}
-                    className="view-icon"
+                    className="icon"
                     onClick={() => handleViewDetailsClick(patient_id)}
                   />
                 </td>
-                <td>
+                <td className="icon">
                   <AiOutlineDelete
-                    color="#0d6efd"
+                    color={ICONS_COLOR}
                     size={30}
-                    className="view-icon"
+                    className="icon"
                     onClick={() => handleDeleteClick(patient)}
                   />
                 </td>

@@ -18,6 +18,8 @@
     width: 150px;
     height: auto;
     margin: 0 1rem;
+    background-color: var(--primary-color);
+    border: var(--primary-color);
 }
 
 .loading {

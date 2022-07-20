@@ -2,6 +2,10 @@
     margin: 1rem 0;
 }
 
-.patients-list .view-icon {
-   cursor: pointer;
-}
+.patients-list .icon {
+    cursor: pointer;
+ }
+
+.patients-list td.icon {
+   width: 80px;
+ }

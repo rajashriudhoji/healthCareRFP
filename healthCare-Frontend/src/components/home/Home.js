@@ -60,7 +60,7 @@ const Home = () => {
             <Form.Group>
               <Form.Control
                 type="search"
-                placeholder="Enter mother name or email to search"
+                placeholder="Enter mother name or phone number to search"
                 value={searchText}
                 onChange={handleOnChange}
               />

@@ -6,3 +6,4 @@ export const VALID_PHONE_NUMBER = "Please enter a 10 digit phone number.";
 export const PREVIOUS_BUTTON_TEXT = "Previous Page";
 export const NEXT_BUTTON_TEXT = "Next Page";
 export const SUBMIT = "Submit";
+export const ICONS_COLOR = "#5a84c3";
