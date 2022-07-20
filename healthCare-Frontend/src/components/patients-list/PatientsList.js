@@ -7,7 +7,7 @@ import DataContext from "../../context/DataContext";
 import { BASE_API_URL } from "../../utils/constants";
 import "./patientslist.css";
 
-const PatientsList = ({ filteredData }) => {
+const PatientsList = ({ filteredData, setFilteredData }) => {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -25,10 +25,13 @@ const PatientsList = ({ filteredData }) => {
     } catch (error) {}
   };
 
-  const handleDeleteClick = (patient) => {
+  const handleDeleteClick = async (patient_id) => {
     try {
-      // delete API;
+      await axios.delete(`${BASE_API_URL}/v1/patient/${patient_id}`);
       setSuccessMsg("Data is successfully deleted.");
+      setFilteredData(
+        filteredData.filter((patient) => patient.patient_id !== patient_id)
+      );
       setErrorMsg("");
       setTimeout(() => {
         setSuccessMsg("");
@@ -36,9 +39,6 @@ const PatientsList = ({ filteredData }) => {
     } catch (error) {
       setSuccessMsg("");
       setErrorMsg("Error while deleting data. Please try again.");
-      setTimeout(() => {
-        setErrorMsg("");
-      }, 5000);
     }
   };
 
@@ -81,7 +81,7 @@ const PatientsList = ({ filteredData }) => {
                   <AiOutlineDelete
                     size={30}
                     className="icon"
-                    onClick={() => handleDeleteClick(patient)}
+                    onClick={() => handleDeleteClick(patient_id)}
                   />
                 </td>
               </tr>

@@ -82,7 +82,10 @@ const Home = () => {
         {loading ? (
           <p className="loading">Loading...</p>
         ) : (
-          <PatientsList filteredData={filteredData} />
+          <PatientsList
+            filteredData={filteredData}
+            setFilteredData={setFilteredData}
+          />
         )}
       </div>
     </>

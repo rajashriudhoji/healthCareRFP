@@ -28,14 +28,21 @@ const StepSix = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      appointmentDate: getConvertedDate(
-        data?.patientFollowUpAppointments?.pFollowupAppointment?.appointmentDate
-      ),
+      appointmentDate: data?.patientFollowUpAppointments?.pFollowupAppointment
+        ?.appointmentDate
+        ? getConvertedDate(
+            data?.patientFollowUpAppointments?.pFollowupAppointment
+              ?.appointmentDate
+          )
+        : null,
 
-      childFollowupAppointment_appointmentDate: getConvertedDate(
-        data?.patientFollowUpAppointments?.childFollowupAppointment
-          ?.appointmentDate
-      ),
+      childFollowupAppointment_appointmentDate: data
+        ?.patientFollowUpAppointments?.childFollowupAppointment?.appointmentDate
+        ? getConvertedDate(
+            data?.patientFollowUpAppointments?.childFollowupAppointment
+              ?.appointmentDate
+          )
+        : null,
 
       childFollowupAppointment_healthCare:
         data?.patientFollowUpAppointments?.childFollowupAppointment?.healthCare,
@@ -67,8 +74,7 @@ const StepSix = () => {
       healthCare,
       isAppointmentTaken,
     } = values;
-    setData((prev) => ({
-      ...prev,
+    const dataToUpdate = {
       patientFollowUpAppointments: {
         pFollowupAppointment: {
           isAppointmentTaken: isAppointmentTaken === "Yes" ? true : false,
@@ -84,11 +90,18 @@ const StepSix = () => {
           healthCare: childFollowupAppointment_healthCare,
         },
       },
+    };
+    setData((prev) => ({
+      ...prev,
+      ...dataToUpdate,
     }));
     if (!isReadOnly) {
       try {
         setLoading(true);
-        await axios.post(`${BASE_API_URL}/v1/patient`, { ...data });
+        await axios.post(`${BASE_API_URL}/v1/patient`, {
+          ...data,
+          ...dataToUpdate,
+        });
         setSuccessMsg("Data is successfully saved.");
         setErrorMsg("");
         setTimeout(() => {
@@ -113,8 +126,16 @@ const StepSix = () => {
       <Stepper step={step} />
       <div className="step-form container step-three">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
-          {successMsg && <Alert variant="success">{successMsg}</Alert>}
-          {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
+          {successMsg && (
+            <Alert variant="success" dismissible>
+              {successMsg}
+            </Alert>
+          )}
+          {errorMsg && (
+            <Alert variant="danger" dismissible>
+              {errorMsg}
+            </Alert>
+          )}
           <h4 className="form-heading">Follow-Up Appointments</h4>
           <Row>
             <Col>

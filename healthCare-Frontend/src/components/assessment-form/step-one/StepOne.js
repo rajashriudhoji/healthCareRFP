@@ -25,7 +25,9 @@ const StepOne = () => {
     defaultValues: {
       motherName: data?.patientBasicInfo?.motherName,
       babyName: data?.patientBasicInfo?.babyName,
-      babyDOB: getConvertedDate(data?.patientBasicInfo?.babyDOB),
+      babyDOB: data?.patientBasicInfo?.babyDOB
+        ? getConvertedDate(data?.patientBasicInfo?.babyDOB)
+        : null,
       address: data?.patientBasicInfo?.address,
       email: data?.patientBasicInfo?.email,
       phone: data?.patientBasicInfo?.phone,

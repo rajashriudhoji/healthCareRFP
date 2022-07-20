@@ -23,7 +23,9 @@ const StepTwo = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      dateOfService: getConvertedDate(data?.patientVisit?.dateOfService),
+      dateOfService: data?.patientVisit?.dateOfService
+        ? getConvertedDate(data?.patientVisit?.dateOfService)
+        : null,
       pulseRate: data?.patientVisit?.vitalSigns?.temperature?.pulseRate,
       respirationRate:
         data?.patientVisit?.vitalSigns?.temperature?.respirationRate,
