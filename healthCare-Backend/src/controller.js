@@ -4,7 +4,21 @@ const queries = require('./queries');
 const getPatient = (req, res) => {
   pool.query(queries.getPatient, (error, result) => {
     if (error) throw error;
-    res.status(200).json(result.rows);
+    const allPatient = [];
+    result.rows.forEach(patient => {
+      const { patient_id, mothername, babyname, babydob, address, email, phone, babygender} = patient;
+      allPatient.push({
+        patient_id,
+        motherName: mothername,
+        babyName: babyname,
+        babyDOB: babydob,
+        address,
+        email,
+        phone,
+        babyGender: babygender,
+      });
+    });
+    res.status(200).json(allPatient);
   })
 };
 
