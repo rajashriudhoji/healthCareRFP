@@ -16,13 +16,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleOnChange = (event) => {
-    setSearchText(event.target.value);
-  };
-
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-    console.log("submitted");
-    const text = searchText.trim();
+    const text = event.target.value.trim();
+    setSearchText(text);
     if (text !== "") {
       setFilteredData(
         data.filter(
@@ -45,7 +40,7 @@ const Home = () => {
       <Header />
       <div className="home-page container">
         <div className="header-section">
-          <Form className="search-box" onSubmit={handleOnSubmit}>
+          <Form className="search-box">
             <Form.Group>
               <Form.Control
                 type="search"

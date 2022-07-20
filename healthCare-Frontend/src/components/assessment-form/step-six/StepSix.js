@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
@@ -16,8 +16,8 @@ import "../step-one/stepone.css";
 
 const StepSix = () => {
   const navigate = useNavigate();
-  const [successMsg, setSuccessMsg] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const { setData, step, data, isReadOnly } = useContext(DataContext);
   const {
     register,
@@ -109,7 +109,7 @@ const StepSix = () => {
       <Stepper step={step} />
       <div className="step-form container step-three">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
-          {successMsg && <p className="successMsg">{successMsg}</p>}
+          {successMsg && <Alert variant="success">{successMsg}</Alert>}
           {errorMsg && <p className="errorMsg">{errorMsg}</p>}
           <h4 className="form-heading">Follow-Up Appointments</h4>
           <Row>
@@ -253,9 +253,11 @@ const StepSix = () => {
             >
               {PREVIOUS_BUTTON_TEXT}
             </Button>
-            <Button variant="secondary" type="submit">
-              {SUBMIT}
-            </Button>
+            {!isReadOnly && (
+              <Button variant="secondary" type="submit">
+                {SUBMIT}
+              </Button>
+            )}
           </Form.Group>
         </Form>
       </div>

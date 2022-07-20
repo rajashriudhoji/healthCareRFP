@@ -33,7 +33,6 @@ const StepTwo = () => {
   });
 
   const handleFormSubmit = (values) => {
-    console.log(values);
     const { dateOfService, smokeStatus, ...rest } = values;
     setData((prev) => ({
       ...prev,

@@ -23,7 +23,6 @@ const StepFive = () => {
   } = useForm({});
 
   const handleFormSubmit = (values) => {
-    console.log(values);
     const {
       depressionScreening,
       contraceptionMethod,
@@ -522,7 +521,7 @@ const StepFive = () => {
               as="textarea"
               rows={2}
               className="address"
-              {...register("details", {})}
+              {...register("details")}
               disabled={isReadOnly}
             />
           </Form.Group>

@@ -16,7 +16,6 @@ import "./stepone.css";
 const StepOne = () => {
   const navigate = useNavigate();
   const { data, setData, step, isReadOnly } = useContext(DataContext);
-  console.log({ gender: data?.patientBasicInfo?.babyGender });
   const {
     register,
     handleSubmit,
@@ -34,7 +33,6 @@ const StepOne = () => {
   });
 
   const handleFormSubmit = (values) => {
-    console.log(values);
     setData((prev) => ({
       ...prev,
       patientBasicInfo: {
@@ -44,8 +42,6 @@ const StepOne = () => {
     }));
     navigate("/step-two");
   };
-
-  console.log({ data });
 
   return (
     <div>

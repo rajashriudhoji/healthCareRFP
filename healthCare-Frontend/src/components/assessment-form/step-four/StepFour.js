@@ -9,6 +9,7 @@ import {
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
 } from "../../../utils/constants";
+import { getSelectedValue } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "../step-one/stepone.css";
@@ -33,6 +34,14 @@ const StepFour = () => {
         data?.patientPsychoSocialAssess?.houseMemberStatus?.isAdjusted === true
           ? "true"
           : "false",
+      fatherStatus:
+        (data?.patientPsychoSocialAssess?.fatherStatus?.isHappy === true &&
+          "happy") ||
+        (data?.patientPsychoSocialAssess?.isAngry === true && "angry") ||
+        (data?.patientPsychoSocialAssess?.isInvolved === true &&
+          "isInvolved") ||
+        (data?.patientPsychoSocialAssess?.isSure === true && "isSure") ||
+        "",
       houseMemberStatus_details:
         data?.patientPsychoSocialAssess?.houseMemberStatus?.details,
       fatherStatus_isSupportive:
@@ -60,11 +69,13 @@ const StepFour = () => {
           : "false",
       resourceStatus_details:
         data?.patientPsychoSocialAssess?.resourceStatus?.details,
+      resourceStatus: getSelectedValue(
+        data?.patientPsychoSocialAssess?.resourceStatus
+      ),
     },
   });
 
   const handleFormSubmit = (values) => {
-    console.log({ values });
     const {
       relationWithBaby_isComfortable,
       relationWithBaby_details,
@@ -96,10 +107,10 @@ const StepFour = () => {
         fatherStatus: {
           isSupportive: fatherStatus_isSupportive === "true" ? true : false,
           detail: fatherStatus_details,
-          isHappy: fatherStatus.includes("happy") ? true : false,
-          isAngry: fatherStatus.includes("angry") ? true : false,
-          isInvolved: fatherStatus.includes("isInvolved") ? true : false,
-          isSure: fatherStatus.includes("isSure") ? true : false,
+          isHappy: fatherStatus === "happy" ? true : false,
+          isAngry: fatherStatus === "angry" ? true : false,
+          isInvolved: fatherStatus === "isInvolved" ? true : false,
+          isSure: fatherStatus === "isSure" ? true : false,
         },
         safety: {
           isSafe: safety_isSafe === "true" ? true : false,
@@ -114,13 +125,19 @@ const StepFour = () => {
           isEnoughResources:
             resourceStatus_isEnoughResources === "true" ? true : false,
           details: resourceStatus_details,
-          isHousingAvailable: resourceStatus.includes("housing") ? true : false,
-          isFinanceAvailable: resourceStatus.includes("financial")
+          isHousingAvailable: resourceStatus.includes("isHousingAvailable")
             ? true
             : false,
-          isFoodAvailable: resourceStatus.includes("food") ? true : false,
-          isFamilyAvailable: resourceStatus.includes("family") ? true : false,
-          isAny: resourceStatus.includes("other") ? true : false,
+          isFinanceAvailable: resourceStatus.includes("isFinanceAvailable")
+            ? true
+            : false,
+          isFoodAvailable: resourceStatus.includes("isFoodAvailable")
+            ? true
+            : false,
+          isFamilyAvailable: resourceStatus.includes("isFamilyAvailable")
+            ? true
+            : false,
+          isAny: resourceStatus.includes("isAny") ? true : false,
         },
       },
     }));
@@ -182,7 +199,7 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("relationWithBaby_details", {})}
+                  {...register("relationWithBaby_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
@@ -235,7 +252,7 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("houseMemberStatus_details", {})}
+                  {...register("houseMemberStatus_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
@@ -286,7 +303,7 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("fatherStatus_details", {})}
+                  {...register("fatherStatus_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
@@ -381,7 +398,7 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("safety_details", {})}
+                  {...register("safety_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
@@ -435,7 +452,7 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("unsafeRelationStatus_details", {})}
+                  {...register("unsafeRelationStatus_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
@@ -486,7 +503,7 @@ const StepFour = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("resourceStatus_details", {})}
+                  {...register("resourceStatus_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
@@ -502,7 +519,7 @@ const StepFour = () => {
                   <Form.Check
                     type="checkbox"
                     label="Housing"
-                    value="housing"
+                    value="isHousingAvailable"
                     {...register("resourceStatus", {
                       required: true,
                     })}
@@ -510,7 +527,7 @@ const StepFour = () => {
                   <Form.Check
                     type="checkbox"
                     label="Financial"
-                    value="financial"
+                    value="isFinanceAvailable"
                     {...register("resourceStatus", {
                       required: true,
                     })}
@@ -518,7 +535,7 @@ const StepFour = () => {
                   <Form.Check
                     type="checkbox"
                     label="Food"
-                    value="food"
+                    value="isFoodAvailable"
                     {...register("resourceStatus", {
                       required: true,
                     })}
@@ -526,7 +543,7 @@ const StepFour = () => {
                   <Form.Check
                     type="checkbox"
                     label="Family"
-                    value="family"
+                    value="isFamilyAvailable"
                     {...register("resourceStatus", {
                       required: true,
                     })}
@@ -534,7 +551,7 @@ const StepFour = () => {
                   <Form.Check
                     type="checkbox"
                     label="Other"
-                    value="other"
+                    value="isAny"
                     {...register("resourceStatus", {
                       required: true,
                     })}

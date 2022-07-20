@@ -49,7 +49,6 @@ const StepThree = () => {
   });
 
   const handleFormSubmit = (values) => {
-    console.log(values);
     const {
       isBreastfeeding,
       feedLength,
@@ -306,7 +305,7 @@ const StepThree = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("birthControl_details", {})}
+                  {...register("birthControl_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
@@ -358,7 +357,7 @@ const StepThree = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter details"
-                  {...register("birthControlAssess_details", {})}
+                  {...register("birthControlAssess_details")}
                   disabled={isReadOnly}
                 />
               </Form.Group>
