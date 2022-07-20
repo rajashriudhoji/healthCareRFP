@@ -50,7 +50,7 @@ const PatientsList = ({ filteredData }) => {
                 <td>{phone}</td>
                 <td>
                   <AiOutlineEye
-                    color="var(--primary-color)"
+                    color="#0d6efd"
                     size={30}
                     className="view-icon"
                     onClick={() => handleViewDetailsClick(patient_id)}
