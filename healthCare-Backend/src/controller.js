@@ -8,6 +8,75 @@ const getPatient = (req, res) => {
   })
 };
 
+const getPatientById = (req, res) => {
+  const patient_id = req.params.patient_id;
+  pool.query(queries.getPatientById, [patient_id], (error, result) => {
+    if (error) throw error;
+    const {pfollowupappointment, childfollowupappointment, dateofservice, vitalsigns,
+      smokestatus, isbreastfeeding, feedlength, feedfrequency, supplimentformula,
+      feedingcomfort, isnipplecracked, birthcontrol, birthcontrolassess,
+      relationwithbaby, housememberstatus, fatherstatus,
+      safety, unsaferelationstatus, resourcestatus, depressionscreening, contraceptionmethod, peripheralbloodglucose,
+      doctorappointment, carseatsafety, immunizationschedule, breastfeeding,
+      infantsafety, familyplanning, checkups, details, mothername, babyname, babydob, address, email, phone, babygender} = result.rows[0];
+    const response = {
+      patientBasicInfo:{
+        patient_id,
+        motherName: mothername,
+        babyName: babyname,
+        babyDOB: babydob,
+        address,
+        email,
+        phone,
+        babyGender: babygender,
+      },
+      patientVisit: {
+        dateOfService: dateofservice,
+        vitalSigns: vitalsigns,
+        smokeStatus: smokestatus,
+      },
+      patientBreastFeeding: {
+        isBreastfeeding: isbreastfeeding,
+        feedLength: feedlength,
+        feedFrequency: feedfrequency,
+        supplimentFormula: supplimentformula,
+        feedingComfort: feedingcomfort,
+        isNippleCracked: isnipplecracked,
+      },
+      patientSafeSpacing: {
+        birthControl: birthcontrol,
+        birthControlAssess: birthcontrolassess,
+      },
+      patientPsychoSocialAssess: {
+        relationWithBaby: relationwithbaby,
+        houseMemberStatus: housememberstatus,
+        fatherStatus: fatherstatus,
+        safety,
+        unsafeRelationStatus: unsaferelationstatus,
+        resourceStatus: resourcestatus,
+      },
+      patientEducationalMaterial: {
+        depressionScreening: depressionscreening,
+        contraceptionMethod: contraceptionmethod,
+        peripheralBloodGlucose: peripheralbloodglucose,
+        doctorAppointment: doctorappointment,
+        carSeatSafety: carseatsafety,
+        immunizationSchedule: immunizationschedule,
+        breastFeeding: breastfeeding,
+        infantSafety: infantsafety,
+        familyPlanning: familyplanning,
+        checkups,
+        details,
+      },
+      patientFollowUpAppointments: {
+        pFollowupAppointment: pfollowupappointment,
+        childFollowupAppointment: childfollowupappointment,
+      },
+    }
+    res.status(200).json(response);
+  })
+};
+
 const addPatientFollowUpAppointments = (patient_id, patientFollowUpAppointments) => {
   const {pFollowupAppointment, childFollowupAppointment} = patientFollowUpAppointments;
 
@@ -101,4 +170,5 @@ const addPatient = async(req, res) => {
 module.exports = {
   getPatient,
   addPatient,
+  getPatientById,
 };
