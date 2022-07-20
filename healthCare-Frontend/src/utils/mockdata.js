@@ -236,7 +236,7 @@ export const data = [
     patientPsychoSocialAssess: {
       relationWithBaby: {
         isComfortable: true,
-        details: "Simple",
+        details: "",
       },
       houseMemberStatus: {
         isAdjusted: true,
@@ -262,10 +262,10 @@ export const data = [
         isEnoughResources: false,
         details: "Hi",
         isHousingAvailable: false,
-        isFinanceAvailable: true,
-        isFoodAvailable: false,
+        isFinanceAvailable: false,
+        isFoodAvailable: true,
         isFamilyAvailable: false,
-        isAny: true,
+        isAny: false,
       },
     },
     patientFollowUpAppointments: {

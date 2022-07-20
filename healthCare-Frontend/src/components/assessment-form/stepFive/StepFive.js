@@ -15,8 +15,7 @@ import "../step-one/stepone.css";
 
 const StepFive = () => {
   const navigate = useNavigate();
-  const { setData, incrementStep, decrementStep, step, isReadOnly } =
-    useContext(DataContext);
+  const { setData, step, isReadOnly } = useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -24,7 +23,6 @@ const StepFive = () => {
   } = useForm({});
 
   const handleFormSubmit = (values) => {
-    console.log(values);
     const {
       depressionScreening,
       contraceptionMethod,
@@ -96,12 +94,10 @@ const StepFive = () => {
         details: details,
       },
     }));
-    incrementStep();
     navigate("/step-six");
   };
 
   const handlePreviousClick = () => {
-    decrementStep();
     navigate("/step-four");
   };
 
@@ -525,10 +521,9 @@ const StepFive = () => {
               as="textarea"
               rows={2}
               className="address"
-              {...register("details", {})}
+              {...register("details")}
               disabled={isReadOnly}
             />
-            {errors.details && <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>}
           </Form.Group>
 
           <Form.Group className="mb-3 buttons">

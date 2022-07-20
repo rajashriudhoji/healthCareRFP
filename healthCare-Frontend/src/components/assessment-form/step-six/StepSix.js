@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
 import {
   ATLEAST_ONE_SELECT,
+  BASE_API_URL,
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
   SUBMIT,
@@ -16,10 +17,10 @@ import "../step-one/stepone.css";
 
 const StepSix = () => {
   const navigate = useNavigate();
-  const [successMsg, setSuccessMsg] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(false);
-  const { setData, decrementStep, step, data, isReadOnly } =
-    useContext(DataContext);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const { setData, step, data, isReadOnly } = useContext(DataContext);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -29,19 +30,28 @@ const StepSix = () => {
       appointmentDate:
         data?.patientFollowUpAppointments?.pFollowupAppointment
           ?.appointmentDate,
+
       childFollowupAppointment_appointmentDate:
         data?.patientFollowUpAppointments?.childFollowupAppointment
           ?.appointmentDate,
+
       childFollowupAppointment_healthCare:
         data?.patientFollowUpAppointments?.childFollowupAppointment?.healthCare,
+
       childFollowupAppointment_isAppointmentTaken:
         data?.patientFollowUpAppointments?.childFollowupAppointment
-          ?.isAppointmentTaken,
+          ?.isAppointmentTaken === true
+          ? "Yes"
+          : "No",
+
       healthCare:
         data?.patientFollowUpAppointments?.pFollowupAppointment?.healthCare,
+
       isAppointmentTaken:
         data?.patientFollowUpAppointments?.pFollowupAppointment
-          ?.isAppointmentTaken,
+          ?.isAppointmentTaken === true
+          ? "Yes"
+          : "No",
     },
   });
 
@@ -75,10 +85,8 @@ const StepSix = () => {
     }));
     if (!isReadOnly) {
       try {
-        await axios.post(
-          "http://localhost:5000/api/v1/patient",
-          { ...data }
-        );
+        setLoading(true);
+        await axios.post(`${BASE_API_URL}/v1/patient`, { ...data });
         setSuccessMsg("Data is successfully saved.");
         setErrorMsg("");
         setTimeout(() => {
@@ -87,12 +95,13 @@ const StepSix = () => {
       } catch (error) {
         setSuccessMsg("");
         setErrorMsg("Error while saving data. Please try again.");
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   const handlePreviousClick = () => {
-    decrementStep();
     navigate("/step-five");
   };
 
@@ -102,8 +111,8 @@ const StepSix = () => {
       <Stepper step={step} />
       <div className="step-form container step-three">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
-          {successMsg && <p className="successMsg">{successMsg}</p>}
-          {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+          {successMsg && <Alert variant="success">{successMsg}</Alert>}
+          {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
           <h4 className="form-heading">Follow-Up Appointments</h4>
           <Row>
             <Col>
@@ -142,7 +151,7 @@ const StepSix = () => {
               </Row>
             </Col>
             <Col>
-              <Form.Group controlId="appointmentDate">
+              <Form.Group>
                 <Form.Label>Appointment Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -158,7 +167,7 @@ const StepSix = () => {
               </Form.Group>
             </Col>
           </Row>
-          <Form.Group className="mb-3" controlId="healthCare">
+          <Form.Group className="mb-3">
             <Form.Label>Health Care Provider</Form.Label>
             <Form.Control
               as="textarea"
@@ -167,9 +176,6 @@ const StepSix = () => {
               {...register("healthCare", {})}
               disabled={isReadOnly}
             />
-            {errors.healthCare && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
           </Form.Group>
           <Row>
             <Col>
@@ -214,10 +220,7 @@ const StepSix = () => {
               </Row>
             </Col>
             <Col>
-              <Form.Group
-                className="mb-3"
-                controlId="childFollowupAppointment_appointmentDate"
-              >
+              <Form.Group className="mb-3">
                 <Form.Label>Appointment Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -233,10 +236,7 @@ const StepSix = () => {
               </Form.Group>
             </Col>
           </Row>
-          <Form.Group
-            className="mb-3"
-            controlId="childFollowupAppointment_healthCare"
-          >
+          <Form.Group className="mb-3">
             <Form.Label>Health Care Provider</Form.Label>
             <Form.Control
               as="textarea"
@@ -245,9 +245,6 @@ const StepSix = () => {
               {...register("childFollowupAppointment_healthCare", {})}
               disabled={isReadOnly}
             />
-            {errors.childFollowupAppointment_healthCare && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
           </Form.Group>
 
           <Form.Group className="mb-3 buttons">
@@ -258,9 +255,11 @@ const StepSix = () => {
             >
               {PREVIOUS_BUTTON_TEXT}
             </Button>
-            <Button variant="secondary" type="submit">
-              {SUBMIT}
-            </Button>
+            {!isReadOnly && (
+              <Button variant="secondary" type="submit" disabled={loading}>
+                {SUBMIT}
+              </Button>
+            )}
           </Form.Group>
         </Form>
       </div>

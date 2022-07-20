@@ -26,18 +26,6 @@ const AppRoutes = () => {
   const [step, setStep] = useState(1);
   const [isReadOnly, setIsReadOnly] = useState(false);
 
-  const incrementStep = () => {
-    setStep((step) => step + 1);
-  };
-
-  const decrementStep = () => {
-    setStep((step) => step - 1);
-  };
-
-  const handleFinish = () => {
-    console.log("Step", step);
-  };
-
   console.log({ data });
 
   return (
@@ -45,9 +33,6 @@ const AppRoutes = () => {
       value={{
         data,
         setData,
-        incrementStep,
-        decrementStep,
-        handleFinish,
         step,
         setStep,
         isReadOnly,
