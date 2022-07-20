@@ -9,6 +9,7 @@ import {
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
 } from "../../../utils/constants";
+import { getConvertedDate } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "./steptwo.css";
@@ -22,7 +23,7 @@ const StepTwo = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      dateOfService: data?.patientVisit?.dateOfService,
+      dateOfService: getConvertedDate(data?.patientVisit?.dateOfService),
       pulseRate: data?.patientVisit?.vitalSigns?.temperature?.pulseRate,
       respirationRate:
         data?.patientVisit?.vitalSigns?.temperature?.respirationRate,

@@ -9,6 +9,7 @@ import {
   REQUIRED_ERROR_MSG,
   VALID_PHONE_NUMBER,
 } from "../../../utils/constants";
+import { getConvertedDate } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "./stepone.css";
@@ -24,7 +25,7 @@ const StepOne = () => {
     defaultValues: {
       motherName: data?.patientBasicInfo?.motherName,
       babyName: data?.patientBasicInfo?.babyName,
-      babyDOB: data?.patientBasicInfo?.babyDOB,
+      babyDOB: getConvertedDate(data?.patientBasicInfo?.babyDOB),
       address: data?.patientBasicInfo?.address,
       email: data?.patientBasicInfo?.email,
       phone: data?.patientBasicInfo?.phone,
