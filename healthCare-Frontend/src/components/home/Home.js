@@ -43,7 +43,7 @@ const Home = () => {
           (patient) =>
             patient?.motherName.toLowerCase().indexOf(text.toLowerCase()) >
               -1 ||
-            patient?.email.toLowerCase().indexOf(text.toLowerCase()) > -1
+            patient?.phone.toLowerCase().indexOf(text.toLowerCase()) > -1
         )
       );
     } else {
