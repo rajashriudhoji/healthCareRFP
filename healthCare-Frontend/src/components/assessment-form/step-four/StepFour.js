@@ -36,10 +36,12 @@ const StepFour = () => {
       fatherStatus:
         (data?.patientPsychoSocialAssess?.fatherStatus?.isHappy === true &&
           "happy") ||
-        (data?.patientPsychoSocialAssess?.isAngry === true && "angry") ||
-        (data?.patientPsychoSocialAssess?.isInvolved === true &&
+        (data?.patientPsychoSocialAssess?.fatherStatus?.isAngry === true &&
+          "angry") ||
+        (data?.patientPsychoSocialAssess?.fatherStatus?.isInvolved === true &&
           "isInvolved") ||
-        (data?.patientPsychoSocialAssess?.isSure === true && "isSure") ||
+        (data?.patientPsychoSocialAssess?.fatherStatus?.isSure === true &&
+          "isSure") ||
         "",
       houseMemberStatus_details:
         data?.patientPsychoSocialAssess?.houseMemberStatus?.details,
