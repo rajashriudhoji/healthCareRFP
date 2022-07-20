@@ -4,6 +4,7 @@
 
 .patients-list .icon {
     cursor: pointer;
+    color: var(--primary-color);
  }
 
 .patients-list td.icon {
