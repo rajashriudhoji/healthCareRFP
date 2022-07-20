@@ -80,7 +80,7 @@ const PatientsList = ({ filteredData }) => {
                 </td>
                 <td>
                   <AiOutlineDelete
-                    color="orange"
+                    color="#0d6efd"
                     size={30}
                     className="view-icon"
                     onClick={() => handleDeleteClick(patient)}
