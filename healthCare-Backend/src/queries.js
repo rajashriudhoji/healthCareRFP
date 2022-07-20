@@ -31,16 +31,13 @@ const getPatientById = `SELECT * FROM patientbasicinfo INNER JOIN patientfollowu
   ON
   patientbasicinfo.patient_id = patienteducationalmaterial.patient_id
   WHERE patientfollowupappointments.patient_id = $1`;
-const removePatient = `DELETE
-  FROM patientbasicinfo
-  USING patientbreastfeeding, patienteducationalmaterial, patientfollowupappointments, patientpsychosocialassess, patientsafespacing, patientvisit
-  WHERE (patientbasicinfo.patient_id = patientbreastfeeding.patient_id)
-  AND  (patientbreastfeeding.patient_id = patienteducationalmaterial.patient_id)
-  AND  (patienteducationalmaterial.patient_id = patientfollowupappointments.patient_id)
-  AND  (patientfollowupappointments.patient_id = patientpsychosocialassess.patient_id)
-  AND  (patientpsychosocialassess.patient_id = patientsafespacing.patient_id)
-  AND  (patientsafespacing.patient_id = patientvisit.patient_id)
-  AND patientbasicinfo.patient_id = $1`;
+const removePatientBasicInfo = `DELETE FROM patientbasicinfo WHERE patient_id = $1 RETURNING *`;
+const removePatientBreastFeeding = `DELETE FROM patientbreastfeeding WHERE patient_id = $1`;
+const removePatientEducationalMaterial = `DELETE FROM patienteducationalmaterial WHERE patient_id = $1`;
+const removePatientFollowupAppointments = `DELETE FROM patientfollowupappointments WHERE patient_id = $1`;
+const removePatientPsychoSocialAssess = `DELETE FROM patientpsychosocialassess WHERE patient_id = $1`;
+const removePatientSafeSpacing = `DELETE FROM patientsafespacing WHERE patient_id = $1`;
+const removepatientVisit = `DELETE FROM patientvisit WHERE patient_id = $1`;
 
 module.exports = {
   getPatient,
@@ -52,5 +49,11 @@ module.exports = {
   addPatientPsychoSocialAssess,
   addPatientEducationalMaterial,
   getPatientById,
-  removePatient,
+  removePatientBasicInfo,
+  removePatientBreastFeeding,
+  removePatientEducationalMaterial,
+  removePatientFollowupAppointments,
+  removePatientPsychoSocialAssess,
+  removePatientSafeSpacing,
+  removepatientVisit,
 };

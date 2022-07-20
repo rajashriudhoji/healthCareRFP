@@ -183,10 +183,16 @@ const addPatient = async(req, res) => {
 
 const removePatient = async(req, res) => {
   const patient_id = req.params.patient_id;
-  pool.query(queries.removePatient, [patient_id], (error, result) => {
-    if (error) throw error;
-    res.status(200).send(`Patient removed successfully`);
-  })
+  const deletedPatient = await pool.query(queries.removePatientBasicInfo, [patient_id]);
+  if(deletedPatient.fields.length) {
+    pool.query(queries.removePatientBreastFeeding, [patient_id]);
+    pool.query(queries.removePatientEducationalMaterial, [patient_id]);
+    pool.query(queries.removePatientFollowupAppointments, [patient_id]);
+    pool.query(queries.removePatientPsychoSocialAssess, [patient_id]);
+    pool.query(queries.removePatientSafeSpacing, [patient_id]);
+    pool.query(queries.removepatientVisit, [patient_id]);
+  }
+  res.status(200).send(`Patient removed successfully`);
 };
 
 module.exports = {
