@@ -76,7 +76,7 @@ const StepSix = () => {
     if (!isReadOnly) {
       try {
         await axios.post(
-          "http://4597-2401-4900-362b-7c62-980b-a0a8-fc0d-3f0f.ngrok.io/api/v1/patient",
+          "http://localhost:5000/api/v1/patient",
           { ...data }
         );
         setSuccessMsg("Data is successfully saved.");

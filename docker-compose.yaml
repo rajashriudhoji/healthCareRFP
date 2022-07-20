@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  healthcare-backend:
+    build: ./healthCare-Backend
+    container_name: healthCare-backend-c
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./healthCare-Backend:/app
+      - ./app/node_modules
+  healthcare-frontend:
+    build: ./healthCare-Frontend
+    container_name: healthCare-Frontend-c
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
