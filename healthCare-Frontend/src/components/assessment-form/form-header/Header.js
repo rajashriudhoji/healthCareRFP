@@ -22,7 +22,7 @@ const Header = () => {
     } else if (filterParams === "/step-six") {
       setStep(6);
     }
-  }, []);
+  }, [location.pathname, setStep]);
   return (
     <div className="form-header">
       <h2>
