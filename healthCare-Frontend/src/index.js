@@ -26,8 +26,6 @@ const AppRoutes = () => {
   const [step, setStep] = useState(1);
   const [isReadOnly, setIsReadOnly] = useState(false);
 
-  console.log({ data });
-
   return (
     <DataContext.Provider
       value={{

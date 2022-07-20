@@ -173,7 +173,7 @@ const StepOne = () => {
               )}
             </Form.Group>
           </fieldset>
-          <Button variant="secondary" type="submit">
+          <Button variant="secondary" type="submit" className="btn">
             {NEXT_BUTTON_TEXT}
           </Button>
         </Form>

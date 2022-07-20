@@ -258,7 +258,12 @@ const StepSix = () => {
               {PREVIOUS_BUTTON_TEXT}
             </Button>
             {!isReadOnly && (
-              <Button variant="secondary" type="submit" disabled={loading}>
+              <Button
+                variant="secondary"
+                type="submit"
+                className="btn"
+                disabled={loading}
+              >
                 {SUBMIT}
               </Button>
             )}
