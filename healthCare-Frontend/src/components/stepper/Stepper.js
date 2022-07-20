@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./stepper.css";
 
 function Stepper(props) {
@@ -6,23 +7,43 @@ function Stepper(props) {
     <div>
       <form id="msform">
         <ul id="progressbar">
-          <li className={step >= 1 ? "active" : ""} id="account">
-            <strong>Basic Info</strong>
+          <li className={step >= 1 ? "active" : ""} data-count="1">
+            <strong>
+              <Link to={step >= 1 ? "/step-one" : ""}>Basic Info</Link>
+            </strong>
           </li>
-          <li className={step >= 2 ? "active" : ""} id="personal">
-            <strong>Postpartum Visit Check</strong>
+          <li className={step >= 2 ? "active" : ""} data-count="2">
+            <strong>
+              <Link to={step >= 2 ? "/step-two" : ""}>
+                Postpartum Visit Check
+              </Link>
+            </strong>
           </li>
-          <li className={step >= 3 ? "active " : ""} id="payment">
-            <strong>Breastfeeding</strong>
+          <li className={step >= 3 ? "active " : ""} data-count="3">
+            <strong>
+              <Link to={step >= 3 ? "/step-three" : ""}>Breastfeeding</Link>
+            </strong>
           </li>
-          <li className={step >= 4 ? "active " : ""} id="confirm">
-            <strong>Psycho-Social Assessment</strong>
+          <li className={step >= 4 ? "active " : ""} data-count="4">
+            <strong>
+              <Link to={step >= 4 ? "/step-four" : ""}>
+                Psycho-Social Assessment
+              </Link>
+            </strong>
           </li>
-          <li className={step >= 5 ? "active " : ""} id="confirm">
-            <strong>Educational Discussions</strong>
+          <li className={step >= 5 ? "active " : ""} data-count="5">
+            <strong>
+              <Link to={step >= 5 ? "/step-five" : ""}>
+                Educational Discussions
+              </Link>
+            </strong>
           </li>
-          <li className={step >= 6 ? "active " : ""} id="confirm">
-            <strong>Follow-Up Appointments</strong>
+          <li className={step >= 6 ? "active " : ""} data-count="6">
+            <strong>
+              <Link to={step >= 6 ? "/step-six" : ""}>
+                Follow-Up Appointments
+              </Link>
+            </strong>
           </li>
         </ul>
       </form>

@@ -22,7 +22,7 @@ p {
     position: relative;
     margin-top: 20px;
     width: 900px;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 #msform fieldset {
@@ -125,6 +125,17 @@ p {
     color: #673AB7
 }
 
+#progressbar a {
+    color: inherit;
+    text-decoration: none;
+    cursor: default;
+}
+
+#progressbar .active a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 #progressbar li {
     list-style-type: none;
     font-size: 15px;
@@ -134,27 +145,8 @@ p {
     font-weight: 400
 }
 
-#progressbar #account:before {
-    font-family: FontAwesome;
-    content: "\f13e"
-}
-
-#progressbar #personal:before {
-    font-family: FontAwesome;
-    content: "\f007"
-}
-
-#progressbar #payment:before {
-    font-family: FontAwesome;
-    content: "\f030"
-}
-
-#progressbar #confirm:before {
-    font-family: FontAwesome;
-    content: "\f00c"
-}
-
 #progressbar li:before {
+    content: attr(data-count);
     width: 50px;
     height: 50px;
     line-height: 45px;
@@ -164,7 +156,7 @@ p {
     background: lightgray;
     border-radius: 50%;
     margin: 0 auto 10px auto;
-    padding: 2px
+    padding: 2px;
 }
 
 #progressbar li:after {

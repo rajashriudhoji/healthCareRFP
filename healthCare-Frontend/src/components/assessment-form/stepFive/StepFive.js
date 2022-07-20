@@ -15,7 +15,7 @@ import "../step-one/stepone.css";
 
 const StepFive = () => {
   const navigate = useNavigate();
-  const { setData, incrementStep, decrementStep, step } =
+  const { setData, incrementStep, decrementStep, step, isReadOnly } =
     useContext(DataContext);
   const {
     register,
@@ -111,412 +111,414 @@ const StepFive = () => {
       <Stepper step={step} />
       <div className="step-form container step-one">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
-          <h3>Educational Discussions/Material(s) Provided</h3>
-          <Row>
-            <Col>
-              <Form.Label>Postpartum depression screening</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("depressionScreening", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("depressionScreening", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("depressionScreening", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            {errors.depressionScreening && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+          <h5 className="form-heading">
+            Educational Discussions/Material(s) Provided
+          </h5>
+          <fieldset disabled={isReadOnly}>
+            <Row>
+              <Col>
+                <Form.Label>Postpartum depression screening</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("depressionScreening", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("depressionScreening", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("depressionScreening", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              {errors.depressionScreening && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
+            <Row>
+              <Col>
+                <Form.Label>Contraception Methods</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("contraceptionMethod", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("contraceptionMethod", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("contraceptionMethod", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Contraception Methods</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("contraceptionMethod", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("contraceptionMethod", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("contraceptionMethod", { required: true })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.contraceptionMethod && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.contraceptionMethod && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Peripheral Blood Glucose</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("peripheralBloodGlucose", {
+                      required: true,
+                    })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("peripheralBloodGlucose", {
+                      required: true,
+                    })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("peripheralBloodGlucose", {
+                      required: true,
+                    })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Peripheral Blood Glucose</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("peripheralBloodGlucose", {
-                    required: true,
-                  })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("peripheralBloodGlucose", {
-                    required: true,
-                  })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("peripheralBloodGlucose", {
-                    required: true,
-                  })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.peripheralBloodGlucose && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.peripheralBloodGlucose && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Doctor Appointments</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("doctorAppointment", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("doctorAppointment", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("doctorAppointment", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Doctor Appointments</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("doctorAppointment", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("doctorAppointment", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("doctorAppointment", { required: true })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.doctorAppointment && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.doctorAppointment && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Car Seat Safety</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("carSeatSafety", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("carSeatSafety", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("carSeatSafety", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Car Seat Safety</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("carSeatSafety", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("carSeatSafety", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("carSeatSafety", { required: true })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.carSeatSafety && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.carSeatSafety && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Immunization Schedule</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("immunizationSchedule", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("immunizationSchedule", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("immunizationSchedule", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Immunization Schedule</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("immunizationSchedule", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("immunizationSchedule", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("immunizationSchedule", { required: true })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.immunizationSchedule && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.immunizationSchedule && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Breast Feeding</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("breastFeeding", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("breastFeeding", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("breastFeeding", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Breast Feeding</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("breastFeeding", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("breastFeeding", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("breastFeeding", { required: true })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.breastFeeding && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.breastFeeding && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Infant Safety</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("infantSafety", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("infantSafety", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("infantSafety", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Infant Safety</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("infantSafety", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("infantSafety", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("infantSafety", { required: true })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.infantSafety && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.infantSafety && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Family Planning</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("familyPlanning", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("familyPlanning", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("familyPlanning", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Family Planning</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("familyPlanning", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("familyPlanning", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("familyPlanning", { required: true })}
-                />
-              </Form.Group>
-            </Col>
+              {errors.familyPlanning && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
 
-            {errors.familyPlanning && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
+            <Row>
+              <Col>
+                <Form.Label>Checkups</Form.Label>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Education Provided"
+                    value="educationProvided"
+                    {...register("checkups", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Referred"
+                    value="referred"
+                    {...register("checkups", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3 baby-gender">
+                  <Form.Check
+                    type="checkbox"
+                    label="Declined"
+                    value="declined"
+                    {...register("checkups", { required: true })}
+                  />
+                </Form.Group>
+              </Col>
 
-          <Row>
-            <Col>
-              <Form.Label>Checkups</Form.Label>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Education Provided"
-                  value="educationProvided"
-                  {...register("checkups", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Referred"
-                  value="referred"
-                  {...register("checkups", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3 baby-gender">
-                <Form.Check
-                  type="checkbox"
-                  label="Declined"
-                  value="declined"
-                  {...register("checkups", { required: true })}
-                />
-              </Form.Group>
-            </Col>
-
-            {errors.checkups && (
-              <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-            )}
-          </Row>
-
+              {errors.checkups && (
+                <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+              )}
+            </Row>
+          </fieldset>
           <Form.Group className="mb-3">
             <Form.Label>Comments:</Form.Label>
             <Form.Control
@@ -524,6 +526,7 @@ const StepFive = () => {
               rows={2}
               className="address"
               {...register("details", {})}
+              disabled={isReadOnly}
             />
           </Form.Group>
 

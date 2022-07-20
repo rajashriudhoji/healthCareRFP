@@ -18,7 +18,7 @@ const StepSix = () => {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
-  const { setData, incrementStep, decrementStep, step, data } =
+  const { setData, decrementStep, step, data, isReadOnly } =
     useContext(DataContext);
   const {
     register,
@@ -77,19 +77,21 @@ const StepSix = () => {
         },
       },
     }));
-    try {
-      await axios.post(
-        "http://4597-2401-4900-362b-7c62-980b-a0a8-fc0d-3f0f.ngrok.io/api/v1/patient",
-        { ...data }
-      );
-      setSuccessMsg("Data is successfully saved.");
-      setErrorMsg("");
-      setTimeout(() => {
-        navigate("/");
-      }, 5000);
-    } catch (error) {
-      setSuccessMsg("");
-      setErrorMsg("Error while saving data. Please try again.");
+    if (!isReadOnly) {
+      try {
+        await axios.post(
+          "http://4597-2401-4900-362b-7c62-980b-a0a8-fc0d-3f0f.ngrok.io/api/v1/patient",
+          { ...data }
+        );
+        setSuccessMsg("Data is successfully saved.");
+        setErrorMsg("");
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
+      } catch (error) {
+        setSuccessMsg("");
+        setErrorMsg("Error while saving data. Please try again.");
+      }
     }
   };
 
@@ -114,30 +116,32 @@ const StepSix = () => {
                   <Form.Label>Follow-Up Appointment Made</Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="baby-gender"
-                    controlId="isAppointmentTaken"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="Yes"
-                      {...register("isAppointmentTaken", {
-                        required: true,
-                      })}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="No"
-                      {...register("isAppointmentTaken", {
-                        required: true,
-                      })}
-                    />
-                    {errors.isAppointmentTaken && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="baby-gender"
+                      controlId="isAppointmentTaken"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="Yes"
+                        {...register("isAppointmentTaken", {
+                          required: true,
+                        })}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="No"
+                        {...register("isAppointmentTaken", {
+                          required: true,
+                        })}
+                      />
+                      {errors.isAppointmentTaken && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
+                      )}
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -150,6 +154,7 @@ const StepSix = () => {
                   {...register("appointmentDate", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.appointmentDate && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -158,12 +163,13 @@ const StepSix = () => {
             </Col>
           </Row>
           <Form.Group className="mb-3" controlId="healthCare">
-            <Form.Label>Health Care Provider:</Form.Label>
+            <Form.Label>Health Care Provider</Form.Label>
             <Form.Control
               as="textarea"
               rows={1}
               className="address"
               {...register("healthCare", {})}
+              disabled={isReadOnly}
             />
           </Form.Group>
           <Row>
@@ -173,36 +179,38 @@ const StepSix = () => {
                   <Form.Label>Well-Child Visit Appointment Made</Form.Label>
                 </Col>
                 <Col>
-                  <Form.Group
-                    className="mb-3 baby-gender"
-                    controlId="childFollowupAppointment"
-                  >
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      value="Yes"
-                      {...register(
-                        "childFollowupAppointment_isAppointmentTaken",
-                        {
-                          required: true,
-                        }
+                  <fieldset disabled={isReadOnly}>
+                    <Form.Group
+                      className="mb-3 baby-gender"
+                      controlId="childFollowupAppointment"
+                    >
+                      <Form.Check
+                        type="radio"
+                        label="Yes"
+                        value="Yes"
+                        {...register(
+                          "childFollowupAppointment_isAppointmentTaken",
+                          {
+                            required: true,
+                          }
+                        )}
+                      />
+                      <Form.Check
+                        type="radio"
+                        label="No"
+                        value="No"
+                        {...register(
+                          "childFollowupAppointment_isAppointmentTaken",
+                          {
+                            required: true,
+                          }
+                        )}
+                      />
+                      {errors.childFollowupAppointment_isAppointmentTaken && (
+                        <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
                       )}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      value="No"
-                      {...register(
-                        "childFollowupAppointment_isAppointmentTaken",
-                        {
-                          required: true,
-                        }
-                      )}
-                    />
-                    {errors.childFollowupAppointment_isAppointmentTaken && (
-                      <p className="errorMsg">{ATLEAST_ONE_SELECT}</p>
-                    )}
-                  </Form.Group>
+                    </Form.Group>
+                  </fieldset>
                 </Col>
               </Row>
             </Col>
@@ -218,6 +226,7 @@ const StepSix = () => {
                   {...register("childFollowupAppointment_appointmentDate", {
                     required: true,
                   })}
+                  disabled={isReadOnly}
                 />
                 {errors.childFollowupAppointment_appointmentDate && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -229,12 +238,13 @@ const StepSix = () => {
             className="mb-3"
             controlId="childFollowupAppointment_healthCare"
           >
-            <Form.Label>Health Care Provider:</Form.Label>
+            <Form.Label>Health Care Provider</Form.Label>
             <Form.Control
               as="textarea"
               rows={1}
               className="address"
               {...register("childFollowupAppointment_healthCare", {})}
+              disabled={isReadOnly}
             />
           </Form.Group>
 

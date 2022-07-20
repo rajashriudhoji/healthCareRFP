@@ -1,0 +1,7 @@
+.patients-list {
+    margin: 1rem 0;
+}
+
+.patients-list .view-icon {
+   cursor: pointer;
+}

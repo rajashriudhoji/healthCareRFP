@@ -1,32 +1,74 @@
-import { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../context/DataContext";
-import { initialState } from "../../utils/data";
+import { initialState } from "../../utils/initialstate";
+import { data } from "../../utils/mockdata";
 import Header from "../header/Header";
+import PatientsList from "../patients-list/PatientsList";
 import "./home.css";
 
 const Home = () => {
-  const { setStep, setData } = useContext(DataContext);
+  const { setStep, setData, setIsReadOnly } = useContext(DataContext);
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState(data);
+
   const navigate = useNavigate();
+
+  const handleOnChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    console.log("submitted");
+    const text = searchText.trim();
+    if (text !== "") {
+      setFilteredData(
+        data.filter(
+          (patient) =>
+            patient?.patientBasicInfo?.motherName
+              .toLowerCase()
+              .indexOf(text.toLowerCase()) > -1 ||
+            patient?.patientBasicInfo?.email
+              .toLowerCase()
+              .indexOf(text.toLowerCase()) > -1
+        )
+      );
+    } else {
+      setFilteredData(data);
+    }
+  };
+
   return (
     <>
       <Header />
-      <div className="home-page">
-        <Button
-          variant="outline-primary"
-          className="btn"
-          onClick={() => {
-            setStep(1);
-            setData(initialState);
-            navigate("/step-one");
-          }}
-        >
-          Add New
-        </Button>
-        <Button variant="outline-secondary" className="btn">
-          View Details
-        </Button>
+      <div className="home-page container">
+        <div className="header-section">
+          <Form className="search-box" onSubmit={handleOnSubmit}>
+            <Form.Group>
+              <Form.Control
+                type="search"
+                placeholder="Enter mother name or email to search"
+                value={searchText}
+                onChange={handleOnChange}
+              />
+            </Form.Group>
+          </Form>
+          <Button
+            variant="outline-primary"
+            className="btn"
+            onClick={() => {
+              setStep(1);
+              setIsReadOnly(false);
+              setData(initialState);
+              navigate("/step-one");
+            }}
+          >
+            Add New
+          </Button>
+        </div>
+        <PatientsList filteredData={filteredData} />
       </div>
     </>
   );

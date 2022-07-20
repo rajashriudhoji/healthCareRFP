@@ -1,8 +1,17 @@
 .home-page {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 90vh;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.home-page .header-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-page .header-section .search-box {
+    flex: 1;
 }
 
 .home-page .btn {
