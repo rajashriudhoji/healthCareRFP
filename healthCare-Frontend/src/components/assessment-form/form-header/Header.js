@@ -1,7 +1,7 @@
-import "./header.css";
 import { useContext, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
-import { useLocation } from 'react-router-dom';
+import "./header.css";
 
 const Header = () => {
   const { setStep } = useContext(DataContext);
@@ -25,7 +25,9 @@ const Header = () => {
   }, []);
   return (
     <div className="form-header">
-      <h2>Postpartum Assessment Form</h2>
+      <h2>
+        <Link to="/">Postpartum Assessment Form</Link>
+      </h2>
     </div>
   );
 };
