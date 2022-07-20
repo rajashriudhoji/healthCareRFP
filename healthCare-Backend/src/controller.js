@@ -181,8 +181,17 @@ const addPatient = async(req, res) => {
   }
 };
 
+const removePatient = async(req, res) => {
+  const patient_id = req.params.patient_id;
+  pool.query(queries.removePatient, [patient_id], (error, result) => {
+    if (error) throw error;
+    res.status(200).send(`Patient removed successfully`);
+  })
+};
+
 module.exports = {
   getPatient,
   addPatient,
   getPatientById,
+  removePatient,
 };
