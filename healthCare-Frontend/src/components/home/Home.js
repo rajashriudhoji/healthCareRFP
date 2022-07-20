@@ -56,16 +56,14 @@ const Home = () => {
       <Header />
       <div className="home-page container">
         <div className="header-section">
-          <Form className="search-box">
-            <Form.Group>
-              <Form.Control
-                type="search"
-                placeholder="Enter mother name or phone number to search"
-                value={searchText}
-                onChange={handleOnChange}
-              />
-            </Form.Group>
-          </Form>
+          <Form.Group className="search-box">
+            <Form.Control
+              type="search"
+              placeholder="Enter mother name or phone number to search"
+              value={searchText}
+              onChange={handleOnChange}
+            />
+          </Form.Group>
           <Button
             variant="primary"
             className="btn"
