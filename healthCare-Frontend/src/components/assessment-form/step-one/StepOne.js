@@ -15,8 +15,7 @@ import "./stepone.css";
 
 const StepOne = () => {
   const navigate = useNavigate();
-  const { data, setData, incrementStep, step, isReadOnly } =
-    useContext(DataContext);
+  const { data, setData, step, isReadOnly } = useContext(DataContext);
   console.log({ gender: data?.patientBasicInfo?.babyGender });
   const {
     register,
@@ -43,7 +42,6 @@ const StepOne = () => {
         phone: +values.phone,
       },
     }));
-    incrementStep();
     navigate("/step-two");
   };
 

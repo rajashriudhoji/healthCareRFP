@@ -18,8 +18,7 @@ const StepSix = () => {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
-  const { setData, decrementStep, step, data, isReadOnly } =
-    useContext(DataContext);
+  const { setData, step, data, isReadOnly } = useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -29,19 +28,28 @@ const StepSix = () => {
       appointmentDate:
         data?.patientFollowUpAppointments?.pFollowupAppointment
           ?.appointmentDate,
+
       childFollowupAppointment_appointmentDate:
         data?.patientFollowUpAppointments?.childFollowupAppointment
           ?.appointmentDate,
+
       childFollowupAppointment_healthCare:
         data?.patientFollowUpAppointments?.childFollowupAppointment?.healthCare,
+
       childFollowupAppointment_isAppointmentTaken:
         data?.patientFollowUpAppointments?.childFollowupAppointment
-          ?.isAppointmentTaken,
+          ?.isAppointmentTaken === true
+          ? "Yes"
+          : "No",
+
       healthCare:
         data?.patientFollowUpAppointments?.pFollowupAppointment?.healthCare,
+
       isAppointmentTaken:
         data?.patientFollowUpAppointments?.pFollowupAppointment
-          ?.isAppointmentTaken,
+          ?.isAppointmentTaken === true
+          ? "Yes"
+          : "No",
     },
   });
 
@@ -92,7 +100,6 @@ const StepSix = () => {
   };
 
   const handlePreviousClick = () => {
-    decrementStep();
     navigate("/step-five");
   };
 
@@ -142,7 +149,7 @@ const StepSix = () => {
               </Row>
             </Col>
             <Col>
-              <Form.Group controlId="appointmentDate">
+              <Form.Group>
                 <Form.Label>Appointment Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -158,7 +165,7 @@ const StepSix = () => {
               </Form.Group>
             </Col>
           </Row>
-          <Form.Group className="mb-3" controlId="healthCare">
+          <Form.Group className="mb-3">
             <Form.Label>Health Care Provider</Form.Label>
             <Form.Control
               as="textarea"
@@ -167,9 +174,6 @@ const StepSix = () => {
               {...register("healthCare", {})}
               disabled={isReadOnly}
             />
-            {errors.healthCare && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
           </Form.Group>
           <Row>
             <Col>
@@ -214,10 +218,7 @@ const StepSix = () => {
               </Row>
             </Col>
             <Col>
-              <Form.Group
-                className="mb-3"
-                controlId="childFollowupAppointment_appointmentDate"
-              >
+              <Form.Group className="mb-3">
                 <Form.Label>Appointment Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -233,10 +234,7 @@ const StepSix = () => {
               </Form.Group>
             </Col>
           </Row>
-          <Form.Group
-            className="mb-3"
-            controlId="childFollowupAppointment_healthCare"
-          >
+          <Form.Group className="mb-3">
             <Form.Label>Health Care Provider</Form.Label>
             <Form.Control
               as="textarea"
@@ -245,9 +243,6 @@ const StepSix = () => {
               {...register("childFollowupAppointment_healthCare", {})}
               disabled={isReadOnly}
             />
-            {errors.childFollowupAppointment_healthCare && (
-              <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-            )}
           </Form.Group>
 
           <Form.Group className="mb-3 buttons">

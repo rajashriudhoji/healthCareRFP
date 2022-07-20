@@ -15,8 +15,7 @@ import "../step-one/stepone.css";
 
 const StepFour = () => {
   const navigate = useNavigate();
-  const { data, setData, incrementStep, decrementStep, step, isReadOnly } =
-    useContext(DataContext);
+  const { data, setData, step, isReadOnly } = useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -125,12 +124,10 @@ const StepFour = () => {
         },
       },
     }));
-    incrementStep();
     navigate("/step-five");
   };
 
   const handlePreviousClick = () => {
-    decrementStep();
     navigate("/step-three");
   };
 
@@ -188,9 +185,6 @@ const StepFour = () => {
                   {...register("relationWithBaby_details", {})}
                   disabled={isReadOnly}
                 />
-                {errors.relationWithBaby_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -244,9 +238,6 @@ const StepFour = () => {
                   {...register("houseMemberStatus_details", {})}
                   disabled={isReadOnly}
                 />
-                {errors.houseMemberStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -298,9 +289,6 @@ const StepFour = () => {
                   {...register("fatherStatus_details", {})}
                   disabled={isReadOnly}
                 />
-                {errors.fatherStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -396,9 +384,6 @@ const StepFour = () => {
                   {...register("safety_details", {})}
                   disabled={isReadOnly}
                 />
-                {errors.safety_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -453,9 +438,6 @@ const StepFour = () => {
                   {...register("unsafeRelationStatus_details", {})}
                   disabled={isReadOnly}
                 />
-                {errors.unsafeRelationStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -507,9 +489,6 @@ const StepFour = () => {
                   {...register("resourceStatus_details", {})}
                   disabled={isReadOnly}
                 />
-                {errors.resourceStatus_details && (
-                  <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
-                )}
               </Form.Group>
             </Col>
           </Row>
