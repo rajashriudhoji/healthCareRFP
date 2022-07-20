@@ -15,8 +15,7 @@ import "../step-one/stepone.css";
 
 const StepThree = () => {
   const navigate = useNavigate();
-  const { setData, incrementStep, decrementStep, step, data, isReadOnly } =
-    useContext(DataContext);
+  const { setData, step, data, isReadOnly } = useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -85,12 +84,10 @@ const StepThree = () => {
         },
       },
     }));
-    incrementStep();
     navigate("/step-four");
   };
 
   const handlePreviousClick = () => {
-    decrementStep();
     navigate("/step-two");
   };
 
@@ -135,7 +132,7 @@ const StepThree = () => {
 
           <Row>
             <Col>
-              <Form.Group className="mb-3" controlId="feedLength">
+              <Form.Group className="mb-3">
                 <Form.Label>Length of feedings</Form.Label>
                 <Form.Control
                   type="text"
@@ -151,7 +148,7 @@ const StepThree = () => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group className="mb-3" controlId="feedFrequency">
+              <Form.Group className="mb-3">
                 <Form.Label>Frequency of feedings</Form.Label>
                 <Form.Control
                   type="text"

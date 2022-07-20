@@ -15,8 +15,7 @@ import "../step-one/stepone.css";
 
 const StepFive = () => {
   const navigate = useNavigate();
-  const { setData, incrementStep, decrementStep, step, isReadOnly } =
-    useContext(DataContext);
+  const { setData, step, isReadOnly } = useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -96,12 +95,10 @@ const StepFive = () => {
         details: details,
       },
     }));
-    incrementStep();
     navigate("/step-six");
   };
 
   const handlePreviousClick = () => {
-    decrementStep();
     navigate("/step-four");
   };
 

@@ -1,14 +1,14 @@
 import "./header.css";
 import { useContext, useEffect } from "react";
 import DataContext from "../../../context/DataContext";
-import { createBrowserHistory } from "history";
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const { setStep } = useContext(DataContext);
-  const history = createBrowserHistory();
+  const location = useLocation();
 
   useEffect(() => {
-    const filterParams = history.location.pathname;
+    const filterParams = location.pathname;
     if (filterParams === "/step-one") {
       setStep(1);
     } else if (filterParams === "/step-two") {
