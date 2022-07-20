@@ -11,6 +11,7 @@ import {
   REQUIRED_ERROR_MSG,
   SUBMIT,
 } from "../../../utils/constants";
+import { getConvertedDate } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "../step-one/stepone.css";
@@ -27,13 +28,14 @@ const StepSix = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      appointmentDate:
-        data?.patientFollowUpAppointments?.pFollowupAppointment
-          ?.appointmentDate,
+      appointmentDate: getConvertedDate(
+        data?.patientFollowUpAppointments?.pFollowupAppointment?.appointmentDate
+      ),
 
-      childFollowupAppointment_appointmentDate:
+      childFollowupAppointment_appointmentDate: getConvertedDate(
         data?.patientFollowUpAppointments?.childFollowupAppointment
-          ?.appointmentDate,
+          ?.appointmentDate
+      ),
 
       childFollowupAppointment_healthCare:
         data?.patientFollowUpAppointments?.childFollowupAppointment?.healthCare,

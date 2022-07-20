@@ -19,3 +19,9 @@
     height: auto;
     margin: 0 1rem;
 }
+
+.loading {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 1rem;
+}

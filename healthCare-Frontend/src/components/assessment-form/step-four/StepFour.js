@@ -7,7 +7,6 @@ import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
-  REQUIRED_ERROR_MSG,
 } from "../../../utils/constants";
 import { getSelectedValue } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
@@ -37,10 +36,12 @@ const StepFour = () => {
       fatherStatus:
         (data?.patientPsychoSocialAssess?.fatherStatus?.isHappy === true &&
           "happy") ||
-        (data?.patientPsychoSocialAssess?.isAngry === true && "angry") ||
-        (data?.patientPsychoSocialAssess?.isInvolved === true &&
+        (data?.patientPsychoSocialAssess?.fatherStatus?.isAngry === true &&
+          "angry") ||
+        (data?.patientPsychoSocialAssess?.fatherStatus?.isInvolved === true &&
           "isInvolved") ||
-        (data?.patientPsychoSocialAssess?.isSure === true && "isSure") ||
+        (data?.patientPsychoSocialAssess?.fatherStatus?.isSure === true &&
+          "isSure") ||
         "",
       houseMemberStatus_details:
         data?.patientPsychoSocialAssess?.houseMemberStatus?.details,

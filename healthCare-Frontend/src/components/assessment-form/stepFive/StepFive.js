@@ -7,20 +7,52 @@ import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
-  REQUIRED_ERROR_MSG,
 } from "../../../utils/constants";
+import { getSelectedValue } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "../step-one/stepone.css";
 
 const StepFive = () => {
   const navigate = useNavigate();
-  const { setData, step, isReadOnly } = useContext(DataContext);
+  const { data, setData, step, isReadOnly } = useContext(DataContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({});
+  } = useForm({
+    defaultValues: {
+      depressionScreening: getSelectedValue(
+        data?.patientEducationalMaterial?.depressionScreening
+      ),
+      contraceptionMethod: getSelectedValue(
+        data?.patientEducationalMaterial?.contraceptionMethod
+      ),
+      peripheralBloodGlucose: getSelectedValue(
+        data?.patientEducationalMaterial?.peripheralBloodGlucose
+      ),
+      doctorAppointment: getSelectedValue(
+        data?.patientEducationalMaterial?.doctorAppointment
+      ),
+      carSeatSafety: getSelectedValue(
+        data?.patientEducationalMaterial?.carSeatSafety
+      ),
+      immunizationSchedule: getSelectedValue(
+        data?.patientEducationalMaterial?.immunizationSchedule
+      ),
+      breastFeeding: getSelectedValue(
+        data?.patientEducationalMaterial?.breastFeeding
+      ),
+      familyPlanning: getSelectedValue(
+        data?.patientEducationalMaterial?.familyPlanning
+      ),
+      infantSafety: getSelectedValue(
+        data?.patientEducationalMaterial?.infantSafety
+      ),
+      details: data?.patientEducationalMaterial?.details,
+      checkups: getSelectedValue(data?.patientEducationalMaterial?.checkups),
+    },
+  });
 
   const handleFormSubmit = (values) => {
     const {

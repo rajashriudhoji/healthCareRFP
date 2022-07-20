@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { Alert, Table } from "react-bootstrap";
 import { AiOutlineEye, AiOutlineDelete } from "react-icons/ai";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../context/DataContext";
+import { BASE_API_URL } from "../../utils/constants";
 import "./patientslist.css";
 
 const PatientsList = ({ filteredData }) => {
@@ -11,11 +13,16 @@ const PatientsList = ({ filteredData }) => {
   const [errorMsg, setErrorMsg] = useState("");
   const { setData, setIsReadOnly, setStep } = useContext(DataContext);
 
-  const handleViewDetailsClick = (patient) => {
-    setData(patient);
-    setStep(1);
-    setIsReadOnly(true);
-    navigate("/step-one");
+  const handleViewDetailsClick = async (patient_id) => {
+    try {
+      const { data: details } = await axios.get(
+        `${BASE_API_URL}/v1/patient/${patient_id}`
+      );
+      setData(details);
+      setStep(1);
+      setIsReadOnly(true);
+      navigate("/step-one");
+    } catch (error) {}
   };
 
   const handleDeleteClick = (patient) => {
@@ -53,8 +60,8 @@ const PatientsList = ({ filteredData }) => {
         </thead>
         <tbody>
           {filteredData.map((patient, index) => {
-            const { motherName, babyName, email, phone } =
-              patient?.patientBasicInfo || {};
+            const { motherName, babyName, email, phone, patient_id } =
+              patient || {};
 
             return (
               <tr key={index}>
@@ -65,10 +72,10 @@ const PatientsList = ({ filteredData }) => {
                 <td>{phone}</td>
                 <td>
                   <AiOutlineEye
-                    color="orange"
+                    color="#0d6efd"
                     size={30}
                     className="view-icon"
-                    onClick={() => handleViewDetailsClick(patient)}
+                    onClick={() => handleViewDetailsClick(patient_id)}
                   />
                 </td>
                 <td>
