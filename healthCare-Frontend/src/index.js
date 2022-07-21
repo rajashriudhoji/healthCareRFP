@@ -25,6 +25,7 @@ const AppRoutes = () => {
   const [data, setData] = useState(initialState);
   const [step, setStep] = useState(1);
   const [isReadOnly, setIsReadOnly] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   return (
     <DataContext.Provider
@@ -35,6 +36,8 @@ const AppRoutes = () => {
         setStep,
         isReadOnly,
         setIsReadOnly,
+        setIsEdit,
+        isEdit,
       }}
     >
       <Routes>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { Alert, Table } from "react-bootstrap";
-import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEye, AiOutlineEdit } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../context/DataContext";
 import { BASE_API_URL } from "../../utils/constants";
@@ -11,7 +11,8 @@ const PatientsList = ({ filteredData, setFilteredData }) => {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const { setData, setIsReadOnly, setStep } = useContext(DataContext);
+  const { setData, setIsReadOnly, setStep, setIsEdit, isEdit } =
+    useContext(DataContext);
 
   const handleViewDetailsClick = async (patient_id) => {
     try {
@@ -43,6 +44,20 @@ const PatientsList = ({ filteredData, setFilteredData }) => {
     }
   };
 
+  const handleEditClick = async (patient_id) => {
+    try {
+      const { data: details } = await axios.get(
+        `${BASE_API_URL}/v1/patient/${patient_id}`
+      );
+      // const { data: details } = await axios.get(`/patient.json`);
+      setData(details);
+      setStep(1);
+      setIsReadOnly(false);
+      setIsEdit(true);
+      navigate("/step-one");
+    } catch (error) {}
+  };
+
   return (
     <div className="patients-list">
       {successMsg && <Alert variant="success">{successMsg}</Alert>}
@@ -56,6 +71,7 @@ const PatientsList = ({ filteredData, setFilteredData }) => {
             <th>Email</th>
             <th>Phone</th>
             <th>View</th>
+            <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
@@ -76,6 +92,13 @@ const PatientsList = ({ filteredData, setFilteredData }) => {
                     size={30}
                     className="icon"
                     onClick={() => handleViewDetailsClick(patient_id)}
+                  />
+                </td>
+                <td className="icon">
+                  <AiOutlineEdit
+                    size={30}
+                    className="icon"
+                    onClick={() => handleEditClick(patient_id)}
                   />
                 </td>
                 <td className="icon">
