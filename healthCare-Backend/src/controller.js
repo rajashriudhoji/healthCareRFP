@@ -197,6 +197,7 @@ const removePatient = async(req, res) => {
     const patient_id = req.params.patient_id;
     const deletedPatient = await pool.query(queries.removePatientBasicInfo, [patient_id]);
     if(deletedPatient.fields.length) {
+      //TODO: Optimize this to single query to delete data from all tables.
       pool.query(queries.removePatientBreastFeeding, [patient_id]);
       pool.query(queries.removePatientEducationalMaterial, [patient_id]);
       pool.query(queries.removePatientFollowupAppointments, [patient_id]);
@@ -211,9 +212,54 @@ const removePatient = async(req, res) => {
   }
 };
 
+const updatePatient = async (req, res) => {
+  try{
+    const patient_id = req.params.patient_id;
+    const {patientBasicInfo:{motherName, babyName, babyDOB, address, email, phone, babyGender},
+    patientFollowUpAppointments, patientVisit, patientBreastFeeding, patientSafeSpacing,
+    patientPsychoSocialAssess, patientEducationalMaterial} = req.body;
+    const {depressionScreening, contraceptionMethod, peripheralBloodGlucose,
+      doctorAppointment, carSeatSafety, immunizationSchedule, breastFeeding,
+      infantSafety, familyPlanning, checkups, details} = patientEducationalMaterial;
+    const {relationWithBaby, houseMemberStatus, fatherStatus,
+      safety, unsafeRelationStatus, resourceStatus} = patientPsychoSocialAssess;
+    const {birthControl, birthControlAssess} = patientSafeSpacing;
+    const {isBreastfeeding, feedLength, feedFrequency, supplimentFormula,
+      feedingComfort, isNippleCracked} = patientBreastFeeding;
+    const {dateOfService, vitalSigns, smokeStatus} = patientVisit;
+    const {pFollowupAppointment, childFollowupAppointment} = patientFollowUpAppointments;
+
+    //TODO: write middleware to validate input.
+    const patient = await pool.query(queries.updatePatient, [motherName, babyName, babyDOB, address, email, phone, babyGender, patient_id]);
+    const patientDetails = patient.rows.length ? patient.rows[0].patient_id : 0;
+    if(patientDetails){
+      pool.query(queries.updatePatientEducationalMaterial, [depressionScreening, contraceptionMethod, peripheralBloodGlucose,
+        doctorAppointment, carSeatSafety, immunizationSchedule, breastFeeding,
+        infantSafety, familyPlanning, checkups, details, patient_id]);
+
+      pool.query(queries.updatePatientPsychoSocialAssess, [relationWithBaby, houseMemberStatus, fatherStatus,
+        safety, unsafeRelationStatus, resourceStatus, patient_id]);
+
+      pool.query(queries.updatePatientSafeSpacing, [birthControl, birthControlAssess, patient_id]);
+
+      pool.query(queries.updatePatientBreastFeeding, [isBreastfeeding, feedLength,
+        feedFrequency, supplimentFormula, feedingComfort, isNippleCracked, patient_id]);
+
+      pool.query(queries.updatePatientVisit, [dateOfService, vitalSigns, smokeStatus, patient_id]);
+
+      pool.query(queries.updatePatientFollowUpAppointments, [pFollowupAppointment, childFollowupAppointment, patient_id]);
+    }
+    res.status(200).send(`Record Updated.`)
+  }catch(err){
+    console.log('error', err);
+    res.status(500);
+  }
+};
+
 module.exports = {
   getPatient,
   addPatient,
   getPatientById,
   removePatient,
+  updatePatient,
 };
