@@ -18,6 +18,7 @@ const PatientsList = ({ filteredData, setFilteredData }) => {
       const { data: details } = await axios.get(
         `${BASE_API_URL}/v1/patient/${patient_id}`
       );
+      // const { data: details } = await axios.get(`/patient.json`);
       setData(details);
       setStep(1);
       setIsReadOnly(true);

@@ -23,6 +23,7 @@ const Home = () => {
       try {
         setLoading(true);
         const { data: details } = await axios.get(`${BASE_API_URL}/v1/patient`);
+        // const { data: details } = await axios.get(`/patients.json`);
 
         setUserData(details);
         setFilteredData(details);
