@@ -9,6 +9,7 @@ import {
   PREVIOUS_BUTTON_TEXT,
 } from "../../../utils/constants";
 import { getSelectedValue } from "../../../utils/functions";
+import { educationalDiscussionData } from "../../../utils/labels/stepFiveLabels";
 import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
 import "../step-one/stepone.css";
@@ -133,48 +134,7 @@ const StepFive = () => {
     navigate("/step-four");
   };
 
-  const educationalDiscussionData = [
-    {
-      formLabel: "Postpartum depression screening",
-      registerLabel: "depressionScreening",
-    },
-    {
-      formLabel: "Contraception Methods",
-      registerLabel: "contraceptionMethod",
-    },
-    {
-      formLabel: "Peripheral Blood Glucose",
-      registerLabel: "peripheralBloodGlucose",
-    },
-    {
-      formLabel: "Doctor Appointments",
-      registerLabel: "doctorAppointment",
-    },
-    {
-      formLabel: "Car Seat Safety",
-      registerLabel: "carSeatSafety",
-    },
-    {
-      formLabel: "Immunization Schedule",
-      registerLabel: "immunizationSchedule",
-    },
-    {
-      formLabel: "Breast Feeding",
-      registerLabel: "breastFeeding",
-    },
-    {
-      formLabel: "Infant Safety",
-      registerLabel: "infantSafety",
-    },
-    {
-      formLabel: "Family Planning",
-      registerLabel: "familyPlanning",
-    },
-    {
-      formLabel: "Checkups",
-      registerLabel: "checkups",
-    },
-  ];
+ 
 
   return (
     <div>
