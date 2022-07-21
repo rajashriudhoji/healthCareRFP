@@ -20,7 +20,7 @@ const StepSix = () => {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const { setData, step, data, isReadOnly } = useContext(DataContext);
+  const { setData, step, data, isReadOnly, isEdit } = useContext(DataContext);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -98,10 +98,14 @@ const StepSix = () => {
     if (!isReadOnly) {
       try {
         setLoading(true);
-        await axios.post(`${BASE_API_URL}/v1/patient`, {
-          ...data,
-          ...dataToUpdate,
-        });
+        if (isEdit) {
+          console.log("INSIDE EDIT CALL");
+        } else {
+          await axios.post(`${BASE_API_URL}/v1/patient`, {
+            ...data,
+            ...dataToUpdate,
+          });
+        }
         setSuccessMsg("Data is successfully saved.");
         setErrorMsg("");
         setTimeout(() => {
