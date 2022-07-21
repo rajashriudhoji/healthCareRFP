@@ -10,7 +10,8 @@ import PatientsList from "../patients-list/PatientsList";
 import "./home.css";
 
 const Home = () => {
-  const { setStep, setData, setIsReadOnly } = useContext(DataContext);
+  const { setStep, setData, setIsReadOnly, setIsEdit } =
+    useContext(DataContext);
   const [searchText, setSearchText] = useState("");
   const [userData, setUserData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -71,6 +72,7 @@ const Home = () => {
             onClick={() => {
               setStep(1);
               setIsReadOnly(false);
+              setIsEdit(false);
               setData(initialState);
               navigate("/step-one");
             }}

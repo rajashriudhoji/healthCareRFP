@@ -1,13 +1,16 @@
 import { useContext } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
+import useAlert from "../../../custom-hooks/useAlert";
 import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
+  UPDATE_BUTTON_TEXT,
+  UPDATE_PROGRESS_BUTTON_TEXT,
 } from "../../../utils/constants";
 import { getConvertedDate } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
@@ -16,7 +19,26 @@ import "./steptwo.css";
 
 const StepTwo = () => {
   const navigate = useNavigate();
-  const { data, setData, step, isReadOnly } = useContext(DataContext);
+  const {
+    data,
+    setData,
+    step,
+    isReadOnly,
+    handleUpdatePatient,
+    patientId,
+    isEdit,
+  } = useContext(DataContext);
+
+  const {
+    successMsg,
+    setSuccessMsg,
+    errorMsg,
+    setErrorMsg,
+    isUpdated,
+    setIsUpdated,
+    inProgress,
+    setInProgress,
+  } = useAlert();
   const {
     register,
     handleSubmit,
@@ -35,10 +57,11 @@ const StepTwo = () => {
     },
   });
 
-  const handleFormSubmit = (values) => {
+  const showNextButton = isUpdated || (!isReadOnly && !isEdit) || isReadOnly;
+
+  const handleFormSubmit = async (values) => {
     const { dateOfService, smokeStatus, ...rest } = values;
-    setData((prev) => ({
-      ...prev,
+    const dataToUpdate = {
       patientVisit: {
         dateOfService,
         smokeStatus: smokeStatus === "true" ? true : false,
@@ -48,8 +71,35 @@ const StepTwo = () => {
           },
         },
       },
+    };
+    setData((prev) => ({
+      ...prev,
+      ...dataToUpdate,
     }));
-    navigate("/step-three");
+    if (showNextButton) {
+      setSuccessMsg("");
+      setErrorMsg("");
+      navigate("/step-three");
+    } else {
+      try {
+        setInProgress(true);
+        const response = await handleUpdatePatient(patientId, {
+          ...data,
+          ...dataToUpdate,
+        });
+        if (response === true) {
+          setIsUpdated(true);
+          setSuccessMsg("Data is successfully updated.");
+          setErrorMsg("");
+        } else {
+          setErrorMsg("Error while updating data. Please try again.");
+          setSuccessMsg("");
+        }
+      } catch (error) {
+      } finally {
+        setInProgress(false);
+      }
+    }
   };
 
   const handlePreviousClick = () => {
@@ -62,6 +112,8 @@ const StepTwo = () => {
       <Stepper step={step} />
       <div className="step-form container step-two">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
+          {successMsg && <Alert variant="success">{successMsg}</Alert>}
+          {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
           <h4 className="form-heading">Postpartum Visit Check</h4>
           <Form.Group className="mb-3" controlId="dateOfService">
             <Form.Label>Date of Service</Form.Label>
@@ -185,15 +237,15 @@ const StepTwo = () => {
             </Col>
           </Row>
           <Form.Group className="mb-3 buttons">
-            <Button
-              variant="secondary"
-              type="button"
-              onClick={handlePreviousClick}
-            >
+            <Button type="button" onClick={handlePreviousClick}>
               {PREVIOUS_BUTTON_TEXT}
             </Button>
-            <Button variant="secondary" type="submit" className="btn">
-              {NEXT_BUTTON_TEXT}
+            <Button type="submit" className="btn">
+              {showNextButton
+                ? NEXT_BUTTON_TEXT
+                : inProgress
+                ? UPDATE_PROGRESS_BUTTON_TEXT
+                : UPDATE_BUTTON_TEXT}
             </Button>
           </Form.Group>
         </Form>

@@ -16,7 +16,7 @@ import "./stepone.css";
 
 const StepOne = () => {
   const navigate = useNavigate();
-  const { data, setData, step, isReadOnly } = useContext(DataContext);
+  const { data, setData, step, isReadOnly, isEdit } = useContext(DataContext);
   const {
     register,
     handleSubmit,
@@ -60,7 +60,7 @@ const StepOne = () => {
               {...register("motherName", {
                 required: true,
               })}
-              disabled={isReadOnly}
+              disabled={isReadOnly || isEdit}
             />
             {errors.motherName && (
               <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -76,7 +76,7 @@ const StepOne = () => {
                   {...register("babyName", {
                     required: true,
                   })}
-                  disabled={isReadOnly}
+                  disabled={isReadOnly || isEdit}
                 />
                 {errors.babyName && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -92,7 +92,7 @@ const StepOne = () => {
                   {...register("babyDOB", {
                     required: true,
                   })}
-                  disabled={isReadOnly}
+                  disabled={isReadOnly || isEdit}
                 />
                 {errors.babyDOB && (
                   <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>
@@ -109,13 +109,13 @@ const StepOne = () => {
               {...register("address", {
                 required: true,
               })}
-              disabled={isReadOnly}
+              disabled={isReadOnly || isEdit}
             />
             {errors.address && <p className="errorMsg">{REQUIRED_ERROR_MSG}</p>}
           </Form.Group>
           <Row>
             <Col>
-              <fieldset disabled={isReadOnly}>
+              <fieldset disabled={isReadOnly || isEdit}>
                 <Form.Group className="mb-3" controlId="email">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
@@ -132,7 +132,7 @@ const StepOne = () => {
               </fieldset>
             </Col>
             <Col>
-              <fieldset disabled={isReadOnly}>
+              <fieldset disabled={isReadOnly || isEdit}>
                 <Form.Group className="mb-3" controlId="phone">
                   <Form.Label>Phone</Form.Label>
                   <Form.Control
@@ -153,7 +153,7 @@ const StepOne = () => {
               </fieldset>
             </Col>
           </Row>
-          <fieldset disabled={isReadOnly}>
+          <fieldset disabled={isReadOnly || isEdit}>
             <Form.Group className="mb-3 baby-gender" controlId="babyGender">
               <Form.Label>Baby's Gender</Form.Label>
               <Form.Check
@@ -175,7 +175,7 @@ const StepOne = () => {
               )}
             </Form.Group>
           </fieldset>
-          <Button variant="secondary" type="submit" className="btn">
+          <Button type="submit" className="btn">
             {NEXT_BUTTON_TEXT}
           </Button>
         </Form>

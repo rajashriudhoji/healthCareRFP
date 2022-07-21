@@ -1,3 +1,4 @@
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import ReactDOM from "react-dom";
@@ -11,6 +12,7 @@ import StepFive from "./components/assessment-form/stepFive/StepFive";
 import Home from "./components/home/Home";
 import DataContext from "./context/DataContext";
 import "./index.css";
+import { BASE_API_URL } from "./utils/constants";
 import { initialState } from "./utils/initialstate";
 
 const AppWrapper = () => {
@@ -26,6 +28,18 @@ const AppRoutes = () => {
   const [step, setStep] = useState(1);
   const [isReadOnly, setIsReadOnly] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [patientId, setPatientId] = useState("");
+
+  const handleUpdatePatient = async (patient_id, dataToUpdate) => {
+    try {
+      await axios.put(`${BASE_API_URL}/v1/patient/${patient_id}`, dataToUpdate);
+      // await axios.get(`/patient.json`);
+      return true;
+    } catch (error) {
+      console.log("Error while updating patient. Please try again");
+      return false;
+    }
+  };
 
   return (
     <DataContext.Provider
@@ -38,6 +52,9 @@ const AppRoutes = () => {
         setIsReadOnly,
         setIsEdit,
         isEdit,
+        handleUpdatePatient,
+        patientId,
+        setPatientId,
       }}
     >
       <Routes>

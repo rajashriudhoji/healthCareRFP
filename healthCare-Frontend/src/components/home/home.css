@@ -22,13 +22,23 @@
     border: var(--primary-color);
 }
 
-.btn:hover {
+.btn:hover,
+.btn:active {
     background-color: var(--primary-color);
     border: var(--primary-color);
 }
 
 .step-form .btn {
     margin: 0;
+}
+
+.step-form .update-btn {
+    margin-left: 1rem;
+}
+
+.step-form .btn.btn-primary {
+    background-color: var(--primary-color);
+    border: var(--primary-color);
 }
 
 .loading {
