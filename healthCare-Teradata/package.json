@@ -1,0 +1,28 @@
+{
+  "name": "healthcare-teradata",
+  "version": "1.0.0",
+  "description": "Teradata integration with Nodejs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajashriudhoji/healthCareRFP.git"
+  },
+  "keywords": [
+    "Teradata",
+    "Nodejs"
+  ],
+  "author": "Rajashri Udhoji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rajashriudhoji/healthCareRFP/issues"
+  },
+  "homepage": "https://github.com/rajashriudhoji/healthCareRFP#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "teradata-nodejs-driver": "^1.0.0-rc.13"
+  }
+}
