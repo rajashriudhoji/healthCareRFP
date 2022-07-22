@@ -1,6 +1,32 @@
-const getPatient = 'SELECT * FROM patientbasicinfo';
-const addPatient = `INSERT INTO patientbasicinfo (motherName, babyName, babyDOB,
-  address, email, phone, babyGender) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+const getPatient = (cursor) => {
+    const sQuery = 'SELECT * FROM patientbasicinfo';
+
+    try {
+        cursor.execute(sQuery);
+        const fetchedRows = cursor.fetchall();
+        console.log("Fetched Rows Count: " + fetchedRows.length);
+    } catch (error) {
+        if (!anIgnoreError(error)) {
+            throw error;
+        }
+    }
+};
+
+const addPatient = (req, res, cursor) => {
+    try {
+        const iQuery = 'INSERT patientbasicinfo values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const values = [motherName, babyName, babyDOB, address, email, phone, babyGender,
+            patientFollowUpAppointments, patientVisit, patientBreastFeeding, patientSafeSpacing,
+            patientPsychoSocialAssess, patientEducationalMaterial] = req.body;
+
+        cursor.execute(iQuery, values);
+    } catch (error) {
+        if (!anIgnoreError(error)) {
+            throw error;
+        }
+    }
+}
+
 const getPatientById = `SELECT * FROM patientbasicinfo INNER JOIN patientfollowupappointments ON
   patientbasicinfo.patient_id = patientfollowupappointments.patient_id
   INNER JOIN patientbreastfeeding

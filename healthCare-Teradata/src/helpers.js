@@ -1,16 +1,19 @@
-const connParams = require('./db');
+// const connParams = require('./db');
 const TeradataConnection = require("teradata-nodejs-driver/teradata-connection");
+const TeradataExceptions = require("teradata-nodejs-driver/teradata-exceptions");
+
+const connParams = {
+    host: '20.115.29.188',
+    log: '0',
+    password: 'TDATdb#490',
+    user: 'excel'
+};
 
 const setupAndRun = () => {
     try {
         var teradataConnection = new TeradataConnection.TeradataConnection();
         var cursor = teradataConnection.cursor();
         teradataConnection.connect(connParams);
-
-        // dropTable(cursor)
-        // createData(cursor);
-        // doFetchAll(cursor);
-        // dropTable(cursor);
 
         return cursor;
 
