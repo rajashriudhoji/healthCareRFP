@@ -10,7 +10,8 @@ import PatientsList from "../patients-list/PatientsList";
 import "./home.css";
 
 const Home = () => {
-  const { setStep, setData, setIsReadOnly } = useContext(DataContext);
+  const { setStep, setData, setIsReadOnly, setIsEdit } =
+    useContext(DataContext);
   const [searchText, setSearchText] = useState("");
   const [userData, setUserData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -23,6 +24,7 @@ const Home = () => {
       try {
         setLoading(true);
         const { data: details } = await axios.get(`${BASE_API_URL}/v1/patient`);
+        // const { data: details } = await axios.get(`/patients.json`);
 
         setUserData(details);
         setFilteredData(details);
@@ -56,22 +58,21 @@ const Home = () => {
       <Header />
       <div className="home-page container">
         <div className="header-section">
-          <Form className="search-box">
-            <Form.Group>
-              <Form.Control
-                type="search"
-                placeholder="Enter mother name or phone number to search"
-                value={searchText}
-                onChange={handleOnChange}
-              />
-            </Form.Group>
-          </Form>
+          <Form.Group className="search-box">
+            <Form.Control
+              type="search"
+              placeholder="Enter mother name or phone number to search"
+              value={searchText}
+              onChange={handleOnChange}
+            />
+          </Form.Group>
           <Button
             variant="primary"
             className="btn"
             onClick={() => {
               setStep(1);
               setIsReadOnly(false);
+              setIsEdit(false);
               setData(initialState);
               navigate("/step-one");
             }}
@@ -82,7 +83,10 @@ const Home = () => {
         {loading ? (
           <p className="loading">Loading...</p>
         ) : (
-          <PatientsList filteredData={filteredData} />
+          <PatientsList
+            filteredData={filteredData}
+            setFilteredData={setFilteredData}
+          />
         )}
       </div>
     </>

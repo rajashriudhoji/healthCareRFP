@@ -2,93 +2,104 @@ const pool = require('../db');
 const queries = require('./queries');
 
 const getPatient = (req, res) => {
-  pool.query(queries.getPatient, (error, result) => {
-    if (error) throw error;
-    const allPatient = [];
-    result.rows.forEach(patient => {
-      const { patient_id, mothername, babyname, babydob, address, email, phone, babygender} = patient;
-      allPatient.push({
-        patient_id,
-        motherName: mothername,
-        babyName: babyname,
-        babyDOB: babydob,
-        address,
-        email,
-        phone,
-        babyGender: babygender,
+  try{
+    pool.query(queries.getPatient, (error, result) => {
+      if (error) throw error;
+      const allPatient = [];
+      result.rows.forEach(patient => {
+        const { patient_id, mothername, babyname, babydob, address, email, phone, babygender} = patient;
+        allPatient.push({
+          patient_id,
+          motherName: mothername,
+          babyName: babyname,
+          babyDOB: babydob,
+          address,
+          email,
+          phone,
+          babyGender: babygender,
+        });
       });
-    });
-    res.status(200).json(allPatient);
-  })
+      res.status(200).json(allPatient);
+    })
+  } catch(err) {
+    console.log('error', err);
+    res.status(500);
+  }
+
 };
 
 const getPatientById = (req, res) => {
-  const patient_id = req.params.patient_id;
-  pool.query(queries.getPatientById, [patient_id], (error, result) => {
-    if (error) throw error;
-    const {pfollowupappointment, childfollowupappointment, dateofservice, vitalsigns,
-      smokestatus, isbreastfeeding, feedlength, feedfrequency, supplimentformula,
-      feedingcomfort, isnipplecracked, birthcontrol, birthcontrolassess,
-      relationwithbaby, housememberstatus, fatherstatus,
-      safety, unsaferelationstatus, resourcestatus, depressionscreening, contraceptionmethod, peripheralbloodglucose,
-      doctorappointment, carseatsafety, immunizationschedule, breastfeeding,
-      infantsafety, familyplanning, checkups, details, mothername, babyname, babydob, address, email, phone, babygender} = result.rows[0];
-    const response = {
-      patientBasicInfo:{
-        patient_id,
-        motherName: mothername,
-        babyName: babyname,
-        babyDOB: babydob,
-        address,
-        email,
-        phone,
-        babyGender: babygender,
-      },
-      patientVisit: {
-        dateOfService: dateofservice,
-        vitalSigns: vitalsigns,
-        smokeStatus: smokestatus,
-      },
-      patientBreastFeeding: {
-        isBreastfeeding: isbreastfeeding,
-        feedLength: feedlength,
-        feedFrequency: feedfrequency,
-        supplimentFormula: supplimentformula,
-        feedingComfort: feedingcomfort,
-        isNippleCracked: isnipplecracked,
-      },
-      patientSafeSpacing: {
-        birthControl: birthcontrol,
-        birthControlAssess: birthcontrolassess,
-      },
-      patientPsychoSocialAssess: {
-        relationWithBaby: relationwithbaby,
-        houseMemberStatus: housememberstatus,
-        fatherStatus: fatherstatus,
-        safety,
-        unsafeRelationStatus: unsaferelationstatus,
-        resourceStatus: resourcestatus,
-      },
-      patientEducationalMaterial: {
-        depressionScreening: depressionscreening,
-        contraceptionMethod: contraceptionmethod,
-        peripheralBloodGlucose: peripheralbloodglucose,
-        doctorAppointment: doctorappointment,
-        carSeatSafety: carseatsafety,
-        immunizationSchedule: immunizationschedule,
-        breastFeeding: breastfeeding,
-        infantSafety: infantsafety,
-        familyPlanning: familyplanning,
-        checkups,
-        details,
-      },
-      patientFollowUpAppointments: {
-        pFollowupAppointment: pfollowupappointment,
-        childFollowupAppointment: childfollowupappointment,
-      },
-    }
-    res.status(200).json(response);
-  })
+  try {
+    const patient_id = req.params.patient_id;
+    pool.query(queries.getPatientById, [patient_id], (error, result) => {
+      if (error) throw error;
+      const {pfollowupappointment, childfollowupappointment, dateofservice, vitalsigns,
+        smokestatus, isbreastfeeding, feedlength, feedfrequency, supplimentformula,
+        feedingcomfort, isnipplecracked, birthcontrol, birthcontrolassess,
+        relationwithbaby, housememberstatus, fatherstatus,
+        safety, unsaferelationstatus, resourcestatus, depressionscreening, contraceptionmethod, peripheralbloodglucose,
+        doctorappointment, carseatsafety, immunizationschedule, breastfeeding,
+        infantsafety, familyplanning, checkups, details, mothername, babyname, babydob, address, email, phone, babygender} = result.rows[0];
+      const response = {
+        patientBasicInfo:{
+          patient_id,
+          motherName: mothername,
+          babyName: babyname,
+          babyDOB: babydob,
+          address,
+          email,
+          phone,
+          babyGender: babygender,
+        },
+        patientVisit: {
+          dateOfService: dateofservice,
+          vitalSigns: vitalsigns,
+          smokeStatus: smokestatus,
+        },
+        patientBreastFeeding: {
+          isBreastfeeding: isbreastfeeding,
+          feedLength: feedlength,
+          feedFrequency: feedfrequency,
+          supplimentFormula: supplimentformula,
+          feedingComfort: feedingcomfort,
+          isNippleCracked: isnipplecracked,
+        },
+        patientSafeSpacing: {
+          birthControl: birthcontrol,
+          birthControlAssess: birthcontrolassess,
+        },
+        patientPsychoSocialAssess: {
+          relationWithBaby: relationwithbaby,
+          houseMemberStatus: housememberstatus,
+          fatherStatus: fatherstatus,
+          safety,
+          unsafeRelationStatus: unsaferelationstatus,
+          resourceStatus: resourcestatus,
+        },
+        patientEducationalMaterial: {
+          depressionScreening: depressionscreening,
+          contraceptionMethod: contraceptionmethod,
+          peripheralBloodGlucose: peripheralbloodglucose,
+          doctorAppointment: doctorappointment,
+          carSeatSafety: carseatsafety,
+          immunizationSchedule: immunizationschedule,
+          breastFeeding: breastfeeding,
+          infantSafety: infantsafety,
+          familyPlanning: familyplanning,
+          checkups,
+          details,
+        },
+        patientFollowUpAppointments: {
+          pFollowupAppointment: pfollowupappointment,
+          childFollowupAppointment: childfollowupappointment,
+        },
+      }
+      res.status(200).json(response);
+    })
+  } catch (err) {
+    console.log('error', err);
+    res.status(500);
+  }
 };
 
 const addPatientFollowUpAppointments = (patient_id, patientFollowUpAppointments) => {
@@ -181,8 +192,28 @@ const addPatient = async(req, res) => {
   }
 };
 
+const removePatient = async(req, res) => {
+  try {
+    const patient_id = req.params.patient_id;
+    const deletedPatient = await pool.query(queries.removePatientBasicInfo, [patient_id]);
+    if(deletedPatient.fields.length) {
+      pool.query(queries.removePatientBreastFeeding, [patient_id]);
+      pool.query(queries.removePatientEducationalMaterial, [patient_id]);
+      pool.query(queries.removePatientFollowupAppointments, [patient_id]);
+      pool.query(queries.removePatientPsychoSocialAssess, [patient_id]);
+      pool.query(queries.removePatientSafeSpacing, [patient_id]);
+      pool.query(queries.removepatientVisit, [patient_id]);
+    }
+    res.status(200).send(`Patient removed successfully`);
+  } catch(err){
+    console.log('error',err);
+    res.status(500);
+  }
+};
+
 module.exports = {
   getPatient,
   addPatient,
   getPatientById,
+  removePatient,
 };

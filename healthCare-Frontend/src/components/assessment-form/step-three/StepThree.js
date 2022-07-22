@@ -1,13 +1,16 @@
 import { useContext } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
+import useAlert from "../../../custom-hooks/useAlert";
 import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
+  UPDATE_BUTTON_TEXT,
+  UPDATE_PROGRESS_BUTTON_TEXT,
 } from "../../../utils/constants";
 import Stepper from "../../stepper/Stepper";
 import Header from "../form-header/Header";
@@ -15,7 +18,26 @@ import "../step-one/stepone.css";
 
 const StepThree = () => {
   const navigate = useNavigate();
-  const { setData, step, data, isReadOnly } = useContext(DataContext);
+  const {
+    setData,
+    step,
+    data,
+    isReadOnly,
+    isEdit,
+    handleUpdatePatient,
+    patientId,
+  } = useContext(DataContext);
+
+  const {
+    successMsg,
+    setSuccessMsg,
+    errorMsg,
+    setErrorMsg,
+    isUpdated,
+    setIsUpdated,
+    inProgress,
+    setInProgress,
+  } = useAlert();
   const {
     register,
     handleSubmit,
@@ -48,7 +70,9 @@ const StepThree = () => {
     },
   });
 
-  const handleFormSubmit = (values) => {
+  const showNextButton = isUpdated || (!isReadOnly && !isEdit) || isReadOnly;
+
+  const handleFormSubmit = async (values) => {
     const {
       isBreastfeeding,
       feedLength,
@@ -61,8 +85,8 @@ const StepThree = () => {
       birthControlAssess_isAssessDone,
       birthControlAssess_details,
     } = values;
-    setData((prev) => ({
-      ...prev,
+
+    const dataToUpdate = {
       patientBreastFeeding: {
         isBreastfeeding: isBreastfeeding === "true" ? true : false,
         feedLength,
@@ -82,8 +106,37 @@ const StepThree = () => {
           details: birthControlAssess_details,
         },
       },
+    };
+
+    setData((prev) => ({
+      ...prev,
+      ...dataToUpdate,
     }));
-    navigate("/step-four");
+
+    if (showNextButton) {
+      setSuccessMsg("");
+      setErrorMsg("");
+      navigate("/step-four");
+    } else {
+      try {
+        setInProgress(true);
+        const response = await handleUpdatePatient(patientId, {
+          ...data,
+          ...dataToUpdate,
+        });
+        if (response === true) {
+          setIsUpdated(true);
+          setSuccessMsg("Data is successfully updated.");
+          setErrorMsg("");
+        } else {
+          setErrorMsg("Error while updating data. Please try again.");
+          setSuccessMsg("");
+        }
+      } catch (error) {
+      } finally {
+        setInProgress(false);
+      }
+    }
   };
 
   const handlePreviousClick = () => {
@@ -96,6 +149,8 @@ const StepThree = () => {
       <Stepper step={step} />
       <div className="step-form container step-three">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
+          {successMsg && <Alert variant="success">{successMsg}</Alert>}
+          {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
           <h4 className="form-heading">Breastfeeding</h4>
           <Row>
             <Col>
@@ -364,15 +419,15 @@ const StepThree = () => {
             </Col>
           </Row>
           <Form.Group className="mb-3 buttons">
-            <Button
-              variant="secondary"
-              type="button"
-              onClick={handlePreviousClick}
-            >
+            <Button type="button" onClick={handlePreviousClick}>
               {PREVIOUS_BUTTON_TEXT}
             </Button>
-            <Button variant="secondary" type="submit">
-              {NEXT_BUTTON_TEXT}
+            <Button type="submit" className="btn">
+              {showNextButton
+                ? NEXT_BUTTON_TEXT
+                : inProgress
+                ? UPDATE_PROGRESS_BUTTON_TEXT
+                : UPDATE_BUTTON_TEXT}
             </Button>
           </Form.Group>
         </Form>

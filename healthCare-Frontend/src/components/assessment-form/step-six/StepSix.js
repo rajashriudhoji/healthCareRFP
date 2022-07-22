@@ -4,12 +4,14 @@ import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
+import useAlert from "../../../custom-hooks/useAlert";
 import {
   ATLEAST_ONE_SELECT,
   BASE_API_URL,
   PREVIOUS_BUTTON_TEXT,
   REQUIRED_ERROR_MSG,
   SUBMIT,
+  UPDATE_BUTTON_TEXT,
 } from "../../../utils/constants";
 import { getConvertedDate } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
@@ -20,22 +22,38 @@ const StepSix = () => {
   const navigate = useNavigate();
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const { setData, step, data, isReadOnly } = useContext(DataContext);
-  const [loading, setLoading] = useState(false);
+  const {
+    setData,
+    step,
+    data,
+    isReadOnly,
+    isEdit,
+    handleUpdatePatient,
+    patientId,
+  } = useContext(DataContext);
+
+  const { inProgress, setInProgress } = useAlert();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      appointmentDate: getConvertedDate(
-        data?.patientFollowUpAppointments?.pFollowupAppointment?.appointmentDate
-      ),
+      appointmentDate: data?.patientFollowUpAppointments?.pFollowupAppointment
+        ?.appointmentDate
+        ? getConvertedDate(
+            data?.patientFollowUpAppointments?.pFollowupAppointment
+              ?.appointmentDate
+          )
+        : null,
 
-      childFollowupAppointment_appointmentDate: getConvertedDate(
-        data?.patientFollowUpAppointments?.childFollowupAppointment
-          ?.appointmentDate
-      ),
+      childFollowupAppointment_appointmentDate: data
+        ?.patientFollowUpAppointments?.childFollowupAppointment?.appointmentDate
+        ? getConvertedDate(
+            data?.patientFollowUpAppointments?.childFollowupAppointment
+              ?.appointmentDate
+          )
+        : null,
 
       childFollowupAppointment_healthCare:
         data?.patientFollowUpAppointments?.childFollowupAppointment?.healthCare,
@@ -58,7 +76,6 @@ const StepSix = () => {
   });
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
     const {
       appointmentDate,
       childFollowupAppointment_appointmentDate,
@@ -67,8 +84,7 @@ const StepSix = () => {
       healthCare,
       isAppointmentTaken,
     } = values;
-    setData((prev) => ({
-      ...prev,
+    const dataToUpdate = {
       patientFollowUpAppointments: {
         pFollowupAppointment: {
           isAppointmentTaken: isAppointmentTaken === "Yes" ? true : false,
@@ -84,21 +100,44 @@ const StepSix = () => {
           healthCare: childFollowupAppointment_healthCare,
         },
       },
+    };
+
+    setData((prev) => ({
+      ...prev,
+      ...dataToUpdate,
     }));
+
     if (!isReadOnly) {
       try {
-        setLoading(true);
-        await axios.post(`${BASE_API_URL}/v1/patient`, { ...data });
-        setSuccessMsg("Data is successfully saved.");
-        setErrorMsg("");
-        setTimeout(() => {
-          navigate("/");
-        }, 5000);
+        if (isEdit) {
+          setInProgress(true);
+          const response = await handleUpdatePatient(patientId, {
+            ...data,
+            ...dataToUpdate,
+          });
+          if (response === true) {
+            setSuccessMsg("Data is successfully updated.");
+            setErrorMsg("");
+          } else {
+            setErrorMsg("Error while updating data. Please try again.");
+            setSuccessMsg("");
+          }
+        } else {
+          await axios.post(`${BASE_API_URL}/v1/patient`, {
+            ...data,
+            ...dataToUpdate,
+          });
+          setSuccessMsg("Data is successfully saved.");
+          setErrorMsg("");
+          setTimeout(() => {
+            navigate("/");
+          }, 5000);
+        }
       } catch (error) {
         setSuccessMsg("");
         setErrorMsg("Error while saving data. Please try again.");
       } finally {
-        setLoading(false);
+        setInProgress(false);
       }
     }
   };
@@ -250,16 +289,12 @@ const StepSix = () => {
           </Form.Group>
 
           <Form.Group className="mb-3 buttons">
-            <Button
-              variant="secondary"
-              type="button"
-              onClick={handlePreviousClick}
-            >
+            <Button type="button" onClick={handlePreviousClick}>
               {PREVIOUS_BUTTON_TEXT}
             </Button>
             {!isReadOnly && (
-              <Button variant="secondary" type="submit" disabled={loading}>
-                {SUBMIT}
+              <Button type="submit" className="btn" disabled={inProgress}>
+                {isEdit ? UPDATE_BUTTON_TEXT : SUBMIT}
               </Button>
             )}
           </Form.Group>

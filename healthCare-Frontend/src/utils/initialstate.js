@@ -128,12 +128,12 @@ export const initialState = {
   },
   patientFollowUpAppointments: {
     pFollowupAppointment: {
-      isAppointmentTaken: true,
+      isAppointmentTaken: false,
       appointmentDate: "",
       healthCare: "",
     },
     childFollowupAppointment: {
-      isAppointmentTaken: true,
+      isAppointmentTaken: false,
       appointmentDate: "",
       healthCare: "",
     },

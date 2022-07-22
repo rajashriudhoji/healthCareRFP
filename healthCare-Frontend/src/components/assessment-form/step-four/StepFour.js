@@ -1,12 +1,15 @@
 import { useContext } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import DataContext from "../../../context/DataContext";
+import useAlert from "../../../custom-hooks/useAlert";
 import {
   ATLEAST_ONE_SELECT,
   NEXT_BUTTON_TEXT,
   PREVIOUS_BUTTON_TEXT,
+  UPDATE_BUTTON_TEXT,
+  UPDATE_PROGRESS_BUTTON_TEXT,
 } from "../../../utils/constants";
 import { getSelectedValue } from "../../../utils/functions";
 import Stepper from "../../stepper/Stepper";
@@ -15,7 +18,26 @@ import "../step-one/stepone.css";
 
 const StepFour = () => {
   const navigate = useNavigate();
-  const { data, setData, step, isReadOnly } = useContext(DataContext);
+  const {
+    data,
+    setData,
+    step,
+    isReadOnly,
+    isEdit,
+    handleUpdatePatient,
+    patientId,
+  } = useContext(DataContext);
+
+  const {
+    successMsg,
+    setSuccessMsg,
+    errorMsg,
+    setErrorMsg,
+    isUpdated,
+    setIsUpdated,
+    inProgress,
+    setInProgress,
+  } = useAlert();
   const {
     register,
     handleSubmit,
@@ -76,7 +98,9 @@ const StepFour = () => {
     },
   });
 
-  const handleFormSubmit = (values) => {
+  const showNextButton = isUpdated || (!isReadOnly && !isEdit) || isReadOnly;
+
+  const handleFormSubmit = async (values) => {
     const {
       relationWithBaby_isComfortable,
       relationWithBaby_details,
@@ -93,8 +117,8 @@ const StepFour = () => {
       resourceStatus_details,
       resourceStatus,
     } = values;
-    setData((prev) => ({
-      ...prev,
+
+    const dataToUpdate = {
       patientPsychoSocialAssess: {
         relationWithBaby: {
           isComfortable:
@@ -141,8 +165,37 @@ const StepFour = () => {
           isAny: resourceStatus.includes("isAny") ? true : false,
         },
       },
+    };
+
+    setData((prev) => ({
+      ...prev,
+      ...dataToUpdate,
     }));
-    navigate("/step-five");
+
+    if (showNextButton) {
+      setSuccessMsg("");
+      setErrorMsg("");
+      navigate("/step-five");
+    } else {
+      try {
+        setInProgress(true);
+        const response = await handleUpdatePatient(patientId, {
+          ...data,
+          ...dataToUpdate,
+        });
+        if (response === true) {
+          setIsUpdated(true);
+          setSuccessMsg("Data is successfully updated.");
+          setErrorMsg("");
+        } else {
+          setErrorMsg("Error while updating data. Please try again.");
+          setSuccessMsg("");
+        }
+      } catch (error) {
+      } finally {
+        setInProgress(false);
+      }
+    }
   };
 
   const handlePreviousClick = () => {
@@ -155,6 +208,8 @@ const StepFour = () => {
       <Stepper step={step} />
       <div className="step-form container step-four">
         <Form onSubmit={handleSubmit(handleFormSubmit)}>
+          {successMsg && <Alert variant="success">{successMsg}</Alert>}
+          {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
           <h4 className="form-heading">Psycho-Social Assessment</h4>
           <Row>
             <Col>
@@ -565,15 +620,15 @@ const StepFour = () => {
             </Col>
           </Row>
           <Form.Group className="mb-3 buttons">
-            <Button
-              variant="secondary"
-              type="button"
-              onClick={handlePreviousClick}
-            >
+            <Button type="button" onClick={handlePreviousClick}>
               {PREVIOUS_BUTTON_TEXT}
             </Button>
-            <Button variant="secondary" type="submit">
-              {NEXT_BUTTON_TEXT}
+            <Button type="submit" className="btn">
+              {showNextButton
+                ? NEXT_BUTTON_TEXT
+                : inProgress
+                ? UPDATE_PROGRESS_BUTTON_TEXT
+                : UPDATE_BUTTON_TEXT}
             </Button>
           </Form.Group>
         </Form>

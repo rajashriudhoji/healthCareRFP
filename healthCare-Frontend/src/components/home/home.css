@@ -14,10 +14,29 @@
     flex: 1;
 }
 
-.home-page .btn {
+.btn {
     width: 150px;
     height: auto;
     margin: 0 1rem;
+    background-color: var(--primary-color);
+    border: var(--primary-color);
+}
+
+.btn:hover,
+.btn:active {
+    background-color: var(--primary-color);
+    border: var(--primary-color);
+}
+
+.step-form .btn {
+    margin: 0;
+}
+
+.step-form .update-btn {
+    margin-left: 1rem;
+}
+
+.step-form .btn.btn-primary {
     background-color: var(--primary-color);
     border: var(--primary-color);
 }
