@@ -38,6 +38,29 @@ const removePatientFollowupAppointments = `DELETE FROM patientfollowupappointmen
 const removePatientPsychoSocialAssess = `DELETE FROM patientpsychosocialassess WHERE patient_id = $1`;
 const removePatientSafeSpacing = `DELETE FROM patientsafespacing WHERE patient_id = $1`;
 const removepatientVisit = `DELETE FROM patientvisit WHERE patient_id = $1`;
+const updatePatient = `UPDATE patientbasicinfo
+  SET motherName = $1, babyName = $2, babyDOB = $3, address = $4, email = $5, phone = $6, babyGender = $7
+  WHERE patient_id = $8 RETURNING *`;
+const updatePatientFollowUpAppointments = `UPDATE patientfollowupappointments
+  SET pFollowupAppointment = $1, childFollowupAppointment = $2
+  WHERE patient_id = $3`;
+const updatePatientVisit = `UPDATE patientvisit
+  SET dateOfService = $1, vitalSigns = $2, smokeStatus = $3
+  WHERE patient_id = $4`;
+const updatePatientBreastFeeding = `UPDATE patientbreastfeeding
+  SET isBreastfeeding = $1, feedLength = $2, feedFrequency = $3, supplimentFormula = $4, feedingComfort = $5, isNippleCracked = $6
+  WHERE patient_id = $7`;
+const updatePatientSafeSpacing = `UPDATE patientsafespacing
+  SET birthControl = $1, birthControlAssess = $2
+  WHERE patient_id = $3`;
+const updatePatientPsychoSocialAssess = `UPDATE patientpsychosocialassess
+  SET relationWithBaby = $1, houseMemberStatus = $2, fatherStatus = $3, safety = $4, unsafeRelationStatus = $5, resourceStatus = $6
+  WHERE patient_id = $7`;
+const updatePatientEducationalMaterial = `UPDATE patienteducationalmaterial
+  SET depressionScreening = $1, contraceptionMethod = $2, peripheralBloodGlucose = $3,
+  doctorAppointment = $4, carSeatSafety = $5, immunizationSchedule = $6, breastFeeding = $7,
+  infantSafety = $8, familyPlanning = $9, checkups = $10, details = $11
+  WHERE patient_id = $12`;
 
 module.exports = {
   getPatient,
@@ -56,4 +79,11 @@ module.exports = {
   removePatientPsychoSocialAssess,
   removePatientSafeSpacing,
   removepatientVisit,
+  updatePatient,
+  updatePatientFollowUpAppointments,
+  updatePatientVisit,
+  updatePatientBreastFeeding,
+  updatePatientSafeSpacing,
+  updatePatientPsychoSocialAssess,
+  updatePatientEducationalMaterial,
 };
