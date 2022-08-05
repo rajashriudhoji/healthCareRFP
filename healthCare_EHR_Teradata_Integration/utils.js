@@ -1,30 +1,28 @@
 const axios = require("axios");
 const { jwtHelper } = require('./jwtHelper');
-const { EHR_access_token_endpoint, EHR_patient_list_endpoint } = require('./constant');
+const { EHR_ACCESS_TOKEN_ENDPOINT, EHR_PATIENT_LIST_ENDPOINT } = require('./constant');
 
 const jwtToken = jwtHelper.issueJwt();
 
 const get_access_token = async () => {
-    console.log('JWT Token', jwtToken);
+    console.log('JWT Token', jwtToken.token);
     try {
         const data = {
-            grant_type: client_credentials,
-            client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            client_assertion: jwtToken,
-        };
-        const access_header = {
-            ContentType: `application/x-www-form-urlencoded`,
+            'grant_type': 'client_credentials',
+            'client_assertion_type': 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+            'client_assertion': jwtToken.token,
+            'Content-Type': 'application/x-www-form-urlencoded'
         };
 
-        return await axios({
+        const access_token = await axios({
             method: 'post',
-            url: `${EHR_access_token_endpoint}`,
+            url: `${EHR_ACCESS_TOKEN_ENDPOINT}`,
             data,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                contentType: `application/x-www-form-urlencoded`
             }
         });
+        console.log({ access_token });
     } catch (error) {
         console.log("get access token failed", error.error);
     }
@@ -34,7 +32,7 @@ const get_patient_data = async access_token => {
     // To Do : Verify the JWT token
     return await axios({
         method: 'get',
-        url: `${EHR_patient_list_endpoint}`
+        url: `${EHR_PATIENT_LIST_ENDPOINT}`
     });
 };
 

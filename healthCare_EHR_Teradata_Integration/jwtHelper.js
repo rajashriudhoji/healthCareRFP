@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const fs = require("fs");
-const { EXPIRES_IN, ALGORITHM } = require('./constant');
+const { EXPIRES_IN, ALGORITHM, AUTH_TOKEN_ENDPOINT_URL } = require('./constant');
 const crypto = require('crypto');
 const publicKey = fs.readFileSync('public.pem');
 const privateKey = fs.readFileSync('private.pem');
@@ -27,7 +27,7 @@ const getSignOptions = () => {
     return {
         issuer: process.env.CLIENT_APP_ID,
         subject: process.env.CLIENT_APP_ID,
-        audience: process.env.AUTH_TOKEN_ENDPOINT_URL,
+        audience: AUTH_TOKEN_ENDPOINT_URL,
         algorithm: ALGORITHM,
         expiresIn: EXPIRES_IN,
     }
