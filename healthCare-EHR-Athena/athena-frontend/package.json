@@ -1,0 +1,11 @@
+{
+  "name": "athena-frontend",
+  "version": "1.0.0",
+  "description": "Fetch Athena-EHR data from Teradata and build a dashboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
